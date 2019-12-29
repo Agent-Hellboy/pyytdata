@@ -4,6 +4,23 @@ this is an youtube api v3 wrapper which is integrated in any python app basicall
 
 ## Installation
 currently you add this package in python site-packages directories, global and per user.
+anyone can easily retrieve the  site-package directories following this
+open yoru terminal and type python or python3
+```python
+prince@prince:~$ python3
+Python 3.6.9 (default, Nov  7 2019, 10:44:02) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from distutils.sysconfig import get_python_lib
+>>> print(get_python_lib())
+/usr/lib/python3/dist-packages
+#or
+>>> import distutils
+>>> distutils.__file__
+'/usr/lib/python3.6/distutils/__init__.py'
+>>> 
+```
+mv the package to the site-package
 
 ## using
 ```python
