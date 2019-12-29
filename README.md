@@ -11,8 +11,8 @@ import api
 
 p=api.API(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no. of response you want
 
-p.get_titles() #function call for titles of video
-p.open_id(item_no) #function to open the specific video in web browser 
+output=p.get_titles() #function call for titles of video
+output=p.open_id(item_no) #function to open the specific video in web browser 
 
 ```
 
