@@ -23,7 +23,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 # or
 prince@prince:~$ python3 -m site --user-site
 /home/prince/.local/lib/python3.6/site-packages
-
+# or
+import sys; 
+print [f for f in sys.path if f.endswith('packages')]
 ```
 mv the package to the site-package
 
