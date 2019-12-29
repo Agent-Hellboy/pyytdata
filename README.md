@@ -14,11 +14,16 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> from distutils.sysconfig import get_python_lib
 >>> print(get_python_lib())
 /usr/lib/python3/dist-packages
-#or
+# or
 >>> import distutils
 >>> distutils.__file__
 '/usr/lib/python3.6/distutils/__init__.py'
 >>> 
+
+# or
+prince@prince:~$ python3 -m site --user-site
+/home/prince/.local/lib/python3.6/site-packages
+
 ```
 mv the package to the site-package
 
