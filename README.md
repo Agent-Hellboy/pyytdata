@@ -2,10 +2,10 @@
 this is an youtube api v3 wrapper which is integrated in any python app basically in web app which recommend youtube videos
 ### this is a simple client for youtube data api v3  It uses Youtube Data API v3.
 
-##Installation
+## Installation
 currently you add this package in python site-packages directories, global and per user.
 
-##using
+## using
 ```python
 import api
 
