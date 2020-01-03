@@ -3,7 +3,7 @@ from apiclient.discovery import build
 class API:
 	def __init__(self,keyword,maxlen):
 		self._api_key=YOU YOUTUBE DATA V3 API KEY
-		#link to get the api key is in description
+		#link to get the api key is in readme file
 		youtube=build('youtube','v3',developerKey=self._api_key)
 		self.keyword=keyword
 		self.maxlen=maxlen
