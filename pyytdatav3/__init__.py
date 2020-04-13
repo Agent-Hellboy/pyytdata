@@ -1,1 +1,1 @@
-from .pyytdata import PyYtData
+from .pyytdatav3 import PyYtData
