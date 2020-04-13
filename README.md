@@ -34,7 +34,7 @@ mv the package to the site-package
 ```python
 import api
 
-p=api.API(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no. of response you want
+p=api.Api(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no. of response you want
 
 output=p.get_titles() #function call for titles of video
 output=p.open_id(item_no) #function to open the specific video in web browser 
