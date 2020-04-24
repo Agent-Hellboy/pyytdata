@@ -10,24 +10,26 @@ https://cloud.google.com/docs/authentication/getting-started
 ## Installation
 Currently you add this package in python site-packages directories, global and per user.
 Anyone can easily retrieve the  site-package directories by just firing the repl and running two commands
-```
+``
 import sys
 sys.path
 
-```
+``
 mv the package to the site-package
 
 ## using
-```python
-import pyytdatav
 
-p=pyytdata.PyYtData(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no. of response you want
+        python
+        import pyytdatav
 
-output=p.get_titles() #function call for titles of video
-output=p.open_id(item_no) #function to open the specific video in web browser 
+        p=pyytdata.PyYtData(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no.
 
-```
+        output=p.get_titles() #function call for titles of video
+        output=p.open_id(item_no) #function to open the specific video in web browser 
+
+
 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
