@@ -1,10 +1,10 @@
 """
 pyytdata file.
 
-""""
+"""
 import os
-
 import webbrowser
+
 from apiclient.discovery import build
 
 
@@ -14,14 +14,17 @@ class PyYtData:
 	"""
 	@staticmethod
 	def _get_api_key():
-		api_key=os.environ.get("API_KEY") 
-		if api_key == None:
-			raise ValueError("no environment variable name API_KEY is found")
+		api_key=os.environ.get("API_KEY")
+		auth_verfy=os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+		if api_key == None or auth_verfy == None:
+			raise ValueError("environment variable API_KEY and GOOGLE_APPLICATION_CREDENTIALS is not set")
+		return api_key
 		
 	def __init__(self, keyword, maxlen):
-		self._API_KEY =self._get_api_key() 
+		self._API_KEY = PyYtData._get_api_key() 
+		print(self._API_KEY)
 		youtube = build("youtube", "v3", developerKey=self._API_KEY)
-		self.keyword = keywor
+		self.keyword = keyword
 		self.maxlen = maxlen
 		req = youtube.search().list(
 			q=self.keyword, part="snippet", type="video", maxResults=self.maxlen
