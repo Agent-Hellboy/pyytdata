@@ -1,3 +1,4 @@
+print("pyytdata imported")
 import os
 
 import webbrowser
@@ -8,7 +9,7 @@ class PyYtData:
     def __init__(self, keyword, maxlen):
         self._API_KEY = os.environ.get("API_KEY")
         # link to get the api key is in readme file
-        youtube = build("youtube", "v3", developerKey=self._api_key)
+        youtube = build("youtube", "v3", developerKey=self._API_KEY)
         self.keyword = keyword
         self.maxlen = maxlen
         req = youtube.search().list(
