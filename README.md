@@ -4,9 +4,9 @@ This is an youtube api v3 wrapper which is integrated in any python app basicall
 
 ## Prerequisites
 Get the youtube data v3 api key from https://console.developers.google.com/apis/
-Set environment variable API_KEY='Your YoutubeDatav3 API key'
+Set environment variable API_KEY='Your YoutubeDatav3 API key' </br>
 and also GOOGLE_APPLICATION_CREDENTIALS='path/to/json/file' </br>
-Reference to set these environment variable 
+Reference to set GOOGLE_APPLICATION_CREDENTIALS
 https://cloud.google.com/docs/authentication/getting-started  
 
 ## Installation
