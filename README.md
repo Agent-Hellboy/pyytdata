@@ -18,7 +18,9 @@ https://cloud.google.com/docs/authentication/getting-started
        
         import pyytdatav
 
-        p=pyytdata.PyYtData(keyword,maxlen) #keyword is the query you want to search from youtube data api and maxlen is no.
+        p=pyytdata.PyYtData(keyword,maxlen) # keyword is the query you want to search from 
+					    # youtube data api and maxlen is no. of video you want.
+													
 
         output=p.get_titles() #function call for titles of video
         output=p.open_id(item_no) #function to open the specific video in web browser 
