@@ -1,11 +1,9 @@
-
-__pycache__/
+__pycache__
 dist/
 pyytdata.egg-info/
 pyytdata/pyytdata.py~
 pyytdata/temp.py
 pyytdata/temp.py~
 setup.py
-*.py~
 
 

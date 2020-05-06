@@ -1,12 +1,12 @@
 """
 Contains a class PyYtData having implementation of youtube data v3 client.
 """
+
 import os
-from typing import Any
-
 import webbrowser
-from apiclient.discovery import build
 
+from apiclient.discovery import build
+from typing import Any
 
 class PyYtData:
     """
@@ -71,3 +71,4 @@ class PyYtData:
                 self.result["items"][0]["snippet"]["thumbnails"]["medium"]["url"]
             )
         return rslt
+
