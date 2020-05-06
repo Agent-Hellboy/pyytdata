@@ -24,11 +24,6 @@ https://cloud.google.com/docs/authentication/getting-started
         output=p.open_id(item_no) #function to open the specific video in web browser 
 
 
-        pip install pyytdata
-
-
-
-
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
