@@ -4,7 +4,7 @@ This is an youtube api v3 wrapper which is integrated in any python app basicall
 
 
 ## Demo
-![Watch the video](https://www.youtube.com/watch?v=dXt98TgGYng)
+[![Watch the video](https://img.youtube.com/vi/dXt98TgGYng/maxresdefault.jpg)](https://youtu.be/dXt98TgGYng)
 
 ## Prerequisites
 Get the youtube data v3 api key from https://console.developers.google.com/apis/
