@@ -68,7 +68,7 @@ class PyYtData:
         rslt = []
         for _ in range(self.maxlen):
             rslt.append(
-                self.result["items"][0]["snippet"]["thumbnails"]["medium"]["url"]
+                self.result["items"][i]["snippet"]["thumbnails"]["medium"]["url"]
             )
         return rslt
 
