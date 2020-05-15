@@ -4,9 +4,11 @@ Contains a class PyYtData having implementation of youtube data v3 client.
 
 import os
 import webbrowser
+import json
 
 from apiclient.discovery import build
 from typing import Any
+
 
 class PyYtData:
     """
@@ -17,13 +19,13 @@ class PyYtData:
     maxlen: Any
 
     def __init__(self, keyword, maxlen, order="relevance", type="video"):
-		try:
-        	self.__API_KEY = os.environ.get(
-        	    "API_KEY"
-        	)  # link to get the api key is in readme file
-		except Exception:
-			raise TypeError("You must have API_KEY set as an environment variable")        
-		youtube = build("youtube", "v3", developerKey=self.__API_KEY)
+        try:
+            self.__API_KEY = os.environ.get(
+                "API_KEY"
+            )  # link to get the api key is in readme file
+        except Exception:
+            raise TypeError("You must have API_KEY set as an environment variable")
+        youtube = build("youtube", "v3", developerKey=self.__API_KEY)
         self.keyword = keyword
         self.maxlen = maxlen
         self.order = order
@@ -36,6 +38,7 @@ class PyYtData:
             order=self.order,
         )
         self.result = req.execute()
+
 
     def open_id(self, item_no):
         """"Opens the video in default browser of the system."""
@@ -61,14 +64,24 @@ class PyYtData:
     def get_image_urls(self):
 
         """
-        Function to get the image url which will be used for retriving the icon image of
-        the youtube video.
+        Returns list of links which is used to fetch the image of the video.
         """
 
         rslt = []
-        for _ in range(self.maxlen):
+        for i in range(self.maxlen):
             rslt.append(
                 self.result["items"][i]["snippet"]["thumbnails"]["medium"]["url"]
+            )
+        return rslt
+
+    def get_links(self):
+        """"
+        Returns a list with links of the video.
+        """
+        rslt = []
+        for i in range(self.maxlen):
+            rslt.append(
+                "https://www.youtube.com/watch?v=" + self.result["items"][i]["id"]["videoId"]
             )
         return rslt
 

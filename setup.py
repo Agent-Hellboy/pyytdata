@@ -13,7 +13,7 @@ setup(
     author_email="princekrroshan01@gmail.com",
     url="https://github.com/princekrroshan01/youtube-api-wrapper",
     description=("this is a simple client for youtube data api v3"),
-    long_description=read("README.md"),
+    long_description=read("README.rst"),
     license="MIT",
     py_modules=["pyytdata/pyytdata"],
     install_requires=["google-api-python-client"],

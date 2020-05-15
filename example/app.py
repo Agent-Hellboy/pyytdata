@@ -19,11 +19,9 @@ def recm_skill():
         titles=data.get_titles()
         descriptions=data.get_descriptions()
         get_urls=data.get_image_urls()
-        print(get_urls)
-        data=zip(titles,descriptions,get_urls)
-        print(data)
-
-        return render_template("recm_skill.html", data=data, form=form)
+        get_links=data.get_links()
+        data1=zip(titles,descriptions,get_urls,get_links)
+        return render_template("recm_skill.html", data1=data1, form=form,j=0)
 
     return render_template("recm_skill.html",form=form)
 

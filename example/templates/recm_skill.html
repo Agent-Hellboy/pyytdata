@@ -13,10 +13,11 @@
 </div>
 
 
-{% for i in data %}
+{% for i in data1 %}
 <h2>{{ i[0] }}> </h2>
 <a class="post-img" href=""><img src="{{ i[2] }}"height=200px width=160px></a>
 <h5>{{ i[1] }} </h5>
+<input type="button" onclick="location.href='{{ i[3] }}';"/>
 
 {% endfor %}
 {% endblock content %}
