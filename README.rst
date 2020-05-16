@@ -34,7 +34,7 @@ using
 
 ::
 
-        import pyytdatav
+        import pyytdata
         # keyword is the query you want to search from 
         # youtube data api and maxlen is no. of video you want.
         
