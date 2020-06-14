@@ -1,6 +1,7 @@
 pyytdata
 ========
 
+[![Version](https://img.shields.io/pypi/v/pyytdata.svg)](https://pypi.org/project/pyytdata/)
 
 This is an youtube api v3 wrapper which is integrated in any python app
 basically in web app which recommend youtube videos 
