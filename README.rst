@@ -23,7 +23,7 @@ pyytdata
    
 |PyPI download total|
 
-.. |PyPI download total| image:: https://img.shields.io/pypi/dt/pyytdata.svg
+.. |PyPI download total| image:: https://img.shields.io/pypi/dm/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
 
 |PyPI format|
