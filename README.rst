@@ -21,9 +21,9 @@ basically in web app which recommend youtube videos
 
 .. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
-
-.. image:: https://coveralls.io/repos/github/princekrroshan01/YouTubeDataApi_Wrapper/badge.svg
-   :target: https://coveralls.io/github/princekrroshan01/YouTubeDataApi_Wrapper
+   
+.. image:: https://coveralls.io/repos/github/princekrroshan01/YouTubeDataApi_Wrapper/badge.svg?branch=master
+   :target: https://coveralls.io/github/princekrroshan01/YouTubeDataApi_Wrapper?branch=master
 
 
 
