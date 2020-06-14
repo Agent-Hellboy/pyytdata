@@ -19,7 +19,10 @@ pyytdata
 
 .. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
-   
+
+.. image:: https://coveralls.io/repos/github/princekrroshan01/YouTubeDataApi_Wrapper/badge.svg
+   :target: https://coveralls.io/github/princekrroshan01/YouTubeDataApi_Wrapper
+
 This is an youtube api v3 wrapper which is integrated in any python app
 basically in web app which recommend youtube videos 
 
