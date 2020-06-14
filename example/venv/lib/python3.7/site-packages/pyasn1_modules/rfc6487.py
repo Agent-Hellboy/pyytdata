@@ -14,9 +14,9 @@
 
 from pyasn1.type import univ
 
-id_pkix = univ.ObjectIdentifier('1.3.6.1.5.5.7')
+id_pkix = univ.ObjectIdentifier("1.3.6.1.5.5.7")
 
-id_ad = id_pkix + (48, )
+id_ad = id_pkix + (48,)
 
-id_ad_rpkiManifest = id_ad + (10, )
-id_ad_signedObject = id_ad + (11, )
+id_ad_rpkiManifest = id_ad + (10,)
+id_ad_signedObject = id_ad + (11,)

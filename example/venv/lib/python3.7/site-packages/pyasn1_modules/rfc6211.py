@@ -31,35 +31,44 @@ SignatureAlgorithmIdentifier = rfc5652.SignatureAlgorithmIdentifier
 
 # CMS Algorithm Protection attribute
 
-id_aa_cmsAlgorithmProtect = univ.ObjectIdentifier('1.2.840.113549.1.9.52')
+id_aa_cmsAlgorithmProtect = univ.ObjectIdentifier("1.2.840.113549.1.9.52")
 
 
 class CMSAlgorithmProtection(univ.Sequence):
     pass
 
+
 CMSAlgorithmProtection.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('digestAlgorithm', DigestAlgorithmIdentifier()),
-    namedtype.OptionalNamedType('signatureAlgorithm',
+    namedtype.NamedType("digestAlgorithm", DigestAlgorithmIdentifier()),
+    namedtype.OptionalNamedType(
+        "signatureAlgorithm",
         SignatureAlgorithmIdentifier().subtype(
-            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.OptionalNamedType('macAlgorithm',
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "macAlgorithm",
         MessageAuthenticationCodeAlgorithm().subtype(
-            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+        ),
+    ),
 )
 
 CMSAlgorithmProtection.subtypeSpec = constraint.ConstraintsUnion(
     constraint.WithComponentsConstraint(
-        ('signatureAlgorithm', constraint.ComponentPresentConstraint()),
-        ('macAlgorithm', constraint.ComponentAbsentConstraint())),
+        ("signatureAlgorithm", constraint.ComponentPresentConstraint()),
+        ("macAlgorithm", constraint.ComponentAbsentConstraint()),
+    ),
     constraint.WithComponentsConstraint(
-        ('signatureAlgorithm', constraint.ComponentAbsentConstraint()),
-        ('macAlgorithm', constraint.ComponentPresentConstraint()))
+        ("signatureAlgorithm", constraint.ComponentAbsentConstraint()),
+        ("macAlgorithm", constraint.ComponentPresentConstraint()),
+    ),
 )
 
 
 aa_cmsAlgorithmProtection = rfc5652.Attribute()
-aa_cmsAlgorithmProtection['attrType'] = id_aa_cmsAlgorithmProtect
-aa_cmsAlgorithmProtection['attrValues'][0] = CMSAlgorithmProtection()
+aa_cmsAlgorithmProtection["attrType"] = id_aa_cmsAlgorithmProtect
+aa_cmsAlgorithmProtection["attrValues"][0] = CMSAlgorithmProtection()
 
 
 # Map of Attribute Type OIDs to Attributes are

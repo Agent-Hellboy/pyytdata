@@ -29,7 +29,7 @@ class Countdown(Progress):
 
 
 class Stack(Progress):
-    phases = (' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█')
+    phases = (" ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█")
 
     def update(self):
         nphases = len(self.phases)
@@ -38,4 +38,4 @@ class Stack(Progress):
 
 
 class Pie(Stack):
-    phases = ('○', '◔', '◑', '◕', '●')
+    phases = ("○", "◔", "◑", "◕", "●")

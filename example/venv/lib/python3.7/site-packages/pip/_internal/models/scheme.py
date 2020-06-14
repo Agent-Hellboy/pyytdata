@@ -10,6 +10,7 @@ class Scheme(object):
     """A Scheme holds paths which are used as the base directories for
     artifacts associated with a Python package.
     """
+
     def __init__(
         self,
         platlib,  # type: str

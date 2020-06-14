@@ -19,27 +19,28 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # Authentication Context Extension
 
-e_legnamnden = univ.ObjectIdentifier('1.2.752.201')
+e_legnamnden = univ.ObjectIdentifier("1.2.752.201")
 
-id_eleg_ce = e_legnamnden + (5, )
+id_eleg_ce = e_legnamnden + (5,)
 
-id_ce_authContext = id_eleg_ce + (1, )
+id_ce_authContext = id_eleg_ce + (1,)
 
 
 class AuthenticationContext(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('contextType', char.UTF8String()),
-        namedtype.OptionalNamedType('contextInfo', char.UTF8String())
+        namedtype.NamedType("contextType", char.UTF8String()),
+        namedtype.OptionalNamedType("contextInfo", char.UTF8String()),
     )
+
 
 class AuthenticationContexts(univ.SequenceOf):
     componentType = AuthenticationContext()
-    subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+    subtypeSpec = constraint.ValueSizeConstraint(1, MAX)
 
 
 # Map of Certificate Extension OIDs to Extensions added to the

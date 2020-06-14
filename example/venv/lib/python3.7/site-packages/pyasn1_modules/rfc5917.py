@@ -27,10 +27,15 @@ from pyasn1_modules import rfc5280
 #   2. only the 'utf8String' choice remains because the ASN.1
 #      specification says: ( WITH COMPONENTS { utf8String PRESENT } )
 
+
 class DirectoryString(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('utf8String', char.UTF8String().subtype(
-            subtypeSpec=constraint.ValueSizeConstraint(1, 64))),
+        namedtype.NamedType(
+            "utf8String",
+            char.UTF8String().subtype(
+                subtypeSpec=constraint.ValueSizeConstraint(1, 64)
+            ),
+        ),
     )
 
 
@@ -42,8 +47,8 @@ ub_clearance_sponsor = univ.Integer(64)
 
 
 at_clearanceSponsor = rfc5280.Attribute()
-at_clearanceSponsor['type'] = id_clearanceSponsor
-at_clearanceSponsor['values'][0] = DirectoryString()
+at_clearanceSponsor["type"] = id_clearanceSponsor
+at_clearanceSponsor["values"][0] = DirectoryString()
 
 
 # Add to the map of Attribute Type OIDs to Attributes in rfc5280.py.

@@ -19,27 +19,28 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # SmtpUTF8Mailbox contains Mailbox as specified in Section 3.3 of RFC 6531
 
 id_pkix = rfc5280.id_pkix
 
-id_on = id_pkix + (8, )
+id_on = id_pkix + (8,)
 
-id_on_SmtpUTF8Mailbox = id_on + (9, )
+id_on_SmtpUTF8Mailbox = id_on + (9,)
 
 
 class SmtpUTF8Mailbox(char.UTF8String):
     pass
 
+
 SmtpUTF8Mailbox.subtypeSpec = constraint.ValueSizeConstraint(1, MAX)
 
 
 on_SmtpUTF8Mailbox = rfc5280.AnotherName()
-on_SmtpUTF8Mailbox['type-id'] = id_on_SmtpUTF8Mailbox
-on_SmtpUTF8Mailbox['value'] = SmtpUTF8Mailbox()
+on_SmtpUTF8Mailbox["type-id"] = id_on_SmtpUTF8Mailbox
+on_SmtpUTF8Mailbox["value"] = SmtpUTF8Mailbox()
 
 
 # Map of Other Name OIDs to Other Name is added to the

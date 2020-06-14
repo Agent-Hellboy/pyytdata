@@ -28,13 +28,13 @@ class CurvePrivateKey(univ.OctetString):
     pass
 
 
-id_X25519 = univ.ObjectIdentifier('1.3.101.110')
+id_X25519 = univ.ObjectIdentifier("1.3.101.110")
 
-id_X448 = univ.ObjectIdentifier('1.3.101.111')
+id_X448 = univ.ObjectIdentifier("1.3.101.111")
 
-id_Ed25519 = univ.ObjectIdentifier('1.3.101.112')
+id_Ed25519 = univ.ObjectIdentifier("1.3.101.112")
 
-id_Ed448 = univ.ObjectIdentifier('1.3.101.113')
+id_Ed448 = univ.ObjectIdentifier("1.3.101.113")
 
 id_sha512 = rfc4055.id_sha512
 

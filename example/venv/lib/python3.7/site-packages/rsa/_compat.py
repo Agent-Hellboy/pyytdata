@@ -45,7 +45,7 @@ if PY2:
     range = xrange
     zip = itertools.izip
 else:
-    integer_types = (int, )
+    integer_types = (int,)
     range = range
     zip = zip
 
@@ -118,13 +118,12 @@ def xor_bytes(b1, b2):
         Bytes object, result of XOR operation.
     """
     if PY2:
-        return ''.join(byte(ord(x) ^ ord(y)) for x, y in zip(b1, b2))
+        return "".join(byte(ord(x) ^ ord(y)) for x, y in zip(b1, b2))
 
     return bytes(x ^ y for x, y in zip(b1, b2))
 
 
-def get_word_alignment(num, force_arch=64,
-                       _machine_word_size=MACHINE_WORD_SIZE):
+def get_word_alignment(num, force_arch=64, _machine_word_size=MACHINE_WORD_SIZE):
     """
     Returns alignment details for the given number based on the platform
     Python is running on.
@@ -143,10 +142,10 @@ def get_word_alignment(num, force_arch=64,
             (word_bits, word_bytes,
              max_uint, packing_format_type)
     """
-    max_uint64 = 0xffffffffffffffff
-    max_uint32 = 0xffffffff
-    max_uint16 = 0xffff
-    max_uint8 = 0xff
+    max_uint64 = 0xFFFFFFFFFFFFFFFF
+    max_uint32 = 0xFFFFFFFF
+    max_uint16 = 0xFFFF
+    max_uint8 = 0xFF
 
     if force_arch == 64 and _machine_word_size >= 64 and num > max_uint32:
         # 64-bit unsigned integer.

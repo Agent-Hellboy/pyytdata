@@ -21,12 +21,22 @@ from pyasn1_modules import rfc5480
 class ECPrivateKey(univ.Sequence):
     pass
 
+
 ECPrivateKey.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('version', univ.Integer(
-        namedValues=namedval.NamedValues(('ecPrivkeyVer1', 1)))),
-    namedtype.NamedType('privateKey', univ.OctetString()),
-    namedtype.OptionalNamedType('parameters', rfc5480.ECParameters().subtype(
-        explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-    namedtype.OptionalNamedType('publicKey', univ.BitString().subtype(
-        explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))
+    namedtype.NamedType(
+        "version", univ.Integer(namedValues=namedval.NamedValues(("ecPrivkeyVer1", 1)))
+    ),
+    namedtype.NamedType("privateKey", univ.OctetString()),
+    namedtype.OptionalNamedType(
+        "parameters",
+        rfc5480.ECParameters().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "publicKey",
+        univ.BitString().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
 )

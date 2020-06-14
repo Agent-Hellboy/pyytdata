@@ -18,15 +18,16 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5280
 
 
-id_ce_hashOfRootKey = univ.ObjectIdentifier('1.3.6.1.4.1.51483.2.1')
+id_ce_hashOfRootKey = univ.ObjectIdentifier("1.3.6.1.4.1.51483.2.1")
 
 
 class HashedRootKey(univ.Sequence):
     pass
 
+
 HashedRootKey.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('hashAlg', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('hashValue', univ.OctetString())
+    namedtype.NamedType("hashAlg", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("hashValue", univ.OctetString()),
 )
 
 
@@ -34,7 +35,7 @@ HashedRootKey.componentType = namedtype.NamedTypes(
 # ones that are in rfc5280.py
 
 _certificateExtensionsMapUpdate = {
-    id_ce_hashOfRootKey: HashedRootKey(),	
+    id_ce_hashOfRootKey: HashedRootKey(),
 }
 
 rfc5280.certificateExtensionsMap.update(_certificateExtensionsMapUpdate)

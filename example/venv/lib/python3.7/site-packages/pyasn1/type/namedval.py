@@ -8,7 +8,7 @@
 #
 from pyasn1 import error
 
-__all__ = ['NamedValues']
+__all__ = ["NamedValues"]
 
 
 class NamedValues(object):
@@ -52,6 +52,7 @@ class NamedValues(object):
         >>> nv['a']
         2
     """
+
     def __init__(self, *args, **kwargs):
         self.__names = {}
         self.__numbers = {}
@@ -64,27 +65,29 @@ class NamedValues(object):
                     name, number = namedValue
 
                 except ValueError:
-                    raise error.PyAsn1Error('Not a proper attribute-value pair %r' % (namedValue,))
+                    raise error.PyAsn1Error(
+                        "Not a proper attribute-value pair %r" % (namedValue,)
+                    )
 
             else:
                 anonymousNames.append(namedValue)
                 continue
 
             if name in self.__names:
-                raise error.PyAsn1Error('Duplicate name %s' % (name,))
+                raise error.PyAsn1Error("Duplicate name %s" % (name,))
 
             if number in self.__numbers:
-                raise error.PyAsn1Error('Duplicate number  %s=%s' % (name, number))
+                raise error.PyAsn1Error("Duplicate number  %s=%s" % (name, number))
 
             self.__names[name] = number
             self.__numbers[number] = name
 
         for name, number in kwargs.items():
             if name in self.__names:
-                raise error.PyAsn1Error('Duplicate name %s' % (name,))
+                raise error.PyAsn1Error("Duplicate name %s" % (name,))
 
             if number in self.__numbers:
-                raise error.PyAsn1Error('Duplicate number  %s=%s' % (name, number))
+                raise error.PyAsn1Error("Duplicate number  %s=%s" % (name, number))
 
             self.__names[name] = number
             self.__numbers[number] = name
@@ -96,7 +99,7 @@ class NamedValues(object):
             for name in anonymousNames:
 
                 if name in self.__names:
-                    raise error.PyAsn1Error('Duplicate name %s' % (name,))
+                    raise error.PyAsn1Error("Duplicate name %s" % (name,))
 
                 self.__names[name] = number
                 self.__numbers[number] = name
@@ -104,13 +107,12 @@ class NamedValues(object):
                 number += 1
 
     def __repr__(self):
-        representation = ', '.join(['%s=%d' % x for x in self.items()])
+        representation = ", ".join(["%s=%d" % x for x in self.items()])
 
         if len(representation) > 64:
-            representation = representation[:32] + '...' + representation[-32:]
+            representation = representation[:32] + "..." + representation[-32:]
 
-        return '<%s object, enums %s>' % (
-            self.__class__.__name__, representation)
+        return "<%s object, enums %s>" % (self.__class__.__name__, representation)
 
     def __eq__(self, other):
         return dict(self) == other
@@ -188,5 +190,5 @@ class NamedValues(object):
 
         except KeyError:
             raise error.PyAsn1Error(
-                'Unknown bit identifier(s): %s' % (set(names).difference(self.__names),)
+                "Unknown bit identifier(s): %s" % (set(names).difference(self.__names),)
             )

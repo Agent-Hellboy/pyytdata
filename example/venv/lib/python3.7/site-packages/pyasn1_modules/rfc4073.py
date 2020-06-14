@@ -19,15 +19,17 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5652
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # Content Collection Content Type and Object Identifier
 
-id_ct_contentCollection = univ.ObjectIdentifier('1.2.840.113549.1.9.16.1.19')
+id_ct_contentCollection = univ.ObjectIdentifier("1.2.840.113549.1.9.16.1.19")
+
 
 class ContentCollection(univ.SequenceOf):
     pass
+
 
 ContentCollection.componentType = rfc5652.ContentInfo()
 ContentCollection.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
@@ -35,16 +37,21 @@ ContentCollection.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
 
 # Content With Attributes Content Type and Object Identifier
 
-id_ct_contentWithAttrs = univ.ObjectIdentifier('1.2.840.113549.1.9.16.1.20')
+id_ct_contentWithAttrs = univ.ObjectIdentifier("1.2.840.113549.1.9.16.1.20")
+
 
 class ContentWithAttributes(univ.Sequence):
     pass
 
+
 ContentWithAttributes.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('content', rfc5652.ContentInfo()),
-    namedtype.NamedType('attrs', univ.SequenceOf(
-        componentType=rfc5652.Attribute()).subtype(
-            sizeSpec=constraint.ValueSizeConstraint(1, MAX)))
+    namedtype.NamedType("content", rfc5652.ContentInfo()),
+    namedtype.NamedType(
+        "attrs",
+        univ.SequenceOf(componentType=rfc5652.Attribute()).subtype(
+            sizeSpec=constraint.ValueSizeConstraint(1, MAX)
+        ),
+    ),
 )
 
 

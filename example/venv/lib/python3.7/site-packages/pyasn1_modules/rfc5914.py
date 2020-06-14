@@ -20,7 +20,7 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5280
 
 
-MAX = float('inf')
+MAX = float("inf")
 
 Certificate = rfc5280.Certificate
 
@@ -42,34 +42,54 @@ NameConstraints = rfc5280.NameConstraints
 class CertPolicyFlags(univ.BitString):
     pass
 
+
 CertPolicyFlags.namedValues = namedval.NamedValues(
-    ('inhibitPolicyMapping', 0),
-    ('requireExplicitPolicy', 1),
-    ('inhibitAnyPolicy', 2)
+    ("inhibitPolicyMapping", 0), ("requireExplicitPolicy", 1), ("inhibitAnyPolicy", 2)
 )
 
 
 class CertPathControls(univ.Sequence):
     pass
 
+
 CertPathControls.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('taName', Name()),
-    namedtype.OptionalNamedType('certificate', Certificate().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-    namedtype.OptionalNamedType('policySet', CertificatePolicies().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.OptionalNamedType('policyFlags', CertPolicyFlags().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))),
-    namedtype.OptionalNamedType('nameConstr', NameConstraints().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))),
-    namedtype.OptionalNamedType('pathLenConstraint', univ.Integer().subtype(
-        subtypeSpec=constraint.ValueRangeConstraint(0, MAX)).subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))
+    namedtype.NamedType("taName", Name()),
+    namedtype.OptionalNamedType(
+        "certificate",
+        Certificate().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "policySet",
+        CertificatePolicies().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "policyFlags",
+        CertPolicyFlags().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "nameConstr",
+        NameConstraints().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "pathLenConstraint",
+        univ.Integer()
+        .subtype(subtypeSpec=constraint.ValueRangeConstraint(0, MAX))
+        .subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)),
+    ),
 )
 
 
 class TrustAnchorTitle(char.UTF8String):
     pass
+
 
 TrustAnchorTitle.subtypeSpec = constraint.ValueSizeConstraint(1, 64)
 
@@ -77,43 +97,64 @@ TrustAnchorTitle.subtypeSpec = constraint.ValueSizeConstraint(1, 64)
 class TrustAnchorInfoVersion(univ.Integer):
     pass
 
-TrustAnchorInfoVersion.namedValues = namedval.NamedValues(
-    ('v1', 1)
-)
+
+TrustAnchorInfoVersion.namedValues = namedval.NamedValues(("v1", 1))
 
 
 class TrustAnchorInfo(univ.Sequence):
     pass
 
+
 TrustAnchorInfo.componentType = namedtype.NamedTypes(
-    namedtype.DefaultedNamedType('version', TrustAnchorInfoVersion().subtype(value='v1')),
-    namedtype.NamedType('pubKey', SubjectPublicKeyInfo()),
-    namedtype.NamedType('keyId', KeyIdentifier()),
-    namedtype.OptionalNamedType('taTitle', TrustAnchorTitle()),
-    namedtype.OptionalNamedType('certPath', CertPathControls()),
-    namedtype.OptionalNamedType('exts', Extensions().subtype(explicitTag=tag.Tag(
-        tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.OptionalNamedType('taTitleLangTag', char.UTF8String().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+    namedtype.DefaultedNamedType(
+        "version", TrustAnchorInfoVersion().subtype(value="v1")
+    ),
+    namedtype.NamedType("pubKey", SubjectPublicKeyInfo()),
+    namedtype.NamedType("keyId", KeyIdentifier()),
+    namedtype.OptionalNamedType("taTitle", TrustAnchorTitle()),
+    namedtype.OptionalNamedType("certPath", CertPathControls()),
+    namedtype.OptionalNamedType(
+        "exts",
+        Extensions().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "taTitleLangTag",
+        char.UTF8String().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+        ),
+    ),
 )
 
 
 class TrustAnchorChoice(univ.Choice):
     pass
 
+
 TrustAnchorChoice.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('certificate', Certificate()),
-    namedtype.NamedType('tbsCert', TBSCertificate().subtype(
-        explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.NamedType('taInfo', TrustAnchorInfo().subtype(
-        explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))
+    namedtype.NamedType("certificate", Certificate()),
+    namedtype.NamedType(
+        "tbsCert",
+        TBSCertificate().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.NamedType(
+        "taInfo",
+        TrustAnchorInfo().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+        ),
+    ),
 )
 
 
-id_ct_trustAnchorList = univ.ObjectIdentifier('1.2.840.113549.1.9.16.1.34')
+id_ct_trustAnchorList = univ.ObjectIdentifier("1.2.840.113549.1.9.16.1.34")
+
 
 class TrustAnchorList(univ.SequenceOf):
     pass
 
+
 TrustAnchorList.componentType = TrustAnchorChoice()
-TrustAnchorList.subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+TrustAnchorList.subtypeSpec = constraint.ValueSizeConstraint(1, MAX)

@@ -6,7 +6,7 @@
 # Copyright (c) 2019, Vigil Security, LLC
 # License: http://snmplabs.com/pyasn1/license.html
 #
-#The scrypt Password-Based Key Derivation Function
+# The scrypt Password-Based Key Derivation Function
 #
 # ASN.1 source from:
 # https://www.rfc-editor.org/rfc/rfc8520.txt
@@ -19,24 +19,31 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
-id_scrypt = univ.ObjectIdentifier('1.3.6.1.4.1.11591.4.11')
+id_scrypt = univ.ObjectIdentifier("1.3.6.1.4.1.11591.4.11")
 
 
 class Scrypt_params(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('salt',
-            univ.OctetString()),
-        namedtype.NamedType('costParameter',
-            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX))),
-        namedtype.NamedType('blockSize',
-            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX))),
-        namedtype.NamedType('parallelizationParameter',
-            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX))),
-        namedtype.OptionalNamedType('keyLength',
-            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX)))
+        namedtype.NamedType("salt", univ.OctetString()),
+        namedtype.NamedType(
+            "costParameter",
+            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX)),
+        ),
+        namedtype.NamedType(
+            "blockSize",
+            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX)),
+        ),
+        namedtype.NamedType(
+            "parallelizationParameter",
+            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX)),
+        ),
+        namedtype.OptionalNamedType(
+            "keyLength",
+            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(1, MAX)),
+        ),
     )
 
 

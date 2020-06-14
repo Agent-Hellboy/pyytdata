@@ -19,45 +19,50 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5755
 
 
-id_smime = univ.ObjectIdentifier((1, 2, 840, 113549, 1, 9, 16, ))
+id_smime = univ.ObjectIdentifier((1, 2, 840, 113549, 1, 9, 16,))
 
-id_tsp = id_smime + (7, )
+id_tsp = id_smime + (7,)
 
-id_tsp_TEST_Amoco = id_tsp + (1, )
+id_tsp_TEST_Amoco = id_tsp + (1,)
+
 
 class Amoco_SecurityClassification(univ.Integer):
     namedValues = namedval.NamedValues(
-        ('amoco-general', 6),
-        ('amoco-confidential', 7),
-        ('amoco-highly-confidential', 8)
+        ("amoco-general", 6),
+        ("amoco-confidential", 7),
+        ("amoco-highly-confidential", 8),
     )
 
 
-id_tsp_TEST_Caterpillar = id_tsp + (2, )
+id_tsp_TEST_Caterpillar = id_tsp + (2,)
+
 
 class Caterpillar_SecurityClassification(univ.Integer):
     namedValues = namedval.NamedValues(
-        ('caterpillar-public', 6),
-        ('caterpillar-green', 7),
-        ('caterpillar-yellow', 8),
-        ('caterpillar-red', 9)
+        ("caterpillar-public", 6),
+        ("caterpillar-green", 7),
+        ("caterpillar-yellow", 8),
+        ("caterpillar-red", 9),
     )
 
 
-id_tsp_TEST_Whirlpool = id_tsp + (3, )
+id_tsp_TEST_Whirlpool = id_tsp + (3,)
+
 
 class Whirlpool_SecurityClassification(univ.Integer):
     namedValues = namedval.NamedValues(
-        ('whirlpool-public', 6),
-        ('whirlpool-internal', 7),
-        ('whirlpool-confidential', 8)
+        ("whirlpool-public", 6),
+        ("whirlpool-internal", 7),
+        ("whirlpool-confidential", 8),
     )
 
 
-id_tsp_TEST_Whirlpool_Categories = id_tsp + (4, )
+id_tsp_TEST_Whirlpool_Categories = id_tsp + (4,)
+
 
 class SecurityCategoryValues(univ.SequenceOf):
     componentType = char.UTF8String()
+
 
 # Example SecurityCategoryValues: "LAW DEPARTMENT USE ONLY"
 # Example SecurityCategoryValues: "HUMAN RESOURCES USE ONLY"

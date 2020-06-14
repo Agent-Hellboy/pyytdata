@@ -21,14 +21,14 @@ from pyasn1_modules import rfc5280
 
 # IP Address Delegation Extension V2
 
-id_pe_ipAddrBlocks_v2 = univ.ObjectIdentifier('1.3.6.1.5.5.7.1.28')
+id_pe_ipAddrBlocks_v2 = univ.ObjectIdentifier("1.3.6.1.5.5.7.1.28")
 
 IPAddrBlocks = rfc3779.IPAddrBlocks
 
 
 # Autonomous System Identifier Delegation Extension V2
 
-id_pe_autonomousSysIds_v2 = univ.ObjectIdentifier('1.3.6.1.5.5.7.1.29')
+id_pe_autonomousSysIds_v2 = univ.ObjectIdentifier("1.3.6.1.5.5.7.1.29")
 
 ASIdentifiers = rfc3779.ASIdentifiers
 

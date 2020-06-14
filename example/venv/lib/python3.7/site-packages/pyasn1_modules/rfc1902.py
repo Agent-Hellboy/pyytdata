@@ -28,18 +28,14 @@ class Integer32(univ.Integer):
 
 
 class OctetString(univ.OctetString):
-    subtypeSpec = univ.Integer.subtypeSpec + constraint.ValueSizeConstraint(
-        0, 65535
-    )
+    subtypeSpec = univ.Integer.subtypeSpec + constraint.ValueSizeConstraint(0, 65535)
 
 
 class IpAddress(univ.OctetString):
     tagSet = univ.OctetString.tagSet.tagImplicitly(
         tag.Tag(tag.tagClassApplication, tag.tagFormatSimple, 0x00)
     )
-    subtypeSpec = univ.OctetString.subtypeSpec + constraint.ValueSizeConstraint(
-        4, 4
-    )
+    subtypeSpec = univ.OctetString.subtypeSpec + constraint.ValueSizeConstraint(4, 4)
 
 
 class Counter32(univ.Integer):
@@ -103,27 +99,27 @@ class ObjectName(univ.ObjectIdentifier):
 
 class SimpleSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('integer-value', Integer()),
-        namedtype.NamedType('string-value', OctetString()),
-        namedtype.NamedType('objectID-value', univ.ObjectIdentifier())
+        namedtype.NamedType("integer-value", Integer()),
+        namedtype.NamedType("string-value", OctetString()),
+        namedtype.NamedType("objectID-value", univ.ObjectIdentifier()),
     )
 
 
 class ApplicationSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('ipAddress-value', IpAddress()),
-        namedtype.NamedType('counter-value', Counter32()),
-        namedtype.NamedType('timeticks-value', TimeTicks()),
-        namedtype.NamedType('arbitrary-value', Opaque()),
-        namedtype.NamedType('big-counter-value', Counter64()),
+        namedtype.NamedType("ipAddress-value", IpAddress()),
+        namedtype.NamedType("counter-value", Counter32()),
+        namedtype.NamedType("timeticks-value", TimeTicks()),
+        namedtype.NamedType("arbitrary-value", Opaque()),
+        namedtype.NamedType("big-counter-value", Counter64()),
         # This conflicts with Counter32
         #        namedtype.NamedType('unsigned-integer-value', Unsigned32()),
-        namedtype.NamedType('gauge32-value', Gauge32())
+        namedtype.NamedType("gauge32-value", Gauge32()),
     )  # BITS misplaced?
 
 
 class ObjectSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('simple', SimpleSyntax()),
-        namedtype.NamedType('application-wide', ApplicationSyntax())
+        namedtype.NamedType("simple", SimpleSyntax()),
+        namedtype.NamedType("application-wide", ApplicationSyntax()),
     )

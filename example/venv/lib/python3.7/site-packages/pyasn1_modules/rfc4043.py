@@ -19,17 +19,17 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5280
 
 
-id_pkix = univ.ObjectIdentifier((1, 3, 6, 1, 5, 5, 7, ))
+id_pkix = univ.ObjectIdentifier((1, 3, 6, 1, 5, 5, 7,))
 
-id_on = id_pkix + (8, )
+id_on = id_pkix + (8,)
 
-id_on_permanentIdentifier = id_on + (3, )
+id_on_permanentIdentifier = id_on + (3,)
 
 
 class PermanentIdentifier(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.OptionalNamedType('identifierValue', char.UTF8String()),
-        namedtype.OptionalNamedType('assigner', univ.ObjectIdentifier())
+        namedtype.OptionalNamedType("identifierValue", char.UTF8String()),
+        namedtype.OptionalNamedType("assigner", univ.ObjectIdentifier()),
     )
 
 

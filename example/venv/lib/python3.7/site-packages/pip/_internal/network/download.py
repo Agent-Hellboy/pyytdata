@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 def _get_http_response_size(resp):
     # type: (Response) -> Optional[int]
     try:
-        return int(resp.headers['content-length'])
+        return int(resp.headers["content-length"])
     except (ValueError, KeyError, TypeError):
         return None
 
@@ -41,7 +41,7 @@ def _get_http_response_size(resp):
 def _prepare_download(
     resp,  # type: Response
     link,  # type: Link
-    progress_bar  # type: str
+    progress_bar,  # type: str
 ):
     # type: (...) -> Iterable[bytes]
     total_length = _get_http_response_size(resp)
@@ -54,7 +54,7 @@ def _prepare_download(
     logged_url = redact_auth_from_url(url)
 
     if total_length:
-        logged_url = '{} ({})'.format(logged_url, format_size(total_length))
+        logged_url = "{} ({})".format(logged_url, format_size(total_length))
 
     if is_from_cache(resp):
         logger.info("Using cached %s", logged_url)
@@ -77,9 +77,7 @@ def _prepare_download(
     if not show_progress:
         return chunks
 
-    return DownloadProgressProvider(
-        progress_bar, max=total_length
-    )(chunks)
+    return DownloadProgressProvider(progress_bar, max=total_length)(chunks)
 
 
 def sanitize_content_filename(filename):
@@ -97,7 +95,7 @@ def parse_content_disposition(content_disposition, default_filename):
     return the default filename if the result is empty.
     """
     _type, params = cgi.parse_header(content_disposition)
-    filename = params.get('filename')
+    filename = params.get("filename")
     if filename:
         # We need to sanitize the filename to prevent directory traversal
         # in case the filename contains ".." path parts.
@@ -112,14 +110,12 @@ def _get_http_response_filename(resp, link):
     """
     filename = link.filename  # fallback
     # Have a look at the Content-Disposition header for a better guess
-    content_disposition = resp.headers.get('content-disposition')
+    content_disposition = resp.headers.get("content-disposition")
     if content_disposition:
         filename = parse_content_disposition(content_disposition, filename)
     ext = splitext(filename)[1]  # type: Optional[str]
     if not ext:
-        ext = mimetypes.guess_extension(
-            resp.headers.get('content-type', '')
-        )
+        ext = mimetypes.guess_extension(resp.headers.get("content-type", ""))
         if ext:
             filename += ext
     if not ext and link.url != resp.url:
@@ -131,7 +127,7 @@ def _get_http_response_filename(resp, link):
 
 def _http_get_download(session, link):
     # type: (PipSession, Link) -> Response
-    target_url = link.url.split('#', 1)[0]
+    target_url = link.url.split("#", 1)[0]
     resp = session.get(
         target_url,
         # We use Accept-Encoding: identity here because requests

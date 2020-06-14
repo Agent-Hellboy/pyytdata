@@ -17,7 +17,7 @@ from pyasn1.type import univ, char, namedtype, namedval, tag, constraint, useful
 from pyasn1_modules import rfc2560
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # Imports from RFC 5280
@@ -63,137 +63,201 @@ id_pkix_ocsp_service_locator = rfc2560.id_pkix_ocsp_service_locator
 
 # Additional object identifiers
 
-id_pkix_ocsp_pref_sig_algs = id_pkix_ocsp + (8, )
-id_pkix_ocsp_extended_revoke = id_pkix_ocsp + (9, )
+id_pkix_ocsp_pref_sig_algs = id_pkix_ocsp + (8,)
+id_pkix_ocsp_extended_revoke = id_pkix_ocsp + (9,)
 
 
 # Updated structures (mostly to improve openTypes support)
 
+
 class CertID(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('hashAlgorithm', AlgorithmIdentifier()),
-        namedtype.NamedType('issuerNameHash', univ.OctetString()),
-        namedtype.NamedType('issuerKeyHash', univ.OctetString()),
-        namedtype.NamedType('serialNumber', CertificateSerialNumber())
+        namedtype.NamedType("hashAlgorithm", AlgorithmIdentifier()),
+        namedtype.NamedType("issuerNameHash", univ.OctetString()),
+        namedtype.NamedType("issuerKeyHash", univ.OctetString()),
+        namedtype.NamedType("serialNumber", CertificateSerialNumber()),
     )
 
 
 class SingleResponse(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('certID', CertID()),
-        namedtype.NamedType('certStatus', CertStatus()),
-        namedtype.NamedType('thisUpdate', useful.GeneralizedTime()),
-        namedtype.OptionalNamedType('nextUpdate', useful.GeneralizedTime().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-        namedtype.OptionalNamedType('singleExtensions', Extensions().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))
+        namedtype.NamedType("certID", CertID()),
+        namedtype.NamedType("certStatus", CertStatus()),
+        namedtype.NamedType("thisUpdate", useful.GeneralizedTime()),
+        namedtype.OptionalNamedType(
+            "nextUpdate",
+            useful.GeneralizedTime().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
+        namedtype.OptionalNamedType(
+            "singleExtensions",
+            Extensions().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
     )
 
 
 class ResponderID(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('byName', Name().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-        namedtype.NamedType('byKey', KeyHash().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+        namedtype.NamedType(
+            "byName",
+            Name().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
+        namedtype.NamedType(
+            "byKey",
+            KeyHash().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+            ),
+        ),
     )
 
 
 class ResponseData(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.DefaultedNamedType('version', Version('v1').subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-        namedtype.NamedType('responderID', ResponderID()),
-        namedtype.NamedType('producedAt', useful.GeneralizedTime()),
-        namedtype.NamedType('responses', univ.SequenceOf(
-            componentType=SingleResponse())),
-        namedtype.OptionalNamedType('responseExtensions', Extensions().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))
+        namedtype.DefaultedNamedType(
+            "version",
+            Version("v1").subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
+        namedtype.NamedType("responderID", ResponderID()),
+        namedtype.NamedType("producedAt", useful.GeneralizedTime()),
+        namedtype.NamedType(
+            "responses", univ.SequenceOf(componentType=SingleResponse())
+        ),
+        namedtype.OptionalNamedType(
+            "responseExtensions",
+            Extensions().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
     )
 
 
 class BasicOCSPResponse(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('tbsResponseData', ResponseData()),
-        namedtype.NamedType('signatureAlgorithm', AlgorithmIdentifier()),
-        namedtype.NamedType('signature', univ.BitString()),
-        namedtype.OptionalNamedType('certs', univ.SequenceOf(
-            componentType=Certificate()).subtype(explicitTag=tag.Tag(
-                tag.tagClassContext, tag.tagFormatSimple, 0)))
+        namedtype.NamedType("tbsResponseData", ResponseData()),
+        namedtype.NamedType("signatureAlgorithm", AlgorithmIdentifier()),
+        namedtype.NamedType("signature", univ.BitString()),
+        namedtype.OptionalNamedType(
+            "certs",
+            univ.SequenceOf(componentType=Certificate()).subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
     )
 
 
 class Request(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('reqCert', CertID()),
-        namedtype.OptionalNamedType('singleRequestExtensions', Extensions().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+        namedtype.NamedType("reqCert", CertID()),
+        namedtype.OptionalNamedType(
+            "singleRequestExtensions",
+            Extensions().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
     )
 
 
 class Signature(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('signatureAlgorithm', AlgorithmIdentifier()),
-        namedtype.NamedType('signature', univ.BitString()),
-        namedtype.OptionalNamedType('certs', univ.SequenceOf(
-            componentType=Certificate()).subtype(explicitTag=tag.Tag(
-                tag.tagClassContext, tag.tagFormatSimple, 0)))
+        namedtype.NamedType("signatureAlgorithm", AlgorithmIdentifier()),
+        namedtype.NamedType("signature", univ.BitString()),
+        namedtype.OptionalNamedType(
+            "certs",
+            univ.SequenceOf(componentType=Certificate()).subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
     )
 
 
 class TBSRequest(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.DefaultedNamedType('version', Version('v1').subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-        namedtype.OptionalNamedType('requestorName', GeneralName().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-        namedtype.NamedType('requestList', univ.SequenceOf(
-            componentType=Request())),
-        namedtype.OptionalNamedType('requestExtensions', Extensions().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+        namedtype.DefaultedNamedType(
+            "version",
+            Version("v1").subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
+        namedtype.OptionalNamedType(
+            "requestorName",
+            GeneralName().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
+        namedtype.NamedType("requestList", univ.SequenceOf(componentType=Request())),
+        namedtype.OptionalNamedType(
+            "requestExtensions",
+            Extensions().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+            ),
+        ),
     )
 
 
 class OCSPRequest(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('tbsRequest', TBSRequest()),
-        namedtype.OptionalNamedType('optionalSignature', Signature().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+        namedtype.NamedType("tbsRequest", TBSRequest()),
+        namedtype.OptionalNamedType(
+            "optionalSignature",
+            Signature().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
     )
 
 
 # Previously omitted structure
 
+
 class ServiceLocator(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('issuer', Name()),
-        namedtype.NamedType('locator', AuthorityInfoAccessSyntax())
+        namedtype.NamedType("issuer", Name()),
+        namedtype.NamedType("locator", AuthorityInfoAccessSyntax()),
     )
 
 
 # Additional structures
 
+
 class CrlID(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.OptionalNamedType('crlUrl', char.IA5String().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-        namedtype.OptionalNamedType('crlNum', univ.Integer().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-        namedtype.OptionalNamedType('crlTime', useful.GeneralizedTime().subtype(
-            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+        namedtype.OptionalNamedType(
+            "crlUrl",
+            char.IA5String().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
+        namedtype.OptionalNamedType(
+            "crlNum",
+            univ.Integer().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
+        namedtype.OptionalNamedType(
+            "crlTime",
+            useful.GeneralizedTime().subtype(
+                explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+            ),
+        ),
     )
 
 
 class PreferredSignatureAlgorithm(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('sigIdentifier', AlgorithmIdentifier()),
-        namedtype.OptionalNamedType('certIdentifier', AlgorithmIdentifier())
+        namedtype.NamedType("sigIdentifier", AlgorithmIdentifier()),
+        namedtype.OptionalNamedType("certIdentifier", AlgorithmIdentifier()),
     )
 
 
 class PreferredSignatureAlgorithms(univ.SequenceOf):
     componentType = PreferredSignatureAlgorithm()
-
 
 
 # Response Type OID to Response Map

@@ -42,7 +42,7 @@ CertificateSerialNumber = rfc5280.CertificateSerialNumber
 
 id_aa_signingCertificate = rfc2634.id_aa_signingCertificate
 
-id_aa_signingCertificateV2 = univ.ObjectIdentifier('1.2.840.113549.1.9.16.2.47')
+id_aa_signingCertificateV2 = univ.ObjectIdentifier("1.2.840.113549.1.9.16.2.47")
 
 Hash = rfc2634.Hash
 
@@ -54,29 +54,31 @@ SigningCertificate = rfc2634.SigningCertificate
 
 
 sha256AlgId = AlgorithmIdentifier()
-sha256AlgId['algorithm'] = rfc4055.id_sha256
+sha256AlgId["algorithm"] = rfc4055.id_sha256
 # A non-schema object for sha256AlgId['parameters'] as absent
-sha256AlgId['parameters'] = der_encode(univ.OctetString(''))
+sha256AlgId["parameters"] = der_encode(univ.OctetString(""))
 
 
 class ESSCertIDv2(univ.Sequence):
     pass
 
+
 ESSCertIDv2.componentType = namedtype.NamedTypes(
-    namedtype.DefaultedNamedType('hashAlgorithm', sha256AlgId),
-    namedtype.NamedType('certHash', Hash()),
-    namedtype.OptionalNamedType('issuerSerial', IssuerSerial())
+    namedtype.DefaultedNamedType("hashAlgorithm", sha256AlgId),
+    namedtype.NamedType("certHash", Hash()),
+    namedtype.OptionalNamedType("issuerSerial", IssuerSerial()),
 )
 
 
 class SigningCertificateV2(univ.Sequence):
     pass
 
+
 SigningCertificateV2.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('certs', univ.SequenceOf(
-        componentType=ESSCertIDv2())),
-    namedtype.OptionalNamedType('policies', univ.SequenceOf(
-        componentType=PolicyInformation()))
+    namedtype.NamedType("certs", univ.SequenceOf(componentType=ESSCertIDv2())),
+    namedtype.OptionalNamedType(
+        "policies", univ.SequenceOf(componentType=PolicyInformation())
+    ),
 )
 
 

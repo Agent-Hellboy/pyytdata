@@ -42,24 +42,29 @@ rc2CBC = rfc8018.rc2CBC
 
 # S/MIME Capabilities Attribute
 
-smimeCapabilities = univ.ObjectIdentifier('1.2.840.113549.1.9.15')
+smimeCapabilities = univ.ObjectIdentifier("1.2.840.113549.1.9.15")
 
 
-smimeCapabilityMap = { }
+smimeCapabilityMap = {}
 
 
 class SMIMECapability(univ.Sequence):
     pass
 
+
 SMIMECapability.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('capabilityID', univ.ObjectIdentifier()),
-    namedtype.OptionalNamedType('parameters', univ.Any(),
-        openType=opentype.OpenType('capabilityID', smimeCapabilityMap))
+    namedtype.NamedType("capabilityID", univ.ObjectIdentifier()),
+    namedtype.OptionalNamedType(
+        "parameters",
+        univ.Any(),
+        openType=opentype.OpenType("capabilityID", smimeCapabilityMap),
+    ),
 )
 
 
 class SMIMECapabilities(univ.SequenceOf):
     pass
+
 
 SMIMECapabilities.componentType = SMIMECapability()
 
@@ -71,7 +76,7 @@ class SMIMECapabilitiesParametersForRC2CBC(univ.Integer):
 
 # S/MIME Encryption Key Preference Attribute
 
-id_smime = univ.ObjectIdentifier('1.2.840.113549.1.9.16')
+id_smime = univ.ObjectIdentifier("1.2.840.113549.1.9.16")
 
 id_aa = _OID(id_smime, 2)
 
@@ -81,18 +86,28 @@ id_aa_encrypKeyPref = _OID(id_aa, 11)
 class SMIMEEncryptionKeyPreference(univ.Choice):
     pass
 
+
 SMIMEEncryptionKeyPreference.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('issuerAndSerialNumber',
-        IssuerAndSerialNumber().subtype(implicitTag=tag.Tag(
-            tag.tagClassContext, tag.tagFormatSimple, 0))),
-    namedtype.NamedType('receipentKeyId',
+    namedtype.NamedType(
+        "issuerAndSerialNumber",
+        IssuerAndSerialNumber().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.NamedType(
+        "receipentKeyId",
         # Yes, 'receipentKeyId' is spelled incorrectly, but kept
         # this way for alignment with the ASN.1 module in the RFC.
-        RecipientKeyIdentifier().subtype(implicitTag=tag.Tag(
-            tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.NamedType('subjectAltKeyIdentifier',
-        SubjectKeyIdentifier().subtype(implicitTag=tag.Tag(
-            tag.tagClassContext, tag.tagFormatSimple, 2)))
+        RecipientKeyIdentifier().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.NamedType(
+        "subjectAltKeyIdentifier",
+        SubjectKeyIdentifier().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+        ),
+    ),
 )
 
 

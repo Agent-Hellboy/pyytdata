@@ -41,49 +41,50 @@ DomainParameters = rfc3279.DomainParameters
 
 # Static DH Proof-of-Possession
 
+
 class DhSigStatic(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.OptionalNamedType('issuerAndSerial', IssuerAndSerialNumber()),
-        namedtype.NamedType('hashValue', MessageDigest())
+        namedtype.OptionalNamedType("issuerAndSerial", IssuerAndSerialNumber()),
+        namedtype.NamedType("hashValue", MessageDigest()),
     )
 
 
 # Object Identifiers
 
-id_dh_sig_hmac_sha1 = id_pkix + (6, 3, )
+id_dh_sig_hmac_sha1 = id_pkix + (6, 3,)
 
 id_dhPop_static_sha1_hmac_sha1 = univ.ObjectIdentifier(id_dh_sig_hmac_sha1)
 
 
-id_alg_dh_pop = id_pkix + (6, 4, )
+id_alg_dh_pop = id_pkix + (6, 4,)
 
 id_alg_dhPop_sha1 = univ.ObjectIdentifier(id_alg_dh_pop)
 
-id_alg_dhPop_sha224 = id_pkix + (6, 5, )
+id_alg_dhPop_sha224 = id_pkix + (6, 5,)
 
-id_alg_dhPop_sha256 = id_pkix + (6, 6, )
+id_alg_dhPop_sha256 = id_pkix + (6, 6,)
 
-id_alg_dhPop_sha384 = id_pkix + (6, 7, )
+id_alg_dhPop_sha384 = id_pkix + (6, 7,)
 
-id_alg_dhPop_sha512 = id_pkix + (6, 8, )
-
-
-id_alg_dhPop_static_sha224_hmac_sha224 = id_pkix + (6, 15, )
-
-id_alg_dhPop_static_sha256_hmac_sha256 = id_pkix + (6, 16, )
-
-id_alg_dhPop_static_sha384_hmac_sha384 = id_pkix + (6, 17, )
-
-id_alg_dhPop_static_sha512_hmac_sha512 = id_pkix + (6, 18, )
+id_alg_dhPop_sha512 = id_pkix + (6, 8,)
 
 
-id_alg_ecdhPop_static_sha224_hmac_sha224 = id_pkix + (6, 25, )
+id_alg_dhPop_static_sha224_hmac_sha224 = id_pkix + (6, 15,)
 
-id_alg_ecdhPop_static_sha256_hmac_sha256 = id_pkix + (6, 26, )
+id_alg_dhPop_static_sha256_hmac_sha256 = id_pkix + (6, 16,)
 
-id_alg_ecdhPop_static_sha384_hmac_sha384 = id_pkix + (6, 27, )
+id_alg_dhPop_static_sha384_hmac_sha384 = id_pkix + (6, 17,)
 
-id_alg_ecdhPop_static_sha512_hmac_sha512 = id_pkix + (6, 28, )
+id_alg_dhPop_static_sha512_hmac_sha512 = id_pkix + (6, 18,)
+
+
+id_alg_ecdhPop_static_sha224_hmac_sha224 = id_pkix + (6, 25,)
+
+id_alg_ecdhPop_static_sha256_hmac_sha256 = id_pkix + (6, 26,)
+
+id_alg_ecdhPop_static_sha384_hmac_sha384 = id_pkix + (6, 27,)
+
+id_alg_ecdhPop_static_sha512_hmac_sha512 = id_pkix + (6, 28,)
 
 
 # Update the Algorithm Identifier map in rfc5280.py

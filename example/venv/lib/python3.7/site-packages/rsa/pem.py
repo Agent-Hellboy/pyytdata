@@ -27,10 +27,12 @@ def _markers(pem_marker):
     """
 
     if not is_bytes(pem_marker):
-        pem_marker = pem_marker.encode('ascii')
+        pem_marker = pem_marker.encode("ascii")
 
-    return (b'-----BEGIN ' + pem_marker + b'-----',
-            b'-----END ' + pem_marker + b'-----')
+    return (
+        b"-----BEGIN " + pem_marker + b"-----",
+        b"-----END " + pem_marker + b"-----",
+    )
 
 
 def load_pem(contents, pem_marker):
@@ -50,7 +52,7 @@ def load_pem(contents, pem_marker):
 
     # We want bytes, not text. If it's text, it can be converted to ASCII bytes.
     if not is_bytes(contents):
-        contents = contents.encode('ascii')
+        contents = contents.encode("ascii")
 
     (pem_start, pem_end) = _markers(pem_marker)
 
@@ -82,7 +84,7 @@ def load_pem(contents, pem_marker):
             break
 
         # Load fields
-        if b':' in line:
+        if b":" in line:
             continue
 
         pem_lines.append(line)
@@ -95,7 +97,7 @@ def load_pem(contents, pem_marker):
         raise ValueError('No PEM end marker "%s" found' % pem_end)
 
     # Base64-decode the contents
-    pem = b''.join(pem_lines)
+    pem = b"".join(pem_lines)
     return base64.standard_b64decode(pem)
 
 
@@ -113,14 +115,14 @@ def save_pem(contents, pem_marker):
 
     (pem_start, pem_end) = _markers(pem_marker)
 
-    b64 = base64.standard_b64encode(contents).replace(b'\n', b'')
+    b64 = base64.standard_b64encode(contents).replace(b"\n", b"")
     pem_lines = [pem_start]
 
     for block_start in range(0, len(b64), 64):
-        block = b64[block_start:block_start + 64]
+        block = b64[block_start : block_start + 64]
         pem_lines.append(block)
 
     pem_lines.append(pem_end)
-    pem_lines.append(b'')
+    pem_lines.append(b"")
 
-    return b'\n'.join(pem_lines)
+    return b"\n".join(pem_lines)

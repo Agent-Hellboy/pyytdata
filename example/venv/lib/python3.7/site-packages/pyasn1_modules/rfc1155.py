@@ -24,10 +24,10 @@ class ObjectName(univ.ObjectIdentifier):
 
 class SimpleSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('number', univ.Integer()),
-        namedtype.NamedType('string', univ.OctetString()),
-        namedtype.NamedType('object', univ.ObjectIdentifier()),
-        namedtype.NamedType('empty', univ.Null())
+        namedtype.NamedType("number", univ.Integer()),
+        namedtype.NamedType("string", univ.OctetString()),
+        namedtype.NamedType("object", univ.ObjectIdentifier()),
+        namedtype.NamedType("empty", univ.Null()),
     )
 
 
@@ -35,15 +35,11 @@ class IpAddress(univ.OctetString):
     tagSet = univ.OctetString.tagSet.tagImplicitly(
         tag.Tag(tag.tagClassApplication, tag.tagFormatSimple, 0)
     )
-    subtypeSpec = univ.Integer.subtypeSpec + constraint.ValueSizeConstraint(
-        4, 4
-    )
+    subtypeSpec = univ.Integer.subtypeSpec + constraint.ValueSizeConstraint(4, 4)
 
 
 class NetworkAddress(univ.Choice):
-    componentType = namedtype.NamedTypes(
-        namedtype.NamedType('internet', IpAddress())
-    )
+    componentType = namedtype.NamedTypes(namedtype.NamedType("internet", IpAddress()))
 
 
 class Counter(univ.Integer):
@@ -81,16 +77,16 @@ class Opaque(univ.OctetString):
 
 class ApplicationSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('address', NetworkAddress()),
-        namedtype.NamedType('counter', Counter()),
-        namedtype.NamedType('gauge', Gauge()),
-        namedtype.NamedType('ticks', TimeTicks()),
-        namedtype.NamedType('arbitrary', Opaque())
+        namedtype.NamedType("address", NetworkAddress()),
+        namedtype.NamedType("counter", Counter()),
+        namedtype.NamedType("gauge", Gauge()),
+        namedtype.NamedType("ticks", TimeTicks()),
+        namedtype.NamedType("arbitrary", Opaque()),
     )
 
 
 class ObjectSyntax(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('simple', SimpleSyntax()),
-        namedtype.NamedType('application-wide', ApplicationSyntax())
+        namedtype.NamedType("simple", SimpleSyntax()),
+        namedtype.NamedType("application-wide", ApplicationSyntax()),
     )

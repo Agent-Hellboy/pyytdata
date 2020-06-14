@@ -19,7 +19,7 @@ from pyasn1_modules import rfc5280
 from pyasn1_modules import rfc5652
 
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 class KeyEncryptionAlgorithmIdentifier(rfc5280.AlgorithmIdentifier):
@@ -36,13 +36,13 @@ class EncryptedData(univ.OctetString):
 
 class EncryptedPrivateKeyInfo(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('encryptionAlgorithm', KeyEncryptionAlgorithmIdentifier()),
-        namedtype.NamedType('encryptedData', EncryptedData())
+        namedtype.NamedType("encryptionAlgorithm", KeyEncryptionAlgorithmIdentifier()),
+        namedtype.NamedType("encryptedData", EncryptedData()),
     )
 
 
 class Version(univ.Integer):
-    namedValues = namedval.NamedValues(('v1', 0), ('v2', 1))
+    namedValues = namedval.NamedValues(("v1", 0), ("v2", 1))
 
 
 class PrivateKey(univ.OctetString):
@@ -54,22 +54,31 @@ class Attributes(univ.SetOf):
 
 
 class PublicKey(univ.BitString):
-   pass
+    pass
 
 
 # OneAsymmetricKey is essentially version 2 of PrivateKeyInfo.
 # If publicKey is present, then the version must be v2;
 # otherwise, the version should be v1.
 
+
 class OneAsymmetricKey(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('version', Version()),
-        namedtype.NamedType('privateKeyAlgorithm', PrivateKeyAlgorithmIdentifier()),
-        namedtype.NamedType('privateKey', PrivateKey()),
-        namedtype.OptionalNamedType('attributes', Attributes().subtype(
-            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0))),
-        namedtype.OptionalNamedType('publicKey', PublicKey().subtype(
-            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))
+        namedtype.NamedType("version", Version()),
+        namedtype.NamedType("privateKeyAlgorithm", PrivateKeyAlgorithmIdentifier()),
+        namedtype.NamedType("privateKey", PrivateKey()),
+        namedtype.OptionalNamedType(
+            "attributes",
+            Attributes().subtype(
+                implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            ),
+        ),
+        namedtype.OptionalNamedType(
+            "publicKey",
+            PublicKey().subtype(
+                implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            ),
+        ),
     )
 
 
@@ -79,14 +88,16 @@ class PrivateKeyInfo(OneAsymmetricKey):
 
 # The CMS AsymmetricKeyPackage Content Type
 
-id_ct_KP_aKeyPackage = univ.ObjectIdentifier('2.16.840.1.101.2.1.2.78.5')
+id_ct_KP_aKeyPackage = univ.ObjectIdentifier("2.16.840.1.101.2.1.2.78.5")
+
 
 class AsymmetricKeyPackage(univ.SequenceOf):
     pass
 
+
 AsymmetricKeyPackage.componentType = OneAsymmetricKey()
-AsymmetricKeyPackage.sizeSpec=constraint.ValueSizeConstraint(1, MAX)
-    
+AsymmetricKeyPackage.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
+
 
 # Map of Content Type OIDs to Content Types is added to the
 # ones that are in rfc5652.py

@@ -15,15 +15,15 @@
 from pyasn1.type import univ
 
 
-id_pkix = univ.ObjectIdentifier('1.3.6.1.5.5.7')
+id_pkix = univ.ObjectIdentifier("1.3.6.1.5.5.7")
 
-id_TEST = id_pkix + (13, )
+id_TEST = id_pkix + (13,)
 
-id_TEST_certPolicyOne   = id_TEST + (1, )
-id_TEST_certPolicyTwo   = id_TEST + (2, )
-id_TEST_certPolicyThree = id_TEST + (3, )
-id_TEST_certPolicyFour  = id_TEST + (4, )
-id_TEST_certPolicyFive  = id_TEST + (5, )
-id_TEST_certPolicySix   = id_TEST + (6, )
-id_TEST_certPolicySeven = id_TEST + (7, )
-id_TEST_certPolicyEight = id_TEST + (8, )
+id_TEST_certPolicyOne = id_TEST + (1,)
+id_TEST_certPolicyTwo = id_TEST + (2,)
+id_TEST_certPolicyThree = id_TEST + (3,)
+id_TEST_certPolicyFour = id_TEST + (4,)
+id_TEST_certPolicyFive = id_TEST + (5,)
+id_TEST_certPolicySix = id_TEST + (6,)
+id_TEST_certPolicySeven = id_TEST + (7,)
+id_TEST_certPolicyEight = id_TEST + (8,)

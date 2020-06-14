@@ -16,6 +16,22 @@ setup(
     long_description=read("README.rst"),
     license="MIT",
     py_modules=["pyytdata/pyytdata"],
+    keywords=[
+        "youtube-api" "recommend-youtube-videos",
+        "youtube-data",
+        "python",
+        "wrapper",
+        "youtube-data-api-v3",
+        "youtube-api-wrapper",
+        "youtube-api-v3",
+    ],
+    python_requires=">=3.6",
     install_requires=["google-api-python-client"],
+    classifiers=[
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Operating System :: OS Independent",
+    ],
     include_package_data=True,
 )

@@ -10,7 +10,7 @@ from pyasn1.compat.octets import str2octs, null
 from pyasn1.type import univ
 from pyasn1.type import useful
 
-__all__ = ['encode']
+__all__ = ["encode"]
 
 
 class BooleanEncoder(encoder.IntegerEncoder):
@@ -30,13 +30,14 @@ class RealEncoder(encoder.RealEncoder):
 
 # specialized GeneralStringEncoder here
 
+
 class TimeEncoderMixIn(object):
-    Z_CHAR = ord('Z')
-    PLUS_CHAR = ord('+')
-    MINUS_CHAR = ord('-')
-    COMMA_CHAR = ord(',')
-    DOT_CHAR = ord('.')
-    ZERO_CHAR = ord('0')
+    Z_CHAR = ord("Z")
+    PLUS_CHAR = ord("+")
+    MINUS_CHAR = ord("-")
+    COMMA_CHAR = ord(",")
+    DOT_CHAR = ord(".")
+    ZERO_CHAR = ord("0")
 
     MIN_LENGTH = 12
     MAX_LENGTH = 19
@@ -55,13 +56,13 @@ class TimeEncoderMixIn(object):
         numbers = value.asNumbers()
 
         if self.PLUS_CHAR in numbers or self.MINUS_CHAR in numbers:
-            raise error.PyAsn1Error('Must be UTC time: %r' % value)
+            raise error.PyAsn1Error("Must be UTC time: %r" % value)
 
         if numbers[-1] != self.Z_CHAR:
             raise error.PyAsn1Error('Missing "Z" time zone specifier: %r' % value)
 
         if self.COMMA_CHAR in numbers:
-            raise error.PyAsn1Error('Comma in fractions disallowed: %r' % value)
+            raise error.PyAsn1Error("Comma in fractions disallowed: %r" % value)
 
         if self.DOT_CHAR in numbers:
 
@@ -90,7 +91,7 @@ class TimeEncoderMixIn(object):
                 value = value.clone(numbers)
 
         if not self.MIN_LENGTH < len(numbers) < self.MAX_LENGTH:
-            raise error.PyAsn1Error('Length constraint violated: %r' % value)
+            raise error.PyAsn1Error("Length constraint violated: %r" % value)
 
         options.update(maxChunkSize=1000)
 
@@ -111,16 +112,13 @@ class UTCTimeEncoder(TimeEncoderMixIn, encoder.OctetStringEncoder):
 
 class SetOfEncoder(encoder.SequenceOfEncoder):
     def encodeValue(self, value, asn1Spec, encodeFun, **options):
-        chunks = self._encodeComponents(
-            value, asn1Spec, encodeFun, **options)
+        chunks = self._encodeComponents(value, asn1Spec, encodeFun, **options)
 
         # sort by serialised and padded components
         if len(chunks) > 1:
-            zero = str2octs('\x00')
+            zero = str2octs("\x00")
             maxLen = max(map(len, chunks))
-            paddedChunks = [
-                (x.ljust(maxLen, zero), x) for x in chunks
-            ]
+            paddedChunks = [(x.ljust(maxLen, zero), x) for x in chunks]
             paddedChunks.sort(key=lambda x: x[0])
 
             chunks = [x[1] for x in paddedChunks]
@@ -131,11 +129,10 @@ class SetOfEncoder(encoder.SequenceOfEncoder):
 class SequenceOfEncoder(encoder.SequenceOfEncoder):
     def encodeValue(self, value, asn1Spec, encodeFun, **options):
 
-        if options.get('ifNotEmpty', False) and not len(value):
+        if options.get("ifNotEmpty", False) and not len(value):
             return null, True, True
 
-        chunks = self._encodeComponents(
-            value, asn1Spec, encodeFun, **options)
+        chunks = self._encodeComponents(value, asn1Spec, encodeFun, **options)
 
         return null.join(chunks), True, True
 
@@ -180,10 +177,10 @@ class SetEncoder(encoder.SequenceEncoder):
                     namedType = namedTypes[idx]
 
                     if namedType.isOptional and not component.isValue:
-                            continue
+                        continue
 
                     if namedType.isDefaulted and component == namedType.asn1Object:
-                            continue
+                        continue
 
                     compsMap[id(component)] = namedType
 
@@ -200,7 +197,9 @@ class SetEncoder(encoder.SequenceEncoder):
                     component = value[namedType.name]
 
                 except KeyError:
-                    raise error.PyAsn1Error('Component name "%s" not found in %r' % (namedType.name, value))
+                    raise error.PyAsn1Error(
+                        'Component name "%s" not found in %r' % (namedType.name, value)
+                    )
 
                 if namedType.isOptional and namedType.name not in value:
                     continue
@@ -235,33 +234,38 @@ class SequenceEncoder(encoder.SequenceEncoder):
 
 
 tagMap = encoder.tagMap.copy()
-tagMap.update({
-    univ.Boolean.tagSet: BooleanEncoder(),
-    univ.Real.tagSet: RealEncoder(),
-    useful.GeneralizedTime.tagSet: GeneralizedTimeEncoder(),
-    useful.UTCTime.tagSet: UTCTimeEncoder(),
-    # Sequence & Set have same tags as SequenceOf & SetOf
-    univ.SetOf.tagSet: SetOfEncoder(),
-    univ.Sequence.typeId: SequenceEncoder()
-})
+tagMap.update(
+    {
+        univ.Boolean.tagSet: BooleanEncoder(),
+        univ.Real.tagSet: RealEncoder(),
+        useful.GeneralizedTime.tagSet: GeneralizedTimeEncoder(),
+        useful.UTCTime.tagSet: UTCTimeEncoder(),
+        # Sequence & Set have same tags as SequenceOf & SetOf
+        univ.SetOf.tagSet: SetOfEncoder(),
+        univ.Sequence.typeId: SequenceEncoder(),
+    }
+)
 
 typeMap = encoder.typeMap.copy()
-typeMap.update({
-    univ.Boolean.typeId: BooleanEncoder(),
-    univ.Real.typeId: RealEncoder(),
-    useful.GeneralizedTime.typeId: GeneralizedTimeEncoder(),
-    useful.UTCTime.typeId: UTCTimeEncoder(),
-    # Sequence & Set have same tags as SequenceOf & SetOf
-    univ.Set.typeId: SetEncoder(),
-    univ.SetOf.typeId: SetOfEncoder(),
-    univ.Sequence.typeId: SequenceEncoder(),
-    univ.SequenceOf.typeId: SequenceOfEncoder()
-})
+typeMap.update(
+    {
+        univ.Boolean.typeId: BooleanEncoder(),
+        univ.Real.typeId: RealEncoder(),
+        useful.GeneralizedTime.typeId: GeneralizedTimeEncoder(),
+        useful.UTCTime.typeId: UTCTimeEncoder(),
+        # Sequence & Set have same tags as SequenceOf & SetOf
+        univ.Set.typeId: SetEncoder(),
+        univ.SetOf.typeId: SetOfEncoder(),
+        univ.Sequence.typeId: SequenceEncoder(),
+        univ.SequenceOf.typeId: SequenceOfEncoder(),
+    }
+)
 
 
 class Encoder(encoder.Encoder):
     fixedDefLengthMode = False
     fixedChunkSize = 1000
+
 
 #: Turns ASN.1 object into CER octet stream.
 #:

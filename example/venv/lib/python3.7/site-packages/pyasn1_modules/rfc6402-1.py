@@ -27,7 +27,7 @@ from pyasn1_modules import rfc4211
 from pyasn1_modules import rfc5280
 from pyasn1_modules import rfc5652
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 def _buildOid(*components):
@@ -41,7 +41,7 @@ def _buildOid(*components):
     return univ.ObjectIdentifier(output)
 
 
-cmcControlAttributesMap = { }
+cmcControlAttributesMap = {}
 
 
 class ChangeSubjectName(univ.Sequence):
@@ -49,8 +49,8 @@ class ChangeSubjectName(univ.Sequence):
 
 
 ChangeSubjectName.componentType = namedtype.NamedTypes(
-    namedtype.OptionalNamedType('subject', rfc5280.Name()),
-    namedtype.OptionalNamedType('subjectAlt', rfc5280.GeneralNames())
+    namedtype.OptionalNamedType("subject", rfc5280.Name()),
+    namedtype.OptionalNamedType("subjectAlt", rfc5280.GeneralNames()),
 )
 
 
@@ -63,13 +63,13 @@ class CMCStatus(univ.Integer):
 
 
 CMCStatus.namedValues = namedval.NamedValues(
-    ('success', 0),
-    ('failed', 2),
-    ('pending', 3),
-    ('noSupport', 4),
-    ('confirmRequired', 5),
-    ('popRequired', 6),
-    ('partial', 7)
+    ("success", 0),
+    ("failed", 2),
+    ("pending", 3),
+    ("noSupport", 4),
+    ("confirmRequired", 5),
+    ("popRequired", 6),
+    ("partial", 7),
 )
 
 
@@ -78,8 +78,8 @@ class PendInfo(univ.Sequence):
 
 
 PendInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('pendToken', univ.OctetString()),
-    namedtype.NamedType('pendTime', useful.GeneralizedTime())
+    namedtype.NamedType("pendToken", univ.OctetString()),
+    namedtype.NamedType("pendTime", useful.GeneralizedTime()),
 )
 
 bodyIdMax = univ.Integer(4294967295)
@@ -105,8 +105,8 @@ class BodyPartReference(univ.Choice):
 
 
 BodyPartReference.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('bodyPartPath', BodyPartPath())
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("bodyPartPath", BodyPartPath()),
 )
 
 
@@ -115,20 +115,20 @@ class CMCFailInfo(univ.Integer):
 
 
 CMCFailInfo.namedValues = namedval.NamedValues(
-    ('badAlg', 0),
-    ('badMessageCheck', 1),
-    ('badRequest', 2),
-    ('badTime', 3),
-    ('badCertId', 4),
-    ('unsupportedExt', 5),
-    ('mustArchiveKeys', 6),
-    ('badIdentity', 7),
-    ('popRequired', 8),
-    ('popFailed', 9),
-    ('noKeyReuse', 10),
-    ('internalCAError', 11),
-    ('tryLater', 12),
-    ('authDataFail', 13)
+    ("badAlg", 0),
+    ("badMessageCheck", 1),
+    ("badRequest", 2),
+    ("badTime", 3),
+    ("badCertId", 4),
+    ("unsupportedExt", 5),
+    ("mustArchiveKeys", 6),
+    ("badIdentity", 7),
+    ("popRequired", 8),
+    ("popFailed", 9),
+    ("noKeyReuse", 10),
+    ("internalCAError", 11),
+    ("tryLater", 12),
+    ("authDataFail", 13),
 )
 
 
@@ -137,24 +137,27 @@ class CMCStatusInfoV2(univ.Sequence):
 
 
 CMCStatusInfoV2.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('cMCStatus', CMCStatus()),
-    namedtype.NamedType('bodyList', univ.SequenceOf(componentType=BodyPartReference())),
-    namedtype.OptionalNamedType('statusString', char.UTF8String()),
+    namedtype.NamedType("cMCStatus", CMCStatus()),
+    namedtype.NamedType("bodyList", univ.SequenceOf(componentType=BodyPartReference())),
+    namedtype.OptionalNamedType("statusString", char.UTF8String()),
     namedtype.OptionalNamedType(
-        'otherInfo', univ.Choice(
+        "otherInfo",
+        univ.Choice(
             componentType=namedtype.NamedTypes(
-                namedtype.NamedType('failInfo', CMCFailInfo()),
-                namedtype.NamedType('pendInfo', PendInfo()),
+                namedtype.NamedType("failInfo", CMCFailInfo()),
+                namedtype.NamedType("pendInfo", PendInfo()),
                 namedtype.NamedType(
-                    'extendedFailInfo', univ.Sequence(
-                    componentType=namedtype.NamedTypes(
-                        namedtype.NamedType('failInfoOID', univ.ObjectIdentifier()),
-                        namedtype.NamedType('failInfoValue', AttributeValue()))
-                    )
-                )
+                    "extendedFailInfo",
+                    univ.Sequence(
+                        componentType=namedtype.NamedTypes(
+                            namedtype.NamedType("failInfoOID", univ.ObjectIdentifier()),
+                            namedtype.NamedType("failInfoValue", AttributeValue()),
+                        )
+                    ),
+                ),
             )
-        )
-    )
+        ),
+    ),
 )
 
 
@@ -163,10 +166,10 @@ class GetCRL(univ.Sequence):
 
 
 GetCRL.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('issuerName', rfc5280.Name()),
-    namedtype.OptionalNamedType('cRLName', rfc5280.GeneralName()),
-    namedtype.OptionalNamedType('time', useful.GeneralizedTime()),
-    namedtype.OptionalNamedType('reasons', rfc5280.ReasonFlags())
+    namedtype.NamedType("issuerName", rfc5280.Name()),
+    namedtype.OptionalNamedType("cRLName", rfc5280.GeneralName()),
+    namedtype.OptionalNamedType("time", useful.GeneralizedTime()),
+    namedtype.OptionalNamedType("reasons", rfc5280.ReasonFlags()),
 )
 
 id_pkix = _buildOid(1, 3, 6, 1, 5, 5, 7)
@@ -183,9 +186,9 @@ class PopLinkWitnessV2(univ.Sequence):
 
 
 PopLinkWitnessV2.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('keyGenAlgorithm', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('macAlgorithm', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('witness', univ.OctetString())
+    namedtype.NamedType("keyGenAlgorithm", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("macAlgorithm", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("witness", univ.OctetString()),
 )
 
 id_cmc_popLinkWitnessV2 = _buildOid(id_cmc, 33)
@@ -202,7 +205,7 @@ class ControlsProcessed(univ.Sequence):
 
 
 ControlsProcessed.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyList', univ.SequenceOf(componentType=BodyPartReference()))
+    namedtype.NamedType("bodyList", univ.SequenceOf(componentType=BodyPartReference()))
 )
 
 
@@ -212,28 +215,33 @@ class CertificationRequest(univ.Sequence):
 
 CertificationRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
-        'certificationRequestInfo', univ.Sequence(
+        "certificationRequestInfo",
+        univ.Sequence(
             componentType=namedtype.NamedTypes(
-                namedtype.NamedType('version', univ.Integer()),
-                namedtype.NamedType('subject', rfc5280.Name()),
+                namedtype.NamedType("version", univ.Integer()),
+                namedtype.NamedType("subject", rfc5280.Name()),
                 namedtype.NamedType(
-                    'subjectPublicKeyInfo', univ.Sequence(
+                    "subjectPublicKeyInfo",
+                    univ.Sequence(
                         componentType=namedtype.NamedTypes(
-                            namedtype.NamedType('algorithm', rfc5280.AlgorithmIdentifier()),
-                            namedtype.NamedType('subjectPublicKey', univ.BitString())
+                            namedtype.NamedType(
+                                "algorithm", rfc5280.AlgorithmIdentifier()
+                            ),
+                            namedtype.NamedType("subjectPublicKey", univ.BitString()),
                         )
-                    )
+                    ),
                 ),
                 namedtype.NamedType(
-                    'attributes', univ.SetOf(
-                        componentType=rfc5652.Attribute()).subtype(
-                        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
-                )
+                    "attributes",
+                    univ.SetOf(componentType=rfc5652.Attribute()).subtype(
+                        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+                    ),
+                ),
             )
-        )
+        ),
     ),
-    namedtype.NamedType('signatureAlgorithm', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('signature', univ.BitString())
+    namedtype.NamedType("signatureAlgorithm", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("signature", univ.BitString()),
 )
 
 
@@ -242,8 +250,8 @@ class TaggedCertificationRequest(univ.Sequence):
 
 
 TaggedCertificationRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('certificationRequest', CertificationRequest())
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("certificationRequest", CertificationRequest()),
 )
 
 
@@ -252,16 +260,30 @@ class TaggedRequest(univ.Choice):
 
 
 TaggedRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('tcr', TaggedCertificationRequest().subtype(
-        implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0))),
-    namedtype.NamedType('crm',
-                        rfc4211.CertReqMsg().subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-    namedtype.NamedType('orm', univ.Sequence(componentType=namedtype.NamedTypes(
-        namedtype.NamedType('bodyPartID', BodyPartID()),
-        namedtype.NamedType('requestMessageType', univ.ObjectIdentifier()),
-        namedtype.NamedType('requestMessageValue', univ.Any())
-    ))
-                        .subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))
+    namedtype.NamedType(
+        "tcr",
+        TaggedCertificationRequest().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+        ),
+    ),
+    namedtype.NamedType(
+        "crm",
+        rfc4211.CertReqMsg().subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
+    namedtype.NamedType(
+        "orm",
+        univ.Sequence(
+            componentType=namedtype.NamedTypes(
+                namedtype.NamedType("bodyPartID", BodyPartID()),
+                namedtype.NamedType("requestMessageType", univ.ObjectIdentifier()),
+                namedtype.NamedType("requestMessageValue", univ.Any()),
+            )
+        ).subtype(
+            implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+        ),
+    ),
 )
 
 id_cmc_popLinkRandom = _buildOid(id_cmc, 22)
@@ -280,9 +302,11 @@ class PublishTrustAnchors(univ.Sequence):
 
 
 PublishTrustAnchors.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('seqNumber', univ.Integer()),
-    namedtype.NamedType('hashAlgorithm', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('anchorHashes', univ.SequenceOf(componentType=univ.OctetString()))
+    namedtype.NamedType("seqNumber", univ.Integer()),
+    namedtype.NamedType("hashAlgorithm", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType(
+        "anchorHashes", univ.SequenceOf(componentType=univ.OctetString())
+    ),
 )
 
 
@@ -291,12 +315,12 @@ class RevokeRequest(univ.Sequence):
 
 
 RevokeRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('issuerName', rfc5280.Name()),
-    namedtype.NamedType('serialNumber', univ.Integer()),
-    namedtype.NamedType('reason', rfc5280.CRLReason()),
-    namedtype.OptionalNamedType('invalidityDate', useful.GeneralizedTime()),
-    namedtype.OptionalNamedType('passphrase', univ.OctetString()),
-    namedtype.OptionalNamedType('comment', char.UTF8String())
+    namedtype.NamedType("issuerName", rfc5280.Name()),
+    namedtype.NamedType("serialNumber", univ.Integer()),
+    namedtype.NamedType("reason", rfc5280.CRLReason()),
+    namedtype.OptionalNamedType("invalidityDate", useful.GeneralizedTime()),
+    namedtype.OptionalNamedType("passphrase", univ.OctetString()),
+    namedtype.OptionalNamedType("comment", char.UTF8String()),
 )
 
 id_cmc_senderNonce = _buildOid(id_cmc, 6)
@@ -309,8 +333,8 @@ class TaggedContentInfo(univ.Sequence):
 
 
 TaggedContentInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('contentInfo', rfc5652.ContentInfo())
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("contentInfo", rfc5652.ContentInfo()),
 )
 
 
@@ -319,9 +343,9 @@ class IdentifyProofV2(univ.Sequence):
 
 
 IdentifyProofV2.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('proofAlgID', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('macAlgId', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('witness', univ.OctetString())
+    namedtype.NamedType("proofAlgID", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("macAlgId", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("witness", univ.OctetString()),
 )
 
 
@@ -330,9 +354,11 @@ class CMCPublicationInfo(univ.Sequence):
 
 
 CMCPublicationInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('hashAlg', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('certHashes', univ.SequenceOf(componentType=univ.OctetString())),
-    namedtype.NamedType('pubInfo', rfc4211.PKIPublicationInfo())
+    namedtype.NamedType("hashAlg", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType(
+        "certHashes", univ.SequenceOf(componentType=univ.OctetString())
+    ),
+    namedtype.NamedType("pubInfo", rfc4211.PKIPublicationInfo()),
 )
 
 id_kp_cmcCA = _buildOid(rfc5280.id_kp, 27)
@@ -355,17 +381,18 @@ class CMCStatusInfo(univ.Sequence):
 
 
 CMCStatusInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('cMCStatus', CMCStatus()),
-    namedtype.NamedType('bodyList', univ.SequenceOf(componentType=BodyPartID())),
-    namedtype.OptionalNamedType('statusString', char.UTF8String()),
+    namedtype.NamedType("cMCStatus", CMCStatus()),
+    namedtype.NamedType("bodyList", univ.SequenceOf(componentType=BodyPartID())),
+    namedtype.OptionalNamedType("statusString", char.UTF8String()),
     namedtype.OptionalNamedType(
-        'otherInfo', univ.Choice(
+        "otherInfo",
+        univ.Choice(
             componentType=namedtype.NamedTypes(
-                namedtype.NamedType('failInfo', CMCFailInfo()),
-                namedtype.NamedType('pendInfo', PendInfo())
+                namedtype.NamedType("failInfo", CMCFailInfo()),
+                namedtype.NamedType("pendInfo", PendInfo()),
             )
-        )
-    )
+        ),
+    ),
 )
 
 
@@ -374,9 +401,9 @@ class DecryptedPOP(univ.Sequence):
 
 
 DecryptedPOP.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('thePOPAlgID', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('thePOP', univ.OctetString())
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("thePOPAlgID", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("thePOP", univ.OctetString()),
 )
 
 id_cmc_addExtensions = _buildOid(id_cmc, 8)
@@ -389,11 +416,13 @@ class TaggedAttribute(univ.Sequence):
 
 
 TaggedAttribute.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('attrType', univ.ObjectIdentifier()),
-    namedtype.NamedType('attrValues', univ.SetOf(componentType=AttributeValue()),
-        openType=opentype.OpenType('attrType', cmcControlAttributesMap)
-    )
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("attrType", univ.ObjectIdentifier()),
+    namedtype.NamedType(
+        "attrValues",
+        univ.SetOf(componentType=AttributeValue()),
+        openType=opentype.OpenType("attrType", cmcControlAttributesMap),
+    ),
 )
 
 
@@ -402,9 +431,9 @@ class OtherMsg(univ.Sequence):
 
 
 OtherMsg.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartID', BodyPartID()),
-    namedtype.NamedType('otherMsgType', univ.ObjectIdentifier()),
-    namedtype.NamedType('otherMsgValue', univ.Any())
+    namedtype.NamedType("bodyPartID", BodyPartID()),
+    namedtype.NamedType("otherMsgType", univ.ObjectIdentifier()),
+    namedtype.NamedType("otherMsgValue", univ.Any()),
 )
 
 
@@ -413,10 +442,14 @@ class PKIData(univ.Sequence):
 
 
 PKIData.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('controlSequence', univ.SequenceOf(componentType=TaggedAttribute())),
-    namedtype.NamedType('reqSequence', univ.SequenceOf(componentType=TaggedRequest())),
-    namedtype.NamedType('cmsSequence', univ.SequenceOf(componentType=TaggedContentInfo())),
-    namedtype.NamedType('otherMsgSequence', univ.SequenceOf(componentType=OtherMsg()))
+    namedtype.NamedType(
+        "controlSequence", univ.SequenceOf(componentType=TaggedAttribute())
+    ),
+    namedtype.NamedType("reqSequence", univ.SequenceOf(componentType=TaggedRequest())),
+    namedtype.NamedType(
+        "cmsSequence", univ.SequenceOf(componentType=TaggedContentInfo())
+    ),
+    namedtype.NamedType("otherMsgSequence", univ.SequenceOf(componentType=OtherMsg())),
 )
 
 
@@ -439,9 +472,9 @@ class CMCUnsignedData(univ.Sequence):
 
 
 CMCUnsignedData.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('bodyPartPath', BodyPartPath()),
-    namedtype.NamedType('identifier', univ.ObjectIdentifier()),
-    namedtype.NamedType('content', univ.Any())
+    namedtype.NamedType("bodyPartPath", BodyPartPath()),
+    namedtype.NamedType("identifier", univ.ObjectIdentifier()),
+    namedtype.NamedType("content", univ.Any()),
 )
 
 
@@ -454,9 +487,13 @@ class PKIResponse(univ.Sequence):
 
 
 PKIResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('controlSequence', univ.SequenceOf(componentType=TaggedAttribute())),
-    namedtype.NamedType('cmsSequence', univ.SequenceOf(componentType=TaggedContentInfo())),
-    namedtype.NamedType('otherMsgSequence', univ.SequenceOf(componentType=OtherMsg()))
+    namedtype.NamedType(
+        "controlSequence", univ.SequenceOf(componentType=TaggedAttribute())
+    ),
+    namedtype.NamedType(
+        "cmsSequence", univ.SequenceOf(componentType=TaggedContentInfo())
+    ),
+    namedtype.NamedType("otherMsgSequence", univ.SequenceOf(componentType=OtherMsg())),
 )
 
 
@@ -474,10 +511,10 @@ class ModCertTemplate(univ.Sequence):
 
 
 ModCertTemplate.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('pkiDataReference', BodyPartPath()),
-    namedtype.NamedType('certReferences', BodyPartList()),
-    namedtype.DefaultedNamedType('replace', univ.Boolean().subtype(value=1)),
-    namedtype.NamedType('certTemplate', rfc4211.CertTemplate())
+    namedtype.NamedType("pkiDataReference", BodyPartPath()),
+    namedtype.NamedType("certReferences", BodyPartList()),
+    namedtype.DefaultedNamedType("replace", univ.Boolean().subtype(value=1)),
+    namedtype.NamedType("certTemplate", rfc4211.CertTemplate()),
 )
 
 id_cmc_regInfo = _buildOid(id_cmc, 18)
@@ -504,8 +541,8 @@ class LraPopWitness(univ.Sequence):
 
 
 LraPopWitness.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('pkiDataBodyid', BodyPartID()),
-    namedtype.NamedType('bodyIds', univ.SequenceOf(componentType=BodyPartID()))
+    namedtype.NamedType("pkiDataBodyid", BodyPartID()),
+    namedtype.NamedType("bodyIds", univ.SequenceOf(componentType=BodyPartID())),
 )
 
 id_aa = _buildOid(1, 2, 840, 113549, 1, 9, 16, 2)
@@ -528,8 +565,8 @@ class GetCert(univ.Sequence):
 
 
 GetCert.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('issuerName', rfc5280.GeneralName()),
-    namedtype.NamedType('serialNumber', univ.Integer())
+    namedtype.NamedType("issuerName", rfc5280.GeneralName()),
+    namedtype.NamedType("serialNumber", univ.Integer()),
 )
 
 id_cmc_identification = _buildOid(id_cmc, 2)
@@ -542,9 +579,11 @@ class AddExtensions(univ.Sequence):
 
 
 AddExtensions.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('pkiDataReference', BodyPartID()),
-    namedtype.NamedType('certReferences', univ.SequenceOf(componentType=BodyPartID())),
-    namedtype.NamedType('extensions', univ.SequenceOf(componentType=rfc5280.Extension()))
+    namedtype.NamedType("pkiDataReference", BodyPartID()),
+    namedtype.NamedType("certReferences", univ.SequenceOf(componentType=BodyPartID())),
+    namedtype.NamedType(
+        "extensions", univ.SequenceOf(componentType=rfc5280.Extension())
+    ),
 )
 
 
@@ -553,11 +592,11 @@ class EncryptedPOP(univ.Sequence):
 
 
 EncryptedPOP.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('request', TaggedRequest()),
-    namedtype.NamedType('cms', rfc5652.ContentInfo()),
-    namedtype.NamedType('thePOPAlgID', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('witnessAlgID', rfc5280.AlgorithmIdentifier()),
-    namedtype.NamedType('witness', univ.OctetString())
+    namedtype.NamedType("request", TaggedRequest()),
+    namedtype.NamedType("cms", rfc5652.ContentInfo()),
+    namedtype.NamedType("thePOPAlgID", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("witnessAlgID", rfc5280.AlgorithmIdentifier()),
+    namedtype.NamedType("witness", univ.OctetString()),
 )
 
 id_cmc_getCRL = _buildOid(id_cmc, 16)
@@ -624,4 +663,3 @@ _cmsContentTypesMapUpdate = {
 }
 
 rfc5652.cmsContentTypesMap.update(_cmsContentTypesMapUpdate)
-

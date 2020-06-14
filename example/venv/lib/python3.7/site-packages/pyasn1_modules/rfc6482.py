@@ -20,10 +20,10 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5652
 
-MAX = float('inf')
+MAX = float("inf")
 
 
-id_ct_routeOriginAuthz = univ.ObjectIdentifier('1.2.840.113549.1.9.16.1.24')
+id_ct_routeOriginAuthz = univ.ObjectIdentifier("1.2.840.113549.1.9.16.1.24")
 
 
 class ASID(univ.Integer):
@@ -36,31 +36,43 @@ class IPAddress(univ.BitString):
 
 class ROAIPAddress(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('address', IPAddress()),
-        namedtype.OptionalNamedType('maxLength', univ.Integer())
+        namedtype.NamedType("address", IPAddress()),
+        namedtype.OptionalNamedType("maxLength", univ.Integer()),
     )
 
 
 class ROAIPAddressFamily(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('addressFamily',
+        namedtype.NamedType(
+            "addressFamily",
             univ.OctetString().subtype(
-                subtypeSpec=constraint.ValueSizeConstraint(2, 3))),
-        namedtype.NamedType('addresses',
+                subtypeSpec=constraint.ValueSizeConstraint(2, 3)
+            ),
+        ),
+        namedtype.NamedType(
+            "addresses",
             univ.SequenceOf(componentType=ROAIPAddress()).subtype(
-                subtypeSpec=constraint.ValueSizeConstraint(1, MAX)))
+                subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+            ),
+        ),
     )
 
 
 class RouteOriginAttestation(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.DefaultedNamedType('version',
-            univ.Integer().subtype(explicitTag=tag.Tag(
-                tag.tagClassContext, tag.tagFormatSimple, 0)).subtype(value=0)),
-        namedtype.NamedType('asID', ASID()),
-        namedtype.NamedType('ipAddrBlocks',
+        namedtype.DefaultedNamedType(
+            "version",
+            univ.Integer()
+            .subtype(explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+            .subtype(value=0),
+        ),
+        namedtype.NamedType("asID", ASID()),
+        namedtype.NamedType(
+            "ipAddrBlocks",
             univ.SequenceOf(componentType=ROAIPAddressFamily()).subtype(
-                subtypeSpec=constraint.ValueSizeConstraint(1, MAX)))
+                subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+            ),
+        ),
     )
 
 

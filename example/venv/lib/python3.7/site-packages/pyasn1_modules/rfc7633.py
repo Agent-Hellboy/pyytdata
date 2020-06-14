@@ -19,9 +19,9 @@ from pyasn1_modules import rfc5280
 
 # TLS Features Extension
 
-id_pe = univ.ObjectIdentifier('1.3.6.1.5.5.7.1')
+id_pe = univ.ObjectIdentifier("1.3.6.1.5.5.7.1")
 
-id_pe_tlsfeature = id_pe + (24, )
+id_pe_tlsfeature = id_pe + (24,)
 
 
 class Features(univ.SequenceOf):

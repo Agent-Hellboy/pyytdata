@@ -25,7 +25,7 @@ from pyasn1_modules import rfc5652
 # The OID is included in otherRevInfoFormat, and
 # signed OCSPResponse is included in otherRevInfo
 
-id_ri_ocsp_response = univ.ObjectIdentifier('1.3.6.1.5.5.7.16.2')
+id_ri_ocsp_response = univ.ObjectIdentifier("1.3.6.1.5.5.7.16.2")
 
 OCSPResponse = rfc2560.OCSPResponse
 
@@ -34,17 +34,23 @@ OCSPResponse = rfc2560.OCSPResponse
 # The OID is included in otherRevInfoFormat, and
 # SCVPReqRes is included in otherRevInfo
 
-id_ri_scvp = univ.ObjectIdentifier('1.3.6.1.5.5.7.16.4')
+id_ri_scvp = univ.ObjectIdentifier("1.3.6.1.5.5.7.16.4")
 
 ContentInfo = rfc5652.ContentInfo
+
 
 class SCVPReqRes(univ.Sequence):
     pass
 
+
 SCVPReqRes.componentType = namedtype.NamedTypes(
-    namedtype.OptionalNamedType('request',
-        ContentInfo().subtype(explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-    namedtype.NamedType('response', ContentInfo())
+    namedtype.OptionalNamedType(
+        "request",
+        ContentInfo().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.NamedType("response", ContentInfo()),
 )
 
 
@@ -52,8 +58,8 @@ SCVPReqRes.componentType = namedtype.NamedTypes(
 # is added to the ones that are in rfc5652.py
 
 _otherRevInfoFormatMapUpdate = {
-     id_ri_ocsp_response: OCSPResponse(),
-     id_ri_scvp: SCVPReqRes(),
+    id_ri_ocsp_response: OCSPResponse(),
+    id_ri_scvp: SCVPReqRes(),
 }
 
 rfc5652.otherRevInfoFormatMap.update(_otherRevInfoFormatMapUpdate)

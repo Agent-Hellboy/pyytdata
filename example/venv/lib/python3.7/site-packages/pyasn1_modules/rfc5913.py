@@ -19,19 +19,19 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5280
 from pyasn1_modules import rfc5755
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # Authority Clearance Constraints Certificate Extension
 
-id_pe_clearanceConstraints = univ.ObjectIdentifier('1.3.6.1.5.5.7.1.21')
+id_pe_clearanceConstraints = univ.ObjectIdentifier("1.3.6.1.5.5.7.1.21")
 
 id_pe_authorityClearanceConstraints = id_pe_clearanceConstraints
 
 
 class AuthorityClearanceConstraints(univ.SequenceOf):
     componentType = rfc5755.Clearance()
-    subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+    subtypeSpec = constraint.ValueSizeConstraint(1, MAX)
 
 
 # Map of Certificate Extension OIDs to Extensions added to the

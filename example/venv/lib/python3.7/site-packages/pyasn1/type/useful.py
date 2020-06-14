@@ -13,7 +13,7 @@ from pyasn1.type import char
 from pyasn1.type import tag
 from pyasn1.type import univ
 
-__all__ = ['ObjectDescriptor', 'GeneralizedTime', 'UTCTime']
+__all__ = ["ObjectDescriptor", "GeneralizedTime", "UTCTime"]
 
 NoValue = univ.NoValue
 noValue = univ.noValue
@@ -43,7 +43,7 @@ class TimeMixIn(object):
 
         # defaulted arguments required
         # https: // docs.python.org / 2.3 / lib / datetime - tzinfo.html
-        def __init__(self, offset=0, name='UTC'):
+        def __init__(self, offset=0, name="UTC"):
             self.__offset = datetime.timedelta(minutes=offset)
             self.__name = name
 
@@ -68,60 +68,62 @@ class TimeMixIn(object):
             new instance of :py:class:`datetime.datetime` object
         """
         text = str(self)
-        if text.endswith('Z'):
+        if text.endswith("Z"):
             tzinfo = TimeMixIn.UTC
             text = text[:-1]
 
-        elif '-' in text or '+' in text:
-            if '+' in text:
-                text, plusminus, tz = string.partition(text, '+')
+        elif "-" in text or "+" in text:
+            if "+" in text:
+                text, plusminus, tz = string.partition(text, "+")
             else:
-                text, plusminus, tz = string.partition(text, '-')
+                text, plusminus, tz = string.partition(text, "-")
 
             if self._shortTZ and len(tz) == 2:
-                tz += '00'
+                tz += "00"
 
             if len(tz) != 4:
-                raise error.PyAsn1Error('malformed time zone offset %s' % tz)
+                raise error.PyAsn1Error("malformed time zone offset %s" % tz)
 
             try:
                 minutes = int(tz[:2]) * 60 + int(tz[2:])
-                if plusminus == '-':
+                if plusminus == "-":
                     minutes *= -1
 
             except ValueError:
-                raise error.PyAsn1Error('unknown time specification %s' % self)
+                raise error.PyAsn1Error("unknown time specification %s" % self)
 
-            tzinfo = TimeMixIn.FixedOffset(minutes, '?')
+            tzinfo = TimeMixIn.FixedOffset(minutes, "?")
 
         else:
             tzinfo = None
 
-        if '.' in text or ',' in text:
-            if '.' in text:
-                text, _, ms = string.partition(text, '.')
+        if "." in text or "," in text:
+            if "." in text:
+                text, _, ms = string.partition(text, ".")
             else:
-                text, _, ms = string.partition(text, ',')
+                text, _, ms = string.partition(text, ",")
 
             try:
                 ms = int(ms) * 1000
 
             except ValueError:
-                raise error.PyAsn1Error('bad sub-second time specification %s' % self)
+                raise error.PyAsn1Error("bad sub-second time specification %s" % self)
 
         else:
             ms = 0
 
         if self._optionalMinutes and len(text) - self._yearsDigits == 6:
-            text += '0000'
+            text += "0000"
         elif len(text) - self._yearsDigits == 8:
-            text += '00'
+            text += "00"
 
         try:
-            dt = dateandtime.strptime(text, self._yearsDigits == 4 and '%Y%m%d%H%M%S' or '%y%m%d%H%M%S')
+            dt = dateandtime.strptime(
+                text, self._yearsDigits == 4 and "%Y%m%d%H%M%S" or "%y%m%d%H%M%S"
+            )
 
         except ValueError:
-            raise error.PyAsn1Error('malformed datetime format %s' % self)
+            raise error.PyAsn1Error("malformed datetime format %s" % self)
 
         return dt.replace(microsecond=ms, tzinfo=tzinfo)
 
@@ -140,19 +142,19 @@ class TimeMixIn(object):
         :
             new instance of |ASN.1| value
         """
-        text = dt.strftime(cls._yearsDigits == 4 and '%Y%m%d%H%M%S' or '%y%m%d%H%M%S')
+        text = dt.strftime(cls._yearsDigits == 4 and "%Y%m%d%H%M%S" or "%y%m%d%H%M%S")
         if cls._hasSubsecond:
-            text += '.%d' % (dt.microsecond // 1000)
+            text += ".%d" % (dt.microsecond // 1000)
 
         if dt.utcoffset():
             seconds = dt.utcoffset().seconds
             if seconds < 0:
-                text += '-'
+                text += "-"
             else:
-                text += '+'
-            text += '%.2d%.2d' % (seconds // 3600, seconds % 3600)
+                text += "+"
+            text += "%.2d%.2d" % (seconds // 3600, seconds % 3600)
         else:
-            text += 'Z'
+            text += "Z"
 
         return cls(text)
 

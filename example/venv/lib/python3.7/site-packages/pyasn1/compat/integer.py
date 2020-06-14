@@ -12,11 +12,11 @@ try:
     implementation = platform.python_implementation()
 
 except (ImportError, AttributeError):
-    implementation = 'CPython'
+    implementation = "CPython"
 
 from pyasn1.compat.octets import oct2int, null, ensureString
 
-if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
+if sys.version_info[0:2] < (3, 2) or implementation != "CPython":
     from binascii import a2b_hex, b2a_hex
 
     if sys.version_info[0] > 2:
@@ -43,7 +43,7 @@ if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
                 valueToEncode = (value + maxValue) % maxValue
 
             else:
-                raise OverflowError('can\'t convert negative int to unsigned')
+                raise OverflowError("can't convert negative int to unsigned")
         elif value == 0 and length == 0:
             return null
         else:
@@ -51,11 +51,11 @@ if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
             valueToEncode = value
 
         hexValue = hex(valueToEncode)[2:]
-        if hexValue.endswith('L'):
+        if hexValue.endswith("L"):
             hexValue = hexValue[:-1]
 
         if len(hexValue) & 1:
-            hexValue = '0' + hexValue
+            hexValue = "0" + hexValue
 
         # padding may be needed for two's complement encoding
         if value != valueToEncode or length:
@@ -64,18 +64,18 @@ if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
             padLength = max(length, bits)
 
             if padLength > hexLength:
-                hexValue = '00' * ((padLength - hexLength - 1) // 8 + 1) + hexValue
+                hexValue = "00" * ((padLength - hexLength - 1) // 8 + 1) + hexValue
             elif length and hexLength - length > 7:
-                raise OverflowError('int too big to convert')
+                raise OverflowError("int too big to convert")
 
         firstOctet = int(hexValue[:2], 16)
 
         if signed:
             if firstOctet & 0x80:
                 if value >= 0:
-                    hexValue = '00' + hexValue
+                    hexValue = "00" + hexValue
             elif value < 0:
-                hexValue = 'ff' + hexValue
+                hexValue = "ff" + hexValue
 
         octets_value = a2b_hex(hexValue)
 
@@ -85,7 +85,7 @@ if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
         # bits in unsigned number
         hexValue = hex(abs(number))
         bits = len(hexValue) - 2
-        if hexValue.endswith('L'):
+        if hexValue.endswith("L"):
             bits -= 1
         if bits & 1:
             bits += 1
@@ -93,10 +93,11 @@ if sys.version_info[0:2] < (3, 2) or implementation != 'CPython':
         # TODO: strip lhs zeros
         return bits
 
+
 else:
 
     def from_bytes(octets, signed=False):
-        return int.from_bytes(bytes(octets), 'big', signed=signed)
+        return int.from_bytes(bytes(octets), "big", signed=signed)
 
     def to_bytes(value, signed=False, length=0):
         length = max(value.bit_length(), length)
@@ -104,7 +105,9 @@ else:
         if signed and length % 8 == 0:
             length += 1
 
-        return value.to_bytes(length // 8 + (length % 8 and 1 or 0), 'big', signed=signed)
+        return value.to_bytes(
+            length // 8 + (length % 8 and 1 or 0), "big", signed=signed
+        )
 
     def bitLength(number):
         return int(number).bit_length()

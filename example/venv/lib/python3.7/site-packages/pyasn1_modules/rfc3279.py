@@ -41,9 +41,9 @@ class DSAPublicKey(univ.Integer):
 
 class Dss_Parms(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('p', univ.Integer()),
-        namedtype.NamedType('q', univ.Integer()),
-        namedtype.NamedType('g', univ.Integer())
+        namedtype.NamedType("p", univ.Integer()),
+        namedtype.NamedType("q", univ.Integer()),
+        namedtype.NamedType("g", univ.Integer()),
     )
 
 
@@ -52,8 +52,8 @@ id_dsa_with_sha1 = _OID(1, 2, 840, 10040, 4, 3)
 
 class Dss_Sig_Value(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('r', univ.Integer()),
-        namedtype.NamedType('s', univ.Integer())
+        namedtype.NamedType("r", univ.Integer()),
+        namedtype.NamedType("s", univ.Integer()),
     )
 
 
@@ -66,8 +66,8 @@ sha1WithRSAEncryption = _OID(pkcs_1, 5)
 
 class RSAPublicKey(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('modulus', univ.Integer()),
-        namedtype.NamedType('publicExponent', univ.Integer())
+        namedtype.NamedType("modulus", univ.Integer()),
+        namedtype.NamedType("publicExponent", univ.Integer()),
     )
 
 
@@ -80,18 +80,18 @@ class DHPublicKey(univ.Integer):
 
 class ValidationParms(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('seed', univ.BitString()),
-        namedtype.NamedType('pgenCounter', univ.Integer())
+        namedtype.NamedType("seed", univ.BitString()),
+        namedtype.NamedType("pgenCounter", univ.Integer()),
     )
 
 
 class DomainParameters(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('p', univ.Integer()),
-        namedtype.NamedType('g', univ.Integer()),
-        namedtype.NamedType('q', univ.Integer()),
-        namedtype.OptionalNamedType('j', univ.Integer()),
-        namedtype.OptionalNamedType('validationParms', ValidationParms())
+        namedtype.NamedType("p", univ.Integer()),
+        namedtype.NamedType("g", univ.Integer()),
+        namedtype.NamedType("q", univ.Integer()),
+        namedtype.OptionalNamedType("j", univ.Integer()),
+        namedtype.OptionalNamedType("validationParms", ValidationParms()),
     )
 
 
@@ -107,8 +107,8 @@ ansi_X9_62 = _OID(1, 2, 840, 10045)
 
 class FieldID(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('fieldType', univ.ObjectIdentifier()),
-        namedtype.NamedType('parameters', univ.Any())
+        namedtype.NamedType("fieldType", univ.ObjectIdentifier()),
+        namedtype.NamedType("parameters", univ.Any()),
     )
 
 
@@ -118,8 +118,8 @@ ecdsa_with_SHA1 = _OID(id_ecSigType, 1)
 
 class ECDSA_Sig_Value(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('r', univ.Integer()),
-        namedtype.NamedType('s', univ.Integer())
+        namedtype.NamedType("r", univ.Integer()),
+        namedtype.NamedType("s", univ.Integer()),
     )
 
 
@@ -136,9 +136,9 @@ characteristic_two_field = _OID(id_fieldType, 2)
 
 class Characteristic_two(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('m', univ.Integer()),
-        namedtype.NamedType('basis', univ.ObjectIdentifier()),
-        namedtype.NamedType('parameters', univ.Any())
+        namedtype.NamedType("m", univ.Integer()),
+        namedtype.NamedType("basis", univ.ObjectIdentifier()),
+        namedtype.NamedType("parameters", univ.Any()),
     )
 
 
@@ -156,9 +156,9 @@ ppBasis = _OID(id_characteristic_two_basis, 3)
 
 class Pentanomial(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('k1', univ.Integer()),
-        namedtype.NamedType('k2', univ.Integer()),
-        namedtype.NamedType('k3', univ.Integer())
+        namedtype.NamedType("k1", univ.Integer()),
+        namedtype.NamedType("k2", univ.Integer()),
+        namedtype.NamedType("k3", univ.Integer()),
     )
 
 
@@ -172,34 +172,32 @@ class ECPoint(univ.OctetString):
 
 class Curve(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('a', FieldElement()),
-        namedtype.NamedType('b', FieldElement()),
-        namedtype.OptionalNamedType('seed', univ.BitString())
+        namedtype.NamedType("a", FieldElement()),
+        namedtype.NamedType("b", FieldElement()),
+        namedtype.OptionalNamedType("seed", univ.BitString()),
     )
 
 
 class ECPVer(univ.Integer):
-    namedValues = namedval.NamedValues(
-        ('ecpVer1', 1)
-    )
+    namedValues = namedval.NamedValues(("ecpVer1", 1))
 
 
 class ECParameters(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('version', ECPVer()),
-        namedtype.NamedType('fieldID', FieldID()),
-        namedtype.NamedType('curve', Curve()),
-        namedtype.NamedType('base', ECPoint()),
-        namedtype.NamedType('order', univ.Integer()),
-        namedtype.OptionalNamedType('cofactor', univ.Integer())
+        namedtype.NamedType("version", ECPVer()),
+        namedtype.NamedType("fieldID", FieldID()),
+        namedtype.NamedType("curve", Curve()),
+        namedtype.NamedType("base", ECPoint()),
+        namedtype.NamedType("order", univ.Integer()),
+        namedtype.OptionalNamedType("cofactor", univ.Integer()),
     )
 
 
 class EcpkParameters(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('ecParameters', ECParameters()),
-        namedtype.NamedType('namedCurve', univ.ObjectIdentifier()),
-        namedtype.NamedType('implicitlyCA', univ.Null())
+        namedtype.NamedType("ecParameters", ECParameters()),
+        namedtype.NamedType("namedCurve", univ.ObjectIdentifier()),
+        namedtype.NamedType("implicitlyCA", univ.Null()),
     )
 
 

@@ -7,7 +7,7 @@
 from pyasn1.codec.cer import decoder
 from pyasn1.type import univ
 
-__all__ = ['decode']
+__all__ = ["decode"]
 
 
 class BitStringDecoder(decoder.BitStringDecoder):
@@ -17,14 +17,17 @@ class BitStringDecoder(decoder.BitStringDecoder):
 class OctetStringDecoder(decoder.OctetStringDecoder):
     supportConstructedForm = False
 
+
 # TODO: prohibit non-canonical encoding
 RealDecoder = decoder.RealDecoder
 
 tagMap = decoder.tagMap.copy()
 tagMap.update(
-    {univ.BitString.tagSet: BitStringDecoder(),
-     univ.OctetString.tagSet: OctetStringDecoder(),
-     univ.Real.tagSet: RealDecoder()}
+    {
+        univ.BitString.tagSet: BitStringDecoder(),
+        univ.OctetString.tagSet: OctetStringDecoder(),
+        univ.Real.tagSet: RealDecoder(),
+    }
 )
 
 typeMap = decoder.typeMap.copy()

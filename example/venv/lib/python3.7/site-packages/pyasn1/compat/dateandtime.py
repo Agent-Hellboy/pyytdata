@@ -8,13 +8,14 @@ import time
 from datetime import datetime
 from sys import version_info
 
-__all__ = ['strptime']
+__all__ = ["strptime"]
 
 
 if version_info[:2] <= (2, 4):
 
     def strptime(text, dateFormat):
         return datetime(*(time.strptime(text, dateFormat)[0:6]))
+
 
 else:
 

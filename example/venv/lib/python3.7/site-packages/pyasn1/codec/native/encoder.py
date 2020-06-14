@@ -18,14 +18,14 @@ from pyasn1.type import tag
 from pyasn1.type import univ
 from pyasn1.type import useful
 
-__all__ = ['encode']
+__all__ = ["encode"]
 
 LOG = debug.registerLoggee(__name__, flags=debug.DEBUG_ENCODER)
 
 
 class AbstractItemEncoder(object):
     def encode(self, value, encodeFun, **options):
-        raise error.PyAsn1Error('Not implemented')
+        raise error.PyAsn1Error("Not implemented")
 
 
 class BooleanEncoder(AbstractItemEncoder):
@@ -135,7 +135,7 @@ tagMap = {
     # useful types
     useful.ObjectDescriptor.tagSet: OctetStringEncoder(),
     useful.GeneralizedTime.tagSet: OctetStringEncoder(),
-    useful.UTCTime.tagSet: OctetStringEncoder()
+    useful.UTCTime.tagSet: OctetStringEncoder(),
 }
 
 
@@ -171,7 +171,7 @@ typeMap = {
     # useful types
     useful.ObjectDescriptor.typeId: OctetStringEncoder(),
     useful.GeneralizedTime.typeId: OctetStringEncoder(),
-    useful.UTCTime.typeId: OctetStringEncoder()
+    useful.UTCTime.typeId: OctetStringEncoder(),
 }
 
 
@@ -184,11 +184,16 @@ class Encoder(object):
 
     def __call__(self, value, **options):
         if not isinstance(value, base.Asn1Item):
-            raise error.PyAsn1Error('value is not valid (should be an instance of an ASN.1 Item)')
+            raise error.PyAsn1Error(
+                "value is not valid (should be an instance of an ASN.1 Item)"
+            )
 
         if LOG:
             debug.scope.push(type(value).__name__)
-            LOG('encoder called for type %s <%s>' % (type(value).__name__, value.prettyPrint()))
+            LOG(
+                "encoder called for type %s <%s>"
+                % (type(value).__name__, value.prettyPrint())
+            )
 
         tagSet = value.tagSet
 
@@ -203,15 +208,21 @@ class Encoder(object):
                 concreteEncoder = self.__tagMap[baseTagSet]
 
             except KeyError:
-                raise error.PyAsn1Error('No encoder for %s' % (value,))
+                raise error.PyAsn1Error("No encoder for %s" % (value,))
 
         if LOG:
-            LOG('using value codec %s chosen by %s' % (concreteEncoder.__class__.__name__, tagSet))
+            LOG(
+                "using value codec %s chosen by %s"
+                % (concreteEncoder.__class__.__name__, tagSet)
+            )
 
         pyObject = concreteEncoder.encode(value, self, **options)
 
         if LOG:
-            LOG('encoder %s produced: %s' % (type(concreteEncoder).__name__, repr(pyObject)))
+            LOG(
+                "encoder %s produced: %s"
+                % (type(concreteEncoder).__name__, repr(pyObject))
+            )
             debug.scope.pop()
 
         return pyObject

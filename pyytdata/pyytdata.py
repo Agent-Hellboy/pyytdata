@@ -8,11 +8,13 @@ import json
 
 from apiclient.discovery import build
 
+
 class PyYtData:
     """
     Class which acts as a client to the youtube data v3 API,
     having attributes as the query parameter for API.
     """
+
     def __init__(self, keyword, maxlen, order="relevance", type="video"):
         try:
             self.__API_KEY = os.environ.get(
@@ -33,7 +35,6 @@ class PyYtData:
             order=self.order,
         )
         self.result = req.execute()
-
 
     def open_id(self, item_no):
         """"Opens the video in default browser of the system."""
@@ -57,11 +58,9 @@ class PyYtData:
         return rslt
 
     def get_image_urls(self):
-
         """
         Returns list of links which is used to fetch the image of the video.
         """
-
         rslt = []
         for i in range(self.maxlen):
             rslt.append(
@@ -76,7 +75,7 @@ class PyYtData:
         rslt = []
         for i in range(self.maxlen):
             rslt.append(
-                "https://www.youtube.com/watch?v=" + self.result["items"][i]["id"]["videoId"]
+                "https://www.youtube.com/watch?v="
+                + self.result["items"][i]["id"]["videoId"]
             )
         return rslt
-

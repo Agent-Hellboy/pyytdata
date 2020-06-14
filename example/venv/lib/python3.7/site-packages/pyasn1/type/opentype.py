@@ -5,7 +5,7 @@
 # License: http://snmplabs.com/pyasn1/license.html
 #
 
-__all__ = ['OpenType']
+__all__ = ["OpenType"]
 
 
 class OpenType(object):

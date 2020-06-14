@@ -5,7 +5,6 @@ from pip._vendor.cachecontrol.cache import BaseCache
 
 
 class RedisCache(BaseCache):
-
     def __init__(self, conn):
         self.conn = conn
 

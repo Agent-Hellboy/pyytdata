@@ -21,8 +21,10 @@ if not _PY3:
         return message
 
     def write_pkg_info(path, message):
-        with open(path, 'w') as metadata:
+        with open(path, "w") as metadata:
             Generator(metadata, mangle_from_=False, maxheaderlen=0).flatten(message)
+
+
 else:
     from email.generator import BytesGenerator
 
@@ -32,9 +34,7 @@ else:
         return message
 
     def read_pkg_info(path):
-        with open(path, "r",
-                  encoding="ascii",
-                  errors="surrogateescape") as headers:
+        with open(path, "r", encoding="ascii", errors="surrogateescape") as headers:
             message = Parser().parse(headers)
         return message
 

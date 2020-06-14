@@ -8,7 +8,7 @@ from pyasn1 import error
 from pyasn1.codec.cer import encoder
 from pyasn1.type import univ
 
-__all__ = ['encode']
+__all__ = ["encode"]
 
 
 class SetEncoder(encoder.SetEncoder):
@@ -30,11 +30,16 @@ class SetEncoder(encoder.SetEncoder):
                 return component.getComponent().tagSet
             else:
                 # TODO: move out of sorting key function
-                names = [namedType.name for namedType in asn1Spec.componentType.namedTypes
-                         if namedType.name in component]
+                names = [
+                    namedType.name
+                    for namedType in asn1Spec.componentType.namedTypes
+                    if namedType.name in component
+                ]
                 if len(names) != 1:
                     raise error.PyAsn1Error(
-                        '%s components for Choice at %r' % (len(names) and 'Multiple ' or 'None ', component))
+                        "%s components for Choice at %r"
+                        % (len(names) and "Multiple " or "None ", component)
+                    )
 
                 # TODO: support nested CHOICE ordering
                 return asn1Spec[names[0]].tagSet
@@ -42,22 +47,28 @@ class SetEncoder(encoder.SetEncoder):
         else:
             return compType.tagSet
 
+
 tagMap = encoder.tagMap.copy()
-tagMap.update({
-    # Set & SetOf have same tags
-    univ.Set.tagSet: SetEncoder()
-})
+tagMap.update(
+    {
+        # Set & SetOf have same tags
+        univ.Set.tagSet: SetEncoder()
+    }
+)
 
 typeMap = encoder.typeMap.copy()
-typeMap.update({
-    # Set & SetOf have same tags
-    univ.Set.typeId: SetEncoder()
-})
+typeMap.update(
+    {
+        # Set & SetOf have same tags
+        univ.Set.typeId: SetEncoder()
+    }
+)
 
 
 class Encoder(encoder.Encoder):
     fixedDefLengthMode = True
     fixedChunkSize = 0
+
 
 #: Turns ASN.1 object into DER octet stream.
 #:

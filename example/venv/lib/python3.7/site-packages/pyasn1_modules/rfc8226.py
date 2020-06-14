@@ -20,7 +20,7 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 def _OID(*components):
@@ -41,6 +41,7 @@ class JWTClaimName(char.IA5String):
 class JWTClaimNames(univ.SequenceOf):
     pass
 
+
 JWTClaimNames.componentType = JWTClaimName()
 JWTClaimNames.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
 
@@ -48,16 +49,21 @@ JWTClaimNames.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
 class JWTClaimPermittedValues(univ.Sequence):
     pass
 
+
 JWTClaimPermittedValues.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('claim', JWTClaimName()),
-    namedtype.NamedType('permitted', univ.SequenceOf(
-        componentType=char.UTF8String()).subtype(
-            sizeSpec=constraint.ValueSizeConstraint(1, MAX)))
+    namedtype.NamedType("claim", JWTClaimName()),
+    namedtype.NamedType(
+        "permitted",
+        univ.SequenceOf(componentType=char.UTF8String()).subtype(
+            sizeSpec=constraint.ValueSizeConstraint(1, MAX)
+        ),
+    ),
 )
 
 
 class JWTClaimPermittedValuesList(univ.SequenceOf):
     pass
+
 
 JWTClaimPermittedValuesList.componentType = JWTClaimPermittedValues()
 JWTClaimPermittedValuesList.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
@@ -66,20 +72,29 @@ JWTClaimPermittedValuesList.sizeSpec = constraint.ValueSizeConstraint(1, MAX)
 class JWTClaimConstraints(univ.Sequence):
     pass
 
+
 JWTClaimConstraints.componentType = namedtype.NamedTypes(
-    namedtype.OptionalNamedType('mustInclude',
-        JWTClaimNames().subtype(explicitTag=tag.Tag(tag.tagClassContext,
-            tag.tagFormatSimple, 0))),
-    namedtype.OptionalNamedType('permittedValues',
-        JWTClaimPermittedValuesList().subtype(explicitTag=tag.Tag(tag.tagClassContext,
-            tag.tagFormatSimple, 1)))
+    namedtype.OptionalNamedType(
+        "mustInclude",
+        JWTClaimNames().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.OptionalNamedType(
+        "permittedValues",
+        JWTClaimPermittedValuesList().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
 )
 
 JWTClaimConstraints.subtypeSpec = constraint.ConstraintsUnion(
     constraint.WithComponentsConstraint(
-        ('mustInclude', constraint.ComponentPresentConstraint())),
+        ("mustInclude", constraint.ComponentPresentConstraint())
+    ),
     constraint.WithComponentsConstraint(
-        ('permittedValues', constraint.ComponentPresentConstraint()))
+        ("permittedValues", constraint.ComponentPresentConstraint())
+    ),
 )
 
 
@@ -93,41 +108,57 @@ class ServiceProviderCode(char.IA5String):
 class TelephoneNumber(char.IA5String):
     pass
 
+
 TelephoneNumber.subtypeSpec = constraint.ConstraintsIntersection(
     constraint.ValueSizeConstraint(1, 15),
     constraint.PermittedAlphabetConstraint(
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*')
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "*"
+    ),
 )
 
 
 class TelephoneNumberRange(univ.Sequence):
     pass
 
+
 TelephoneNumberRange.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('start', TelephoneNumber()),
-    namedtype.NamedType('count',
-        univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(2, MAX)))
+    namedtype.NamedType("start", TelephoneNumber()),
+    namedtype.NamedType(
+        "count",
+        univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(2, MAX)),
+    ),
 )
 
 
 class TNEntry(univ.Choice):
     pass
 
+
 TNEntry.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('spc',
-        ServiceProviderCode().subtype(explicitTag=tag.Tag(tag.tagClassContext,
-            tag.tagFormatSimple, 0))),
-    namedtype.NamedType('range',
-        TelephoneNumberRange().subtype(explicitTag=tag.Tag(tag.tagClassContext,
-            tag.tagFormatConstructed, 1))),
-    namedtype.NamedType('one',
-        TelephoneNumber().subtype(explicitTag=tag.Tag(tag.tagClassContext,
-            tag.tagFormatSimple, 2)))
+    namedtype.NamedType(
+        "spc",
+        ServiceProviderCode().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.NamedType(
+        "range",
+        TelephoneNumberRange().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+        ),
+    ),
+    namedtype.NamedType(
+        "one",
+        TelephoneNumber().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+        ),
+    ),
 )
 
 
 class TNAuthorizationList(univ.SequenceOf):
     pass
+
 
 TNAuthorizationList.componentType = TNEntry()
 TNAuthorizationList.sizeSpec = constraint.ValueSizeConstraint(1, MAX)

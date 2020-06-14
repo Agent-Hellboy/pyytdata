@@ -21,11 +21,11 @@ from pyasn1_modules import rfc5280
 
 # NAI Realm Name for Certificates
 
-id_pkix = univ.ObjectIdentifier('1.3.6.1.5.5.7')
+id_pkix = univ.ObjectIdentifier("1.3.6.1.5.5.7")
 
-id_on = id_pkix + (8, )
+id_on = id_pkix + (8,)
 
-id_on_naiRealm = id_on + (8, )
+id_on_naiRealm = id_on + (8,)
 
 
 ub_naiRealm_length = univ.Integer(255)
@@ -36,8 +36,8 @@ class NAIRealm(char.UTF8String):
 
 
 naiRealm = rfc5280.AnotherName()
-naiRealm['type-id'] = id_on_naiRealm
-naiRealm['value'] = NAIRealm()
+naiRealm["type-id"] = id_on_naiRealm
+naiRealm["value"] = NAIRealm()
 
 
 # Map of Other Name OIDs to Other Name is added to the

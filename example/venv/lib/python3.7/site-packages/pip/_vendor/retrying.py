@@ -31,8 +31,8 @@ def retry(*dargs, **dkw):
     """
     # support both @retry and @retry() as valid syntax
     if len(dargs) == 1 and callable(dargs[0]):
-        def wrap_simple(f):
 
+        def wrap_simple(f):
             @six.wraps(f)
             def wrapped_f(*args, **kw):
                 return Retrying().call(f, *args, **kw)
@@ -42,8 +42,8 @@ def retry(*dargs, **dkw):
         return wrap_simple(dargs[0])
 
     else:
-        def wrap(f):
 
+        def wrap(f):
             @six.wraps(f)
             def wrapped_f(*args, **kw):
                 return Retrying(*dargs, **dkw).call(f, *args, **kw)
@@ -54,31 +54,46 @@ def retry(*dargs, **dkw):
 
 
 class Retrying(object):
+    def __init__(
+        self,
+        stop=None,
+        wait=None,
+        stop_max_attempt_number=None,
+        stop_max_delay=None,
+        wait_fixed=None,
+        wait_random_min=None,
+        wait_random_max=None,
+        wait_incrementing_start=None,
+        wait_incrementing_increment=None,
+        wait_exponential_multiplier=None,
+        wait_exponential_max=None,
+        retry_on_exception=None,
+        retry_on_result=None,
+        wrap_exception=False,
+        stop_func=None,
+        wait_func=None,
+        wait_jitter_max=None,
+    ):
 
-    def __init__(self,
-                 stop=None, wait=None,
-                 stop_max_attempt_number=None,
-                 stop_max_delay=None,
-                 wait_fixed=None,
-                 wait_random_min=None, wait_random_max=None,
-                 wait_incrementing_start=None, wait_incrementing_increment=None,
-                 wait_exponential_multiplier=None, wait_exponential_max=None,
-                 retry_on_exception=None,
-                 retry_on_result=None,
-                 wrap_exception=False,
-                 stop_func=None,
-                 wait_func=None,
-                 wait_jitter_max=None):
-
-        self._stop_max_attempt_number = 5 if stop_max_attempt_number is None else stop_max_attempt_number
+        self._stop_max_attempt_number = (
+            5 if stop_max_attempt_number is None else stop_max_attempt_number
+        )
         self._stop_max_delay = 100 if stop_max_delay is None else stop_max_delay
         self._wait_fixed = 1000 if wait_fixed is None else wait_fixed
         self._wait_random_min = 0 if wait_random_min is None else wait_random_min
         self._wait_random_max = 1000 if wait_random_max is None else wait_random_max
-        self._wait_incrementing_start = 0 if wait_incrementing_start is None else wait_incrementing_start
-        self._wait_incrementing_increment = 100 if wait_incrementing_increment is None else wait_incrementing_increment
-        self._wait_exponential_multiplier = 1 if wait_exponential_multiplier is None else wait_exponential_multiplier
-        self._wait_exponential_max = MAX_WAIT if wait_exponential_max is None else wait_exponential_max
+        self._wait_incrementing_start = (
+            0 if wait_incrementing_start is None else wait_incrementing_start
+        )
+        self._wait_incrementing_increment = (
+            100 if wait_incrementing_increment is None else wait_incrementing_increment
+        )
+        self._wait_exponential_multiplier = (
+            1 if wait_exponential_multiplier is None else wait_exponential_multiplier
+        )
+        self._wait_exponential_max = (
+            MAX_WAIT if wait_exponential_max is None else wait_exponential_max
+        )
         self._wait_jitter_max = 0 if wait_jitter_max is None else wait_jitter_max
 
         # TODO add chaining of stop behaviors
@@ -94,7 +109,9 @@ class Retrying(object):
             self.stop = stop_func
 
         elif stop is None:
-            self.stop = lambda attempts, delay: any(f(attempts, delay) for f in stop_funcs)
+            self.stop = lambda attempts, delay: any(
+                f(attempts, delay) for f in stop_funcs
+            )
 
         else:
             self.stop = getattr(self, stop)
@@ -108,7 +125,10 @@ class Retrying(object):
         if wait_random_min is not None or wait_random_max is not None:
             wait_funcs.append(self.random_sleep)
 
-        if wait_incrementing_start is not None or wait_incrementing_increment is not None:
+        if (
+            wait_incrementing_start is not None
+            or wait_incrementing_increment is not None
+        ):
             wait_funcs.append(self.incrementing_sleep)
 
         if wait_exponential_multiplier is not None or wait_exponential_max is not None:
@@ -118,7 +138,9 @@ class Retrying(object):
             self.wait = wait_func
 
         elif wait is None:
-            self.wait = lambda attempts, delay: max(f(attempts, delay) for f in wait_funcs)
+            self.wait = lambda attempts, delay: max(
+                f(attempts, delay) for f in wait_funcs
+            )
 
         else:
             self.wait = getattr(self, wait)
@@ -163,7 +185,9 @@ class Retrying(object):
         Sleep an incremental amount of time after each attempt, starting at
         wait_incrementing_start and incrementing by wait_incrementing_increment
         """
-        result = self._wait_incrementing_start + (self._wait_incrementing_increment * (previous_attempt_number - 1))
+        result = self._wait_incrementing_start + (
+            self._wait_incrementing_increment * (previous_attempt_number - 1)
+        )
         if result < 0:
             result = 0
         return result
@@ -250,7 +274,9 @@ class Attempt(object):
 
     def __repr__(self):
         if self.has_exception:
-            return "Attempts: {0}, Error:\n{1}".format(self.attempt_number, "".join(traceback.format_tb(self.value[2])))
+            return "Attempts: {0}, Error:\n{1}".format(
+                self.attempt_number, "".join(traceback.format_tb(self.value[2]))
+            )
         else:
             return "Attempts: {0}, Value: {1}".format(self.attempt_number, self.value)
 

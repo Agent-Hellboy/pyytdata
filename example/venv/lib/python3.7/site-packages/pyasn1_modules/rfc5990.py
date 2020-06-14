@@ -18,7 +18,8 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
+
 
 def _OID(*components):
     output = []
@@ -36,6 +37,7 @@ AlgorithmIdentifier = rfc5280.AlgorithmIdentifier
 
 
 # Useful types and definitions
+
 
 class NullParms(univ.Null):
     pass
@@ -56,23 +58,30 @@ x9_44_components = _OID(x9_44, 1)
 
 # Types for algorithm identifiers
 
+
 class Camellia_KeyWrappingScheme(AlgorithmIdentifier):
     pass
+
 
 class DataEncapsulationMechanism(AlgorithmIdentifier):
     pass
 
+
 class KDF2_HashFunction(AlgorithmIdentifier):
     pass
+
 
 class KDF3_HashFunction(AlgorithmIdentifier):
     pass
 
+
 class KeyDerivationFunction(AlgorithmIdentifier):
     pass
 
+
 class KeyEncapsulationMechanism(AlgorithmIdentifier):
     pass
+
 
 class X9_SymmetricKeyWrappingScheme(AlgorithmIdentifier):
     pass
@@ -86,15 +95,16 @@ id_rsa_kem = _OID(1, 2, 840, 113549, 1, 9, 16, 3, 14)
 class GenericHybridParameters(univ.Sequence):
     pass
 
+
 GenericHybridParameters.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('kem', KeyEncapsulationMechanism()),
-    namedtype.NamedType('dem', DataEncapsulationMechanism())
+    namedtype.NamedType("kem", KeyEncapsulationMechanism()),
+    namedtype.NamedType("dem", DataEncapsulationMechanism()),
 )
 
 
 rsa_kem = AlgorithmIdentifier()
-rsa_kem['algorithm'] = id_rsa_kem
-rsa_kem['parameters'] = GenericHybridParameters()
+rsa_kem["algorithm"] = id_rsa_kem
+rsa_kem["parameters"] = GenericHybridParameters()
 
 
 # KEM-RSA Key Encapsulation Mechanism
@@ -105,21 +115,23 @@ id_kem_rsa = _OID(is18033_2, 2, 4)
 class KeyLength(univ.Integer):
     pass
 
+
 KeyLength.subtypeSpec = constraint.ValueRangeConstraint(1, MAX)
 
 
 class RsaKemParameters(univ.Sequence):
     pass
 
+
 RsaKemParameters.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('keyDerivationFunction', KeyDerivationFunction()),
-    namedtype.NamedType('keyLength', KeyLength())
+    namedtype.NamedType("keyDerivationFunction", KeyDerivationFunction()),
+    namedtype.NamedType("keyLength", KeyLength()),
 )
 
 
 kem_rsa = AlgorithmIdentifier()
-kem_rsa['algorithm'] = id_kem_rsa
-kem_rsa['parameters'] = RsaKemParameters()
+kem_rsa["algorithm"] = id_kem_rsa
+kem_rsa["parameters"] = RsaKemParameters()
 
 
 # Key Derivation Functions
@@ -130,12 +142,12 @@ id_kdf_kdf3 = _OID(x9_44_components, 2)
 
 
 kdf2 = AlgorithmIdentifier()
-kdf2['algorithm'] = id_kdf_kdf2
-kdf2['parameters'] = KDF2_HashFunction()
+kdf2["algorithm"] = id_kdf_kdf2
+kdf2["parameters"] = KDF2_HashFunction()
 
 kdf3 = AlgorithmIdentifier()
-kdf3['algorithm'] = id_kdf_kdf3
-kdf3['parameters'] = KDF3_HashFunction()
+kdf3["algorithm"] = id_kdf_kdf3
+kdf3["parameters"] = KDF3_HashFunction()
 
 
 # Hash Functions
@@ -152,24 +164,24 @@ id_sha512 = _OID(2, 16, 840, 1, 101, 3, 4, 2, 3)
 
 
 sha1 = AlgorithmIdentifier()
-sha1['algorithm'] = id_sha1
-sha1['parameters'] = univ.Null("")
+sha1["algorithm"] = id_sha1
+sha1["parameters"] = univ.Null("")
 
 sha224 = AlgorithmIdentifier()
-sha224['algorithm'] = id_sha224
-sha224['parameters'] = univ.Null("")
+sha224["algorithm"] = id_sha224
+sha224["parameters"] = univ.Null("")
 
 sha256 = AlgorithmIdentifier()
-sha256['algorithm'] = id_sha256
-sha256['parameters'] = univ.Null("")
+sha256["algorithm"] = id_sha256
+sha256["parameters"] = univ.Null("")
 
 sha384 = AlgorithmIdentifier()
-sha384['algorithm'] = id_sha384
-sha384['parameters'] = univ.Null("")
+sha384["algorithm"] = id_sha384
+sha384["parameters"] = univ.Null("")
 
 sha512 = AlgorithmIdentifier()
-sha512['algorithm'] = id_sha512
-sha512['parameters'] = univ.Null("")
+sha512["algorithm"] = id_sha512
+sha512["parameters"] = univ.Null("")
 
 
 # Symmetric Key-Wrapping Schemes
@@ -190,31 +202,31 @@ id_camellia256_Wrap = _OID(1, 2, 392, 200011, 61, 1, 1, 3, 4)
 
 
 aes128_Wrap = AlgorithmIdentifier()
-aes128_Wrap['algorithm'] = id_aes128_Wrap
+aes128_Wrap["algorithm"] = id_aes128_Wrap
 # aes128_Wrap['parameters'] are absent
 
 aes192_Wrap = AlgorithmIdentifier()
-aes192_Wrap['algorithm'] = id_aes128_Wrap
+aes192_Wrap["algorithm"] = id_aes128_Wrap
 # aes192_Wrap['parameters'] are absent
 
 aes256_Wrap = AlgorithmIdentifier()
-aes256_Wrap['algorithm'] = id_sha256
+aes256_Wrap["algorithm"] = id_sha256
 # aes256_Wrap['parameters'] are absent
 
 tdes_Wrap = AlgorithmIdentifier()
-tdes_Wrap['algorithm'] = id_alg_CMS3DESwrap
-tdes_Wrap['parameters'] = univ.Null("")
+tdes_Wrap["algorithm"] = id_alg_CMS3DESwrap
+tdes_Wrap["parameters"] = univ.Null("")
 
 camellia128_Wrap = AlgorithmIdentifier()
-camellia128_Wrap['algorithm'] = id_camellia128_Wrap
+camellia128_Wrap["algorithm"] = id_camellia128_Wrap
 # camellia128_Wrap['parameters'] are absent
 
 camellia192_Wrap = AlgorithmIdentifier()
-camellia192_Wrap['algorithm'] = id_camellia192_Wrap
+camellia192_Wrap["algorithm"] = id_camellia192_Wrap
 # camellia192_Wrap['parameters'] are absent
 
 camellia256_Wrap = AlgorithmIdentifier()
-camellia256_Wrap['algorithm'] = id_camellia256_Wrap
+camellia256_Wrap["algorithm"] = id_camellia256_Wrap
 # camellia256_Wrap['parameters'] are absent
 
 

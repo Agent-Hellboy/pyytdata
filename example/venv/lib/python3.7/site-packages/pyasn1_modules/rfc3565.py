@@ -26,21 +26,22 @@ class AlgorithmIdentifier(rfc5280.AlgorithmIdentifier):
 class AES_IV(univ.OctetString):
     pass
 
+
 AES_IV.subtypeSpec = constraint.ValueSizeConstraint(16, 16)
 
 
-id_aes128_CBC = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.2')
+id_aes128_CBC = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.2")
 
-id_aes192_CBC = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.22')
+id_aes192_CBC = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.22")
 
-id_aes256_CBC = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.42')
+id_aes256_CBC = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.42")
 
 
-id_aes128_wrap = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.5')
+id_aes128_wrap = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.5")
 
-id_aes192_wrap = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.25')
+id_aes192_wrap = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.25")
 
-id_aes256_wrap = univ.ObjectIdentifier('2.16.840.1.101.3.4.1.45')
+id_aes256_wrap = univ.ObjectIdentifier("2.16.840.1.101.3.4.1.45")
 
 
 # Update the Algorithm Identifier map

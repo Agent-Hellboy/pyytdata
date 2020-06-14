@@ -91,7 +91,7 @@ def _iglob(pathname, recursive):
 def glob1(dirname, pattern):
     if not dirname:
         if isinstance(pattern, bytes):
-            dirname = os.curdir.encode('ASCII')
+            dirname = os.curdir.encode("ASCII")
         else:
             dirname = os.curdir
     try:
@@ -128,7 +128,7 @@ def glob2(dirname, pattern):
 def _rlistdir(dirname):
     if not dirname:
         if isinstance(dirname, bytes):
-            dirname = os.curdir.encode('ASCII')
+            dirname = os.curdir.encode("ASCII")
         else:
             dirname = os.curdir
     try:
@@ -142,8 +142,8 @@ def _rlistdir(dirname):
             yield os.path.join(x, y)
 
 
-magic_check = re.compile('([*?[])')
-magic_check_bytes = re.compile(b'([*?[])')
+magic_check = re.compile("([*?[])")
+magic_check_bytes = re.compile(b"([*?[])")
 
 
 def has_magic(s):
@@ -156,9 +156,9 @@ def has_magic(s):
 
 def _isrecursive(pattern):
     if isinstance(pattern, bytes):
-        return pattern == b'**'
+        return pattern == b"**"
     else:
-        return pattern == '**'
+        return pattern == "**"
 
 
 def escape(pathname):
@@ -168,7 +168,7 @@ def escape(pathname):
     # Metacharacters do not work in the drive part and shouldn't be escaped.
     drive, pathname = os.path.splitdrive(pathname)
     if isinstance(pathname, bytes):
-        pathname = magic_check_bytes.sub(br'[\1]', pathname)
+        pathname = magic_check_bytes.sub(br"[\1]", pathname)
     else:
-        pathname = magic_check.sub(r'[\1]', pathname)
+        pathname = magic_check.sub(r"[\1]", pathname)
     return drive + pathname

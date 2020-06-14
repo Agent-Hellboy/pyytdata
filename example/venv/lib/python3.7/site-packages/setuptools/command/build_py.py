@@ -33,10 +33,9 @@ class build_py(orig.build_py, Mixin2to3):
     def finalize_options(self):
         orig.build_py.finalize_options(self)
         self.package_data = self.distribution.package_data
-        self.exclude_package_data = (self.distribution.exclude_package_data or
-                                     {})
-        if 'data_files' in self.__dict__:
-            del self.__dict__['data_files']
+        self.exclude_package_data = self.distribution.exclude_package_data or {}
+        if "data_files" in self.__dict__:
+            del self.__dict__["data_files"]
         self.__updated_files = []
         self.__doctests_2to3 = []
 
@@ -62,7 +61,7 @@ class build_py(orig.build_py, Mixin2to3):
 
     def __getattr__(self, attr):
         "lazily compute data files"
-        if attr == 'data_files':
+        if attr == "data_files":
             self.data_files = self._get_data_files()
             return self.data_files
         return orig.build_py.__getattr__(self, attr)
@@ -70,9 +69,8 @@ class build_py(orig.build_py, Mixin2to3):
     def build_module(self, module, module_file, package):
         if six.PY2 and isinstance(package, six.string_types):
             # avoid errors on Python 2 when unicode is passed (#190)
-            package = package.split('.')
-        outfile, copied = orig.build_py.build_module(self, module, module_file,
-                                                     package)
+            package = package.split(".")
+        outfile, copied = orig.build_py.build_module(self, module, module_file, package)
         if copied:
             self.__updated_files.append(outfile)
         return outfile, copied
@@ -87,7 +85,7 @@ class build_py(orig.build_py, Mixin2to3):
         src_dir = self.get_package_dir(package)
 
         # Compute package build directory
-        build_dir = os.path.join(*([self.build_lib] + package.split('.')))
+        build_dir = os.path.join(*([self.build_lib] + package.split(".")))
 
         # Strip directory from globbed filenames
         filenames = [
@@ -98,19 +96,12 @@ class build_py(orig.build_py, Mixin2to3):
 
     def find_data_files(self, package, src_dir):
         """Return filenames for package's data files in 'src_dir'"""
-        patterns = self._get_platform_patterns(
-            self.package_data,
-            package,
-            src_dir,
-        )
+        patterns = self._get_platform_patterns(self.package_data, package, src_dir,)
         globs_expanded = map(glob, patterns)
         # flatten the expanded globs into an iterable of matches
         globs_matches = itertools.chain.from_iterable(globs_expanded)
         glob_files = filter(os.path.isfile, globs_matches)
-        files = itertools.chain(
-            self.manifest_files.get(package, []),
-            glob_files,
-        )
+        files = itertools.chain(self.manifest_files.get(package, []), glob_files,)
         return self.exclude_data_files(package, src_dir, files)
 
     def build_package_data(self):
@@ -122,8 +113,7 @@ class build_py(orig.build_py, Mixin2to3):
                 srcfile = os.path.join(src_dir, filename)
                 outf, copied = self.copy_file(srcfile, target)
                 srcfile = os.path.abspath(srcfile)
-                if (copied and
-                        srcfile in self.distribution.convert_2to3_doctests):
+                if copied and srcfile in self.distribution.convert_2to3_doctests:
                     self.__doctests_2to3.append(outf)
 
     def analyze_manifest(self):
@@ -135,8 +125,8 @@ class build_py(orig.build_py, Mixin2to3):
             # Locate package source directory
             src_dirs[assert_relative(self.get_package_dir(package))] = package
 
-        self.run_command('egg_info')
-        ei_cmd = self.get_finalized_command('egg_info')
+        self.run_command("egg_info")
+        ei_cmd = self.get_finalized_command("egg_info")
         for path in ei_cmd.filelist.files:
             d, f = os.path.split(assert_relative(path))
             prev = None
@@ -146,7 +136,7 @@ class build_py(orig.build_py, Mixin2to3):
                 d, df = os.path.split(d)
                 f = os.path.join(df, f)
             if d in src_dirs:
-                if path.endswith('.py') and f == oldf:
+                if path.endswith(".py") and f == oldf:
                     continue  # it's a module, not data
                 mf.setdefault(src_dirs[d], []).append(path)
 
@@ -167,18 +157,18 @@ class build_py(orig.build_py, Mixin2to3):
             return init_py
 
         for pkg in self.distribution.namespace_packages:
-            if pkg == package or pkg.startswith(package + '.'):
+            if pkg == package or pkg.startswith(package + "."):
                 break
         else:
             return init_py
 
-        with io.open(init_py, 'rb') as f:
+        with io.open(init_py, "rb") as f:
             contents = f.read()
-        if b'declare_namespace' not in contents:
+        if b"declare_namespace" not in contents:
             raise distutils.errors.DistutilsError(
                 "Namespace package problem: %s is a namespace package, but "
                 "its\n__init__.py does not call declare_namespace()! Please "
-                'fix it.\n(See the setuptools manual under '
+                "fix it.\n(See the setuptools manual under "
                 '"Namespace Packages" for details.)\n"' % (package,)
             )
         return init_py
@@ -197,22 +187,13 @@ class build_py(orig.build_py, Mixin2to3):
         """Filter filenames for package's data files in 'src_dir'"""
         files = list(files)
         patterns = self._get_platform_patterns(
-            self.exclude_package_data,
-            package,
-            src_dir,
+            self.exclude_package_data, package, src_dir,
         )
-        match_groups = (
-            fnmatch.filter(files, pattern)
-            for pattern in patterns
-        )
+        match_groups = (fnmatch.filter(files, pattern) for pattern in patterns)
         # flatten the groups of matches into an iterable of matches
         matches = itertools.chain.from_iterable(match_groups)
         bad = set(matches)
-        keepers = (
-            fn
-            for fn in files
-            if fn not in bad
-        )
+        keepers = (fn for fn in files if fn not in bad)
         # ditch dupes
         return list(_unique_everseen(keepers))
 
@@ -224,10 +205,7 @@ class build_py(orig.build_py, Mixin2to3):
         self.package_data or self.exclude_package_data)
         matching package in src_dir.
         """
-        raw_patterns = itertools.chain(
-            spec.get('', []),
-            spec.get(package, []),
-        )
+        raw_patterns = itertools.chain(spec.get("", []), spec.get(package, []),)
         return (
             # Each pattern has to be converted to a platform-specific path
             os.path.join(src_dir, convert_path(pattern))
@@ -259,12 +237,17 @@ def assert_relative(path):
         return path
     from distutils.errors import DistutilsSetupError
 
-    msg = textwrap.dedent("""
+    msg = (
+        textwrap.dedent(
+            """
         Error: setup script specifies an absolute path:
 
             %s
 
         setup() arguments must *always* be /-separated paths relative to the
         setup.py directory, *never* absolute paths.
-        """).lstrip() % path
+        """
+        ).lstrip()
+        % path
+    )
     raise DistutilsSetupError(msg)

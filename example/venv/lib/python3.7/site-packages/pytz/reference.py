@@ -1,21 +1,21 @@
-'''
+"""
 Reference tzinfo implementations from the Python docs.
 Used for testing against as they are only correct for the years
 1987 to 2006. Do not use these for real code.
-'''
+"""
 
 from datetime import tzinfo, timedelta, datetime
 from pytz import HOUR, ZERO, UTC
 
 __all__ = [
-    'FixedOffset',
-    'LocalTimezone',
-    'USTimeZone',
-    'Eastern',
-    'Central',
-    'Mountain',
-    'Pacific',
-    'UTC'
+    "FixedOffset",
+    "LocalTimezone",
+    "USTimeZone",
+    "Eastern",
+    "Central",
+    "Mountain",
+    "Pacific",
+    "UTC",
 ]
 
 
@@ -52,7 +52,6 @@ DSTDIFF = DSTOFFSET - STDOFFSET
 
 # A class capturing the platform's idea of local time.
 class LocalTimezone(tzinfo):
-
     def utcoffset(self, dt):
         if self._isdst(dt):
             return DSTOFFSET
@@ -69,12 +68,21 @@ class LocalTimezone(tzinfo):
         return _time.tzname[self._isdst(dt)]
 
     def _isdst(self, dt):
-        tt = (dt.year, dt.month, dt.day,
-              dt.hour, dt.minute, dt.second,
-              dt.weekday(), 0, -1)
+        tt = (
+            dt.year,
+            dt.month,
+            dt.day,
+            dt.hour,
+            dt.minute,
+            dt.second,
+            dt.weekday(),
+            0,
+            -1,
+        )
         stamp = _time.mktime(tt)
         tt = _time.localtime(stamp)
         return tt.tm_isdst > 0
+
 
 Local = LocalTimezone()
 
@@ -95,7 +103,6 @@ DSTEND = datetime(1, 10, 25, 1)
 
 # A complete implementation of current DST rules for major US time zones.
 class USTimeZone(tzinfo):
-
     def __init__(self, hours, reprname, stdname, dstname):
         self.stdoffset = timedelta(hours=hours)
         self.reprname = reprname
@@ -133,6 +140,7 @@ class USTimeZone(tzinfo):
             return HOUR
         else:
             return ZERO
+
 
 Eastern = USTimeZone(-5, "Eastern", "EST", "EDT")
 Central = USTimeZone(-6, "Central", "CST", "CDT")

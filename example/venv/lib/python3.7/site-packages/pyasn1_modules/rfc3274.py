@@ -26,15 +26,17 @@ class CompressionAlgorithmIdentifier(rfc5280.AlgorithmIdentifier):
 
 # The CMS Compressed Data Content Type
 
-id_ct_compressedData = univ.ObjectIdentifier('1.2.840.113549.1.9.16.1.9')
+id_ct_compressedData = univ.ObjectIdentifier("1.2.840.113549.1.9.16.1.9")
+
 
 class CompressedData(univ.Sequence):
     pass
 
+
 CompressedData.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('version', rfc5652.CMSVersion()), # Always set to 0
-    namedtype.NamedType('compressionAlgorithm', CompressionAlgorithmIdentifier()),
-    namedtype.NamedType('encapContentInfo', rfc5652.EncapsulatedContentInfo())
+    namedtype.NamedType("version", rfc5652.CMSVersion()),  # Always set to 0
+    namedtype.NamedType("compressionAlgorithm", CompressionAlgorithmIdentifier()),
+    namedtype.NamedType("encapContentInfo", rfc5652.EncapsulatedContentInfo()),
 )
 
 
@@ -42,10 +44,10 @@ CompressedData.componentType = namedtype.NamedTypes(
 # This includes cpa_zlibCompress as defined in RFC 6268,
 # from https://www.rfc-editor.org/rfc/rfc6268.txt
 
-id_alg_zlibCompress = univ.ObjectIdentifier('1.2.840.113549.1.9.16.3.8')
+id_alg_zlibCompress = univ.ObjectIdentifier("1.2.840.113549.1.9.16.3.8")
 
 cpa_zlibCompress = rfc5280.AlgorithmIdentifier()
-cpa_zlibCompress['algorithm'] = id_alg_zlibCompress
+cpa_zlibCompress["algorithm"] = id_alg_zlibCompress
 # cpa_zlibCompress['parameters'] are absent
 
 

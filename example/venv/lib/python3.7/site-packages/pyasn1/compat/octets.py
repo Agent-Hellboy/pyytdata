@@ -9,8 +9,8 @@ from sys import version_info
 if version_info[0] <= 2:
     int2oct = chr
     # noinspection PyPep8
-    ints2octs = lambda s: ''.join([int2oct(x) for x in s])
-    null = ''
+    ints2octs = lambda s: "".join([int2oct(x) for x in s])
+    null = ""
     oct2int = ord
     # TODO: refactor to return a sequence of ints
     # noinspection PyPep8
@@ -35,9 +35,9 @@ else:
     # noinspection PyPep8
     octs2ints = lambda x: x
     # noinspection PyPep8
-    str2octs = lambda x: x.encode('iso-8859-1')
+    str2octs = lambda x: x.encode("iso-8859-1")
     # noinspection PyPep8
-    octs2str = lambda x: x.decode('iso-8859-1')
+    octs2str = lambda x: x.decode("iso-8859-1")
     # noinspection PyPep8
     isOctetsType = lambda s: isinstance(s, bytes)
     # noinspection PyPep8

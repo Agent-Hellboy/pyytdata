@@ -18,7 +18,6 @@ def _b64_decode_str(s):
 
 
 class Serializer(object):
-
     def dumps(self, request, response, body=None):
         response_headers = CaseInsensitiveDict(response.headers)
 

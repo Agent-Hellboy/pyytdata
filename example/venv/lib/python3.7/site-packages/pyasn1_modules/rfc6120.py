@@ -17,16 +17,16 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # XmppAddr Identifier Type as specified in Section 13.7.1.4. of RFC 6120
 
 id_pkix = rfc5280.id_pkix
 
-id_on = id_pkix + (8, )
+id_on = id_pkix + (8,)
 
-id_on_xmppAddr = id_on + (5, )
+id_on_xmppAddr = id_on + (5,)
 
 
 class XmppAddr(char.UTF8String):

@@ -6,7 +6,7 @@
 #
 from pyasn1 import error
 
-__all__ = ['TagMap']
+__all__ = ["TagMap"]
 
 
 class TagMap(object):
@@ -32,14 +32,18 @@ class TagMap(object):
         An ASN.1 type object callee *TagMap* returns for any *TagSet* key not present
         in *presentTypes* (unless given key is present in *skipTypes*).
     """
+
     def __init__(self, presentTypes=None, skipTypes=None, defaultType=None):
         self.__presentTypes = presentTypes or {}
         self.__skipTypes = skipTypes or {}
         self.__defaultType = defaultType
 
     def __contains__(self, tagSet):
-        return (tagSet in self.__presentTypes or
-                self.__defaultType is not None and tagSet not in self.__skipTypes)
+        return (
+            tagSet in self.__presentTypes
+            or self.__defaultType is not None
+            and tagSet not in self.__skipTypes
+        )
 
     def __getitem__(self, tagSet):
         try:
@@ -48,7 +52,7 @@ class TagMap(object):
             if self.__defaultType is None:
                 raise KeyError()
             elif tagSet in self.__skipTypes:
-                raise error.PyAsn1Error('Key in negative map')
+                raise error.PyAsn1Error("Key in negative map")
             else:
                 return self.__defaultType
 
@@ -56,18 +60,18 @@ class TagMap(object):
         return iter(self.__presentTypes)
 
     def __repr__(self):
-        representation = '%s object' % self.__class__.__name__
+        representation = "%s object" % self.__class__.__name__
 
         if self.__presentTypes:
-            representation += ', present %s' % repr(self.__presentTypes)
+            representation += ", present %s" % repr(self.__presentTypes)
 
         if self.__skipTypes:
-            representation += ', skip %s' % repr(self.__skipTypes)
+            representation += ", skip %s" % repr(self.__skipTypes)
 
         if self.__defaultType is not None:
-            representation += ', default %s' % repr(self.__defaultType)
+            representation += ", default %s" % repr(self.__defaultType)
 
-        return '<%s>' % representation
+        return "<%s>" % representation
 
     @property
     def presentTypes(self):

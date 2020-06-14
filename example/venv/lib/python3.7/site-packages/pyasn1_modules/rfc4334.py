@@ -18,28 +18,29 @@ from pyasn1.type import univ
 
 from pyasn1_modules import rfc5280
 
-MAX = float('inf')
+MAX = float("inf")
 
 
 # OID Arcs
 
-id_pe = univ.ObjectIdentifier('1.3.6.1.5.5.7.1')
+id_pe = univ.ObjectIdentifier("1.3.6.1.5.5.7.1")
 
-id_kp = univ.ObjectIdentifier('1.3.6.1.5.5.7.3')
+id_kp = univ.ObjectIdentifier("1.3.6.1.5.5.7.3")
 
-id_aca = univ.ObjectIdentifier('1.3.6.1.5.5.7.10')
+id_aca = univ.ObjectIdentifier("1.3.6.1.5.5.7.10")
 
 
 # Extended Key Usage Values
 
-id_kp_eapOverPPP = id_kp + (13, )
+id_kp_eapOverPPP = id_kp + (13,)
 
-id_kp_eapOverLAN = id_kp + (14, )
+id_kp_eapOverLAN = id_kp + (14,)
 
 
 # Wireless LAN SSID Extension
 
-id_pe_wlanSSID = id_pe + (13, )
+id_pe_wlanSSID = id_pe + (13,)
+
 
 class SSID(univ.OctetString):
     constraint.ValueSizeConstraint(1, 32)
@@ -47,12 +48,12 @@ class SSID(univ.OctetString):
 
 class SSIDList(univ.SequenceOf):
     componentType = SSID()
-    subtypeSpec=constraint.ValueSizeConstraint(1, MAX)
+    subtypeSpec = constraint.ValueSizeConstraint(1, MAX)
 
 
 # Wireless LAN SSID Attribute Certificate Attribute
 
-id_aca_wlanSSID = id_aca + (7, )
+id_aca_wlanSSID = id_aca + (7,)
 
 
 # Map of Certificate Extension OIDs to Extensions

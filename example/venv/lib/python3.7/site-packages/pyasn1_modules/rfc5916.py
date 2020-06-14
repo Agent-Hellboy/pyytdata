@@ -22,8 +22,8 @@ from pyasn1_modules import rfc5280
 id_deviceOwner = univ.ObjectIdentifier((2, 16, 840, 1, 101, 2, 1, 5, 69))
 
 at_deviceOwner = rfc5280.Attribute()
-at_deviceOwner['type'] = id_deviceOwner
-at_deviceOwner['values'][0] = univ.ObjectIdentifier()
+at_deviceOwner["type"] = id_deviceOwner
+at_deviceOwner["values"][0] = univ.ObjectIdentifier()
 
 
 # Add to the map of Attribute Type OIDs to Attributes in rfc5280.py.

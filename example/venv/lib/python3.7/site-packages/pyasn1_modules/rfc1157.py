@@ -21,9 +21,7 @@ from pyasn1_modules import rfc1155
 
 
 class Version(univ.Integer):
-    namedValues = namedval.NamedValues(
-        ('version-1', 0)
-    )
+    namedValues = namedval.NamedValues(("version-1", 0))
     defaultValue = 0
 
 
@@ -37,12 +35,12 @@ class RequestID(univ.Integer):
 
 class ErrorStatus(univ.Integer):
     namedValues = namedval.NamedValues(
-        ('noError', 0),
-        ('tooBig', 1),
-        ('noSuchName', 2),
-        ('badValue', 3),
-        ('readOnly', 4),
-        ('genErr', 5)
+        ("noError", 0),
+        ("tooBig", 1),
+        ("noSuchName", 2),
+        ("badValue", 3),
+        ("readOnly", 4),
+        ("genErr", 5),
     )
 
 
@@ -52,8 +50,8 @@ class ErrorIndex(univ.Integer):
 
 class VarBind(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('name', rfc1155.ObjectName()),
-        namedtype.NamedType('value', rfc1155.ObjectSyntax())
+        namedtype.NamedType("name", rfc1155.ObjectName()),
+        namedtype.NamedType("value", rfc1155.ObjectSyntax()),
     )
 
 
@@ -63,10 +61,10 @@ class VarBindList(univ.SequenceOf):
 
 class _RequestBase(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('request-id', RequestID()),
-        namedtype.NamedType('error-status', ErrorStatus()),
-        namedtype.NamedType('error-index', ErrorIndex()),
-        namedtype.NamedType('variable-bindings', VarBindList())
+        namedtype.NamedType("request-id", RequestID()),
+        namedtype.NamedType("error-status", ErrorStatus()),
+        namedtype.NamedType("error-index", ErrorIndex()),
+        namedtype.NamedType("variable-bindings", VarBindList()),
     )
 
 
@@ -96,31 +94,41 @@ class SetRequestPDU(_RequestBase):
 
 class TrapPDU(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('enterprise', univ.ObjectIdentifier()),
-        namedtype.NamedType('agent-addr', rfc1155.NetworkAddress()),
-        namedtype.NamedType('generic-trap', univ.Integer().clone(
-            namedValues=namedval.NamedValues(('coldStart', 0), ('warmStart', 1), ('linkDown', 2), ('linkUp', 3),
-                                             ('authenticationFailure', 4), ('egpNeighborLoss', 5),
-                                             ('enterpriseSpecific', 6)))),
-        namedtype.NamedType('specific-trap', univ.Integer()),
-        namedtype.NamedType('time-stamp', rfc1155.TimeTicks()),
-        namedtype.NamedType('variable-bindings', VarBindList())
+        namedtype.NamedType("enterprise", univ.ObjectIdentifier()),
+        namedtype.NamedType("agent-addr", rfc1155.NetworkAddress()),
+        namedtype.NamedType(
+            "generic-trap",
+            univ.Integer().clone(
+                namedValues=namedval.NamedValues(
+                    ("coldStart", 0),
+                    ("warmStart", 1),
+                    ("linkDown", 2),
+                    ("linkUp", 3),
+                    ("authenticationFailure", 4),
+                    ("egpNeighborLoss", 5),
+                    ("enterpriseSpecific", 6),
+                )
+            ),
+        ),
+        namedtype.NamedType("specific-trap", univ.Integer()),
+        namedtype.NamedType("time-stamp", rfc1155.TimeTicks()),
+        namedtype.NamedType("variable-bindings", VarBindList()),
     )
 
 
 class Pdus(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('get-request', GetRequestPDU()),
-        namedtype.NamedType('get-next-request', GetNextRequestPDU()),
-        namedtype.NamedType('get-response', GetResponsePDU()),
-        namedtype.NamedType('set-request', SetRequestPDU()),
-        namedtype.NamedType('trap', TrapPDU())
+        namedtype.NamedType("get-request", GetRequestPDU()),
+        namedtype.NamedType("get-next-request", GetNextRequestPDU()),
+        namedtype.NamedType("get-response", GetResponsePDU()),
+        namedtype.NamedType("set-request", SetRequestPDU()),
+        namedtype.NamedType("trap", TrapPDU()),
     )
 
 
 class Message(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('version', Version()),
-        namedtype.NamedType('community', Community()),
-        namedtype.NamedType('data', Pdus())
+        namedtype.NamedType("version", Version()),
+        namedtype.NamedType("community", Community()),
+        namedtype.NamedType("data", Pdus()),
     )

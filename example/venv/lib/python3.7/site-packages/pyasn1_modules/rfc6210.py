@@ -18,18 +18,19 @@ from pyasn1.type import univ
 from pyasn1_modules import rfc5280
 
 
-id_alg_MD5_XOR_EXPERIMENT = univ.ObjectIdentifier('1.2.840.113549.1.9.16.3.13')
+id_alg_MD5_XOR_EXPERIMENT = univ.ObjectIdentifier("1.2.840.113549.1.9.16.3.13")
 
 
 class MD5_XOR_EXPERIMENT(univ.OctetString):
     pass
 
+
 MD5_XOR_EXPERIMENT.subtypeSpec = constraint.ValueSizeConstraint(64, 64)
 
 
 mda_xor_md5_EXPERIMENT = rfc5280.AlgorithmIdentifier()
-mda_xor_md5_EXPERIMENT['algorithm'] = id_alg_MD5_XOR_EXPERIMENT
-mda_xor_md5_EXPERIMENT['parameters'] = MD5_XOR_EXPERIMENT()
+mda_xor_md5_EXPERIMENT["algorithm"] = id_alg_MD5_XOR_EXPERIMENT
+mda_xor_md5_EXPERIMENT["parameters"] = MD5_XOR_EXPERIMENT()
 
 
 # Map of Algorithm Identifier OIDs to Parameters added to the

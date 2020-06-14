@@ -22,21 +22,33 @@ max_bindings = rfc1902.Integer(2147483647)
 
 class _BindValue(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('value', rfc1902.ObjectSyntax()),
-        namedtype.NamedType('unSpecified', univ.Null()),
-        namedtype.NamedType('noSuchObject',
-                            univ.Null().subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-        namedtype.NamedType('noSuchInstance',
-                            univ.Null().subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))),
-        namedtype.NamedType('endOfMibView',
-                            univ.Null().subtype(implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+        namedtype.NamedType("value", rfc1902.ObjectSyntax()),
+        namedtype.NamedType("unSpecified", univ.Null()),
+        namedtype.NamedType(
+            "noSuchObject",
+            univ.Null().subtype(
+                implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+            ),
+        ),
+        namedtype.NamedType(
+            "noSuchInstance",
+            univ.Null().subtype(
+                implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+            ),
+        ),
+        namedtype.NamedType(
+            "endOfMibView",
+            univ.Null().subtype(
+                implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
+            ),
+        ),
     )
 
 
 class VarBind(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('name', rfc1902.ObjectName()),
-        namedtype.NamedType('', _BindValue())
+        namedtype.NamedType("name", rfc1902.ObjectName()),
+        namedtype.NamedType("", _BindValue()),
     )
 
 
@@ -49,28 +61,59 @@ class VarBindList(univ.SequenceOf):
 
 class PDU(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('request-id', rfc1902.Integer32()),
-        namedtype.NamedType('error-status', univ.Integer(
-            namedValues=namedval.NamedValues(('noError', 0), ('tooBig', 1), ('noSuchName', 2), ('badValue', 3),
-                                             ('readOnly', 4), ('genErr', 5), ('noAccess', 6), ('wrongType', 7),
-                                             ('wrongLength', 8), ('wrongEncoding', 9), ('wrongValue', 10),
-                                             ('noCreation', 11), ('inconsistentValue', 12), ('resourceUnavailable', 13),
-                                             ('commitFailed', 14), ('undoFailed', 15), ('authorizationError', 16),
-                                             ('notWritable', 17), ('inconsistentName', 18)))),
-        namedtype.NamedType('error-index',
-                            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings))),
-        namedtype.NamedType('variable-bindings', VarBindList())
+        namedtype.NamedType("request-id", rfc1902.Integer32()),
+        namedtype.NamedType(
+            "error-status",
+            univ.Integer(
+                namedValues=namedval.NamedValues(
+                    ("noError", 0),
+                    ("tooBig", 1),
+                    ("noSuchName", 2),
+                    ("badValue", 3),
+                    ("readOnly", 4),
+                    ("genErr", 5),
+                    ("noAccess", 6),
+                    ("wrongType", 7),
+                    ("wrongLength", 8),
+                    ("wrongEncoding", 9),
+                    ("wrongValue", 10),
+                    ("noCreation", 11),
+                    ("inconsistentValue", 12),
+                    ("resourceUnavailable", 13),
+                    ("commitFailed", 14),
+                    ("undoFailed", 15),
+                    ("authorizationError", 16),
+                    ("notWritable", 17),
+                    ("inconsistentName", 18),
+                )
+            ),
+        ),
+        namedtype.NamedType(
+            "error-index",
+            univ.Integer().subtype(
+                subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings)
+            ),
+        ),
+        namedtype.NamedType("variable-bindings", VarBindList()),
     )
 
 
 class BulkPDU(univ.Sequence):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('request-id', rfc1902.Integer32()),
-        namedtype.NamedType('non-repeaters',
-                            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings))),
-        namedtype.NamedType('max-repetitions',
-                            univ.Integer().subtype(subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings))),
-        namedtype.NamedType('variable-bindings', VarBindList())
+        namedtype.NamedType("request-id", rfc1902.Integer32()),
+        namedtype.NamedType(
+            "non-repeaters",
+            univ.Integer().subtype(
+                subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings)
+            ),
+        ),
+        namedtype.NamedType(
+            "max-repetitions",
+            univ.Integer().subtype(
+                subtypeSpec=constraint.ValueRangeConstraint(0, max_bindings)
+            ),
+        ),
+        namedtype.NamedType("variable-bindings", VarBindList()),
     )
 
 
@@ -124,12 +167,12 @@ class ReportPDU(PDU):
 
 class PDUs(univ.Choice):
     componentType = namedtype.NamedTypes(
-        namedtype.NamedType('get-request', GetRequestPDU()),
-        namedtype.NamedType('get-next-request', GetNextRequestPDU()),
-        namedtype.NamedType('get-bulk-request', GetBulkRequestPDU()),
-        namedtype.NamedType('response', ResponsePDU()),
-        namedtype.NamedType('set-request', SetRequestPDU()),
-        namedtype.NamedType('inform-request', InformRequestPDU()),
-        namedtype.NamedType('snmpV2-trap', SNMPv2TrapPDU()),
-        namedtype.NamedType('report', ReportPDU())
+        namedtype.NamedType("get-request", GetRequestPDU()),
+        namedtype.NamedType("get-next-request", GetNextRequestPDU()),
+        namedtype.NamedType("get-bulk-request", GetBulkRequestPDU()),
+        namedtype.NamedType("response", ResponsePDU()),
+        namedtype.NamedType("set-request", SetRequestPDU()),
+        namedtype.NamedType("inform-request", InformRequestPDU()),
+        namedtype.NamedType("snmpV2-trap", SNMPv2TrapPDU()),
+        namedtype.NamedType("report", ReportPDU()),
     )

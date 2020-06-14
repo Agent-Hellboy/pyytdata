@@ -20,13 +20,25 @@ from pyasn1_modules import rfc5280
 class CertificateOrCRL(univ.Choice):
     pass
 
+
 CertificateOrCRL.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('cert', rfc5280.Certificate().subtype(explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))),
-    namedtype.NamedType('crl', rfc5280.CertificateList().subtype(explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))
+    namedtype.NamedType(
+        "cert",
+        rfc5280.Certificate().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
+        ),
+    ),
+    namedtype.NamedType(
+        "crl",
+        rfc5280.CertificateList().subtype(
+            explicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
+        ),
+    ),
 )
 
 
 class CertificateBundle(univ.SequenceOf):
     pass
+
 
 CertificateBundle.componentType = CertificateOrCRL()
