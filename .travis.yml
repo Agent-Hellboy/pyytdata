@@ -16,8 +16,7 @@ deploy:
   provider: pypi
   user: princekrroshan01
   password:
-    secure: AgEIcHlwaS5vcmcCJDExYzZmOTRlLWM4MzYtNDliMC1hN2FhLTQ1Njg0YjIxYmZhOQACOXsicGVybWlzc2lv
-            bnMiOiB7InByb2plY3RzIjogWyJweXl0ZGF0YSJdfSwgInZlcnNpb24iOiAxfQAABiAAOw- Nuue5wgF1NH35S7l31Cbd6zEuQahQKktMreaovg
+    secure: AgEIcHlwaS5vcmcCJDExYzZmOTRlLWM4MzYtNDliMC1hN2FhLTQ1Njg0YjIxYmZhOQACOXsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJweXl0ZGF0YSJdfSwgInZlcnNpb24iOiAxfQAABiAAOw- Nuue5wgF1NH35S7l31Cbd6zEuQahQKktMreaovg
   distributions: sdist bdist_wheel
   skip_existing: true
   on:
