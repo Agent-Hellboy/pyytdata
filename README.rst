@@ -1,34 +1,23 @@
 pyytdata
 ========
 
-|Version|
-
-.. |Version| image:: https://img.shields.io/pypi/v/pyytdata
+|
+.. image:: https://img.shields.io/pypi/v/pyytdata
    :target: https://pypi.python.org/pypi/pyytdata/
-   
-|Build Status|
 
-.. |Build Status| image:: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper.svg?branch=master
+.. image:: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper.svg?branch=master
     :target: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper
     
-|PyPI pyversions|
-
-.. |PyPI pyversions| image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
+.. image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
    
-|PyPI license|
-
-.. |PyPI license| image:: https://img.shields.io/pypi/l/pyytdata.svg
+.. image:: https://img.shields.io/pypi/l/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
    
-|PyPI download total|
-
-.. |PyPI download total| image:: https://img.shields.io/pypi/dm/pyytdata.svg
+.. image:: https://img.shields.io/pypi/dm/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
 
-|PyPI format|
-
-.. |PyPI format| image:: https://img.shields.io/pypi/format/pyytdata.svg
+.. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
    
 This is an youtube api v3 wrapper which is integrated in any python app
