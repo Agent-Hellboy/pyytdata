@@ -3,10 +3,6 @@ python:
 - '3.6'
 - '3.7'
 - '3.8'
-env:
-  global: 
-    - secure: {{ENCRYPTED_API_KEY}}
-    - secure: {{ENCRYPTED_GOOGLE_APPLICATION_CREDENTIALS}}
 install:
 - pip install -r requirements.txt
 - pip install coveralls
