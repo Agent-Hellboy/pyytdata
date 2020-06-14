@@ -22,7 +22,7 @@ class TestPyYtData(unittest.TestCase):
         data=api.get_titles()
         data2=api.get_descriptions()
         data3=api.get_image_urls()
-        data3=api.get_links()
+        data4=api.get_links()
         self.assertTrue(type(data)==list)
         self.assertTrue(type(data4)==list)
         self.assertTrue(type(data2)==list)
