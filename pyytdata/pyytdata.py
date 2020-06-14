@@ -7,17 +7,12 @@ import webbrowser
 import json
 
 from apiclient.discovery import build
-from typing import Any
-
 
 class PyYtData:
     """
     Class which acts as a client to the youtube data v3 API,
     having attributes as the query parameter for API.
     """
-
-    maxlen: Any
-
     def __init__(self, keyword, maxlen, order="relevance", type="video"):
         try:
             self.__API_KEY = os.environ.get(
