@@ -2,8 +2,8 @@ YouTubeDataApi\_Wrapper
 =======================
 
 This is an youtube api v3 wrapper which is integrated in any python app
-basically in web app which recommend youtube videos ### A simple client
-for youtube data api v3
+basically in web app which recommend youtube videos 
+
 
 Demo
 ----

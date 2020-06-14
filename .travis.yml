@@ -1,0 +1,25 @@
+language: python
+python:
+- '3.4'
+- '3.5'
+- '3.6'
+- '3.7'
+- '3.8'
+install:
+- pip install -r requirements.txt
+- pip install coveralls
+script:
+- coverage run -m unittest discover -s tests -t tests
+after_success:
+- coveralls
+deploy:
+  provider: pypi
+  user: princekrroshan01
+  password:
+    secure: AgEIcHlwaS5vcmcCJDExYzZmOTRlLWM4MzYtNDliMC1hN2FhLTQ1Njg0YjIxYmZhOQACOXsicGVybWlzc2lv
+            bnMiOiB7InByb2plY3RzIjogWyJweXl0ZGF0YSJdfSwgInZlcnNpb24iOiAxfQAABiAAOw- Nuue5wgF1NH35S7l31Cbd6zEuQahQKktMreaovg
+  distributions: sdist bdist_wheel
+  skip_existing: true
+  on:
+    tags: true
+    python: '3.6'
