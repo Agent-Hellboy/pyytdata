@@ -16,8 +16,8 @@ basically in web app which recommend youtube videos
 .. image:: https://img.shields.io/pypi/l/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
    
-.. image:: https://img.shields.io/pypi/dm/pyytdata.svg
-   :target: https://pypi.python.org/pypi/pyytdata/
+.. image:: https://pepy.tech/badge/pyytdata
+   :target: https://pepy.tech/project/pyytdata
 
 .. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
