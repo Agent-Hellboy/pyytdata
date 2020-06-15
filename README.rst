@@ -38,12 +38,10 @@ Demo
 Prerequisites
 -------------
 
-Get the youtube data v3 api key from
-https://console.developers.google.com/apis/ Set environment variable
-API\_KEY='Your YoutubeDatav3 API key' and also
-GOOGLE\_APPLICATION\_CREDENTIALS='path/to/json/file' Reference to set
-GOOGLE\_APPLICATION\_CREDENTIALS
-https://cloud.google.com/docs/authentication/getting-started
+- Get the youtube data v3 api key from https://console.developers.google.com/apis/ 
+- Set environment variable API\_KEY='Your YoutubeDatav3 API key' 
+- Set environment variable GOOGLE\_APPLICATION\_CREDENTIALS='path/to/json/file' 
+- Reference to set GOOGLE\_APPLICATION\_CREDENTIALS https://cloud.google.com/docs/authentication/getting-started
 
 Installation
 ------------
@@ -55,21 +53,22 @@ Installation
 using
 -----
 
-::
+.. code-block:: python
 
-        from pyytdata import pyytdata
-        # keyword is the query you want to search from 
-        # youtube data api and maxlen is no. of video you want.
-        
-        p=pyytdata.PyYtData(keyword,maxlen) 
+   from pyytdata import pyytdata
+   '''   
+   keyword is the query you want to search from 
+   youtube data v3 api and maxlen is no. of video you want.
+   '''     
+   p=pyytdata.PyYtData(keyword,maxlen) 
                                                     
-        #function call for titles of video
+   #function call for titles of video
         
-        output=p.get_titles() 
+   output=p.get_titles() 
 
-        #function to open the specific video in web browser
+   #function to open the specific video in web browser
         
-        output=p.open_id(item_no)  
+   output=p.open_id(item_no)  
 
 General Info
 ------------
