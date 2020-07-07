@@ -33,8 +33,7 @@ Prerequisites
 
 - Get the youtube data v3 api key from https://console.developers.google.com/apis/
 - Set environment variable API\_KEY='Your YoutubeDatav3 API key'
-- Set environment variable GOOGLE\_APPLICATION\_CREDENTIALS='path/to/json/file'
-- Reference to set GOOGLE\_APPLICATION\_CREDENTIALS https://cloud.google.com/docs/authentication/getting-started
+
 
 Installation
 ------------
