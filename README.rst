@@ -8,7 +8,7 @@ basically in web app which recommend youtube videos
    :target: https://pypi.python.org/pypi/pyytdata/
 
 .. image:: https://travis-ci.org/Agent-Hellboy/YouTubeDataApi_Wrapper.svg?branch=master
-    :target: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper
+    :target: https://travis-ci.org/Agent-Hellboy/YouTubeDataApi_Wrapper
 
 .. image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
@@ -22,8 +22,8 @@ basically in web app which recommend youtube videos
 .. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
 
-.. image:: https://coveralls.io/repos/github/princekrroshan01/YouTubeDataApi_Wrapper/badge.svg?branch=master
-   :target: https://coveralls.io/github/princekrroshan01/YouTubeDataApi_Wrapper?branch=master
+.. image:: https://coveralls.io/repos/github/Agent-Hellboy/YouTubeDataApi_Wrapper/badge.svg?branch=master
+   :target: https://coveralls.io/github/Agent-Hellboy/YouTubeDataApi_Wrapper?branch=master
 
 
 
