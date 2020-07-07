@@ -1,2 +1,3 @@
 [run]
+include = util/*
 include = pyytdata/*

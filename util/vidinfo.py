@@ -1,4 +1,5 @@
 from util.info import Info
+from util.chnlinfo import ChnlInfo
 
 vido_catgy = {"2": "Cars & Vehicles",
               "1": "Film & Animation",
@@ -56,23 +57,21 @@ class VidInfo(Info):
   def open_id(self):
     return "https://www.youtube.com/watch?v=" + self.result["items"][self._id]["id"]["videoId"]
 
-  def get_titles(self):
-    print(self._id)
-    print(type(self._id))
+  def get_title(self):
     return self.result["items"][self._id]["snippet"]["title"]
 
-  def get_descriptions(self):
+  def get_description(self):
     return self.result["items"][self._id]["snippet"]["description"]
 
-  def get_image_urls(self):
+  def get_image_url(self):
     return self.result["items"][self._id]["snippet"]["thumbnails"]["medium"]["url"]
 
-  def get_links(self):
+  def get_link(self):
     return "https://www.youtube.com/watch?v=" + self.result["items"][self._id]["id"]["videoId"]
 
-  def get_publishedtime():
+  def get_publishedtime(self):
     pass
 
   def channel_info(self):
-    id = self.result["items"][self._id]["id"]["videoId"]
-    return ChnlInfo(id)
+    id = self.result["items"][self._id]["snippet"]["channelId"]
+    return ChnlInfo(self.youtube, id)
