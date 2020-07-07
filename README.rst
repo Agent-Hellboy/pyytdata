@@ -7,7 +7,7 @@ basically in web app which recommend youtube videos
 .. image:: https://img.shields.io/pypi/v/pyytdata
    :target: https://pypi.python.org/pypi/pyytdata/
 
-.. image:: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper.svg?branch=master
+.. image:: https://travis-ci.org/Agent-Hellboy/YouTubeDataApi_Wrapper.svg?branch=master
     :target: https://travis-ci.org/princekrroshan01/YouTubeDataApi_Wrapper
 
 .. image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
