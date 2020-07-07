@@ -39,8 +39,16 @@ Installation
 ------------
 
 ::
-
+       for stable version
        pip install pyytdata
+       
+       for developement
+       git clone https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/
+       cd flask-hedcrypt
+       virtualenv venv
+       source venv/bin/activate
+       pip install -r requirements.txt
+      
 
 using
 -----
