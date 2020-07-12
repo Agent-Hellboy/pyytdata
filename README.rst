@@ -63,24 +63,26 @@ using
     
     You can fire dir on this object to get the attribute and method of the object.
     >>> dir(vid[0])
-['_Info__API_KEY', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_id', 'channel_info', 'get_description', 'get_image_url', 'get_link', 'get_publishedtime', 'get_title', 'keyword', 'maxlen', 'open_id', 'order', 'result', 'type', 'youtube']
+
+    ['_Info__API_KEY', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_id', 'channel_info', 'get_description', 'get_image_url', 'get_link', 'get_publishedtime', 'get_title', 'keyword', 'maxlen', 'open_id', 'order', 'result', 'type', 'youtube']
 
     
     To get the description of the video
     >>> vid[0].get_description()
-    'Flask is a micro web framework written in Python. It is    classified as a microframework because it does not require particular tools or libraries. Learn how to use it ...'
+    'Flask is a micro web framework written in Python. It is classified as a            microframework because it does not require particular tools or libraries. Learn how to use it ...'
     
     To get the title of the video.
     >>> vid[0].get_title()
-'Learn Flask for Python - Full Tutorial'
+   'Learn Flask for Python - Full Tutorial'
 
-    To get the link for the video which can we used in web app to open the link for the video.
+    To get the link for the video which can we used in web app to open the link for the           video.
     >>> vid[0].get_link()
-'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
+   'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
 
     To get the title img of the video which can be rendered through HTML tag.
+
     >>> vid[0].get_image_url()
-'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
+   'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
 
 
 
@@ -90,7 +92,7 @@ using
     >>> chnl=vid[0].channel_info()
     To get the number of view cnt on this channel
     >>> dir(chnl)
-    ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
+    ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
 
     To get the total view count of the channel.
     >>> chnl.total_viewcnt()
@@ -117,3 +119,4 @@ Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
+      
