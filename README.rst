@@ -1,8 +1,7 @@
 pyytdata
 ========
 
-This is an youtube api v3 wrapper which is integrated in any python app
-basically in web app which recommend youtube videos
+This is a API that an  youtube api v3 wrapper which is integrated into any python app basically in the  web app which recommendsthata  youtube videos.
 
 .. image:: https://img.shields.io/pypi/v/pyytdata
    :target: https://pypi.python.org/pypi/pyytdata/
@@ -69,24 +68,19 @@ using
     
     To get the description of the video
     >>> vid[0].get_description()
-    'Flask is a micro web framework written in Python. It is classified as a            microframework because it does not require particular tools or libraries. Learn how to use it ...'
+    'Flask is a micro web framework written in Python. It is classified as a microframework because it does not require particular tools or libraries. Learn how to use it ...'
     
     To get the title of the video.
     >>> vid[0].get_title()
    'Learn Flask for Python - Full Tutorial'
 
-    To get the link for the video which can we used in web app to open the link for the           video.
+    To get the link for the video which can we used in web app to open the link for the video.
     >>> vid[0].get_link()
    'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
 
     To get the title img of the video which can be rendered through HTML tag.
-
     >>> vid[0].get_image_url()
    'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
-
-
-
-
     
     To get the chnlInfo object having methods which describes a channel.
     >>> chnl=vid[0].channel_info()
