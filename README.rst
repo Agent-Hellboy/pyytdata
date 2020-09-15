@@ -110,7 +110,7 @@ Please have a look at the Issue
 Package Architecture
 --------------------
 .. image:: /images/info.png
-    :alt: Architecture
+   :width: 600
 
 Contributing
 ------------
