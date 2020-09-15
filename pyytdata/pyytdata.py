@@ -24,6 +24,7 @@ class PyYtData:
         self.type = type
 
     def get_videoinfo(self):
+        """Returns a list with has objects of VidInfo class"""
         rslt = []
 
         for i in range(self.maxlen):

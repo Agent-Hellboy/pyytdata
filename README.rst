@@ -58,7 +58,7 @@ using
     >>> vid
     [<util.vidinfo.VidInfo object at 0x7ff971539e10>]
     
-    You can fire dir on this object to get the attribute and method of the object.
+    #You can fire dir on this object to get the attribute and method of the object.
     >>> dir(vid[0])
     ['_Info__API_KEY', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_id', 'channel_info', 'get_description', 'get_image_url', 'get_link', 'get_publishedtime', 'get_title', 'keyword', 'maxlen', 'open_id', 'order', 'result', 'type', 'youtube']
 
