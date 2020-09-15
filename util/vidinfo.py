@@ -1,6 +1,6 @@
-from util.info import Info
-from util.chnlinfo import ChnlInfo
 
+from util.chnlinfo import ChnlInfo
+from util.querier import VidQuerier
 vido_catgy = {"2": "Cars & Vehicles",
               "1": "Film & Animation",
               "10": "Music",
@@ -36,23 +36,22 @@ vido_catgy = {"2": "Cars & Vehicles",
               }
 
 
-class VidInfo(Info):
-  def __init__(self, keyword, maxlen, id, order="relevance", type="video", videoCategoryId=27):
+class VidInfo():
+
+  def __query_youtube(self, name):
+    if hasattr(self, name):
+      return self.result
+    else:
+      obj = VidQuerier(self.keyword, self.maxlen, self.order, self.type)
+      return obj.get_result()
+
+  def __init__(self, keyword, maxlen, id, order, type):
+    self._id = id
     self.keyword = keyword
     self.maxlen = maxlen
     self.order = order
     self.type = type
-    self._id = id
-    super().__init__(keyword, maxlen, id, order="relevance", type="video")
-    req = self.youtube.search().list(
-        q=self.keyword,
-        part="snippet",
-        maxResults=self.maxlen,
-        type=self.type,
-        order=self.order,
-        videoCategoryId=videoCategoryId
-    )
-    self.result = req.execute()
+    self.result = self.__query_youtube("result")
 
   def open_id(self):
     return "https://www.youtube.com/watch?v=" + self.result["items"][self._id]["id"]["videoId"]
