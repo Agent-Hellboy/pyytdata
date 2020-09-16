@@ -100,12 +100,11 @@ using
 General Info
 ------------
 Under Developement
-Please have a look at the Issue
 
 .. image:: /images/info.png
    :width: 600
 
-- I think the package has implemented the facade pattern As the lower level packages like videoinfo and chnlinfo are independent and is not exposed to client and also the interaction between querier and videoinfo is hidden from client by providing a interface/module pyytdata
+- I think the package has implemented the facade pattern as the lower level packages like videoinfo and chnlinfo are independent form pyytdata and is not exposed to client and also the interaction between querier and videoinfo is hidden from client by providing a interface/module pyytdata
 - vidoinfo class and Chnlinfo has composition relationship as video does not exixts without a channel
 
 Contributing
