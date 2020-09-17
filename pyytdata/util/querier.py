@@ -1,4 +1,4 @@
-from util.info import Info
+from .info import Info
 
 
 class VidQuerier(Info):

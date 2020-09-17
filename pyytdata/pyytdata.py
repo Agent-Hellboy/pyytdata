@@ -8,7 +8,7 @@ import json
 
 from apiclient.discovery import build
 
-from util.vidinfo import VidInfo
+from .util import VidInfo
 
 
 class PyYtData:
