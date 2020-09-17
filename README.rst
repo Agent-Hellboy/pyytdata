@@ -53,7 +53,7 @@ using
 
 .. code-block:: python
 
-    >>> from pyytdata.pyytdata import PyYtData
+    >>> from pyytdata import PyYtData
     >>> obj=PyYtData('flask',1)
     >>> vid=obj.get_videoinfo()
     >>> vid
@@ -80,6 +80,9 @@ using
     >>> vid[0].get_image_url()
    'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
 
+    # To get the date at which the video is published
+    >>> vid[0].get_publisheddate()
+
     # To get the chnlInfo object having methods which describes a channel.
     >>> chnl=vid[0].channel_info()
 
@@ -98,6 +101,20 @@ using
     >>> chnl.total_video()
     '1133'
 
+    # To get the obejct having stat of the video
+    >>> vidinf=vid[0]..video_stat()
+
+    # To get total number of like to the video
+    >>> vidinf.total_like()
+
+    # To get total number of dislike to the video
+    >>> vidinf.total_dislike()
+
+    # To get total number of views
+    >>> vidinf.total_view()
+
+    # To get total number of comment on the video
+    >>> vidinf.total_comment()
 
 General Info
 ------------

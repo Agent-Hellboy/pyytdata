@@ -8,7 +8,7 @@ class Info:
     having attributes as the query parameter for API.
     """
 
-    def __init__(self, keyword, maxlen, order="relevance", type="video"):
+    def __init__(self, order="relevance", type="video"):
         try:
             self.__API_KEY = os.environ.get(
                 "API_KEY"
