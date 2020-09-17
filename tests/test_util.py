@@ -2,9 +2,6 @@ import os
 import unittest
 
 from pyytdata.pyytdata import PyYtData
-from util.chnlinfo import ChnlInfo
-from util.vidinfo import VidInfo
-
 
 class TestPyYtData(unittest.TestCase):
 

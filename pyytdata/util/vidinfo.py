@@ -1,6 +1,7 @@
-from util.info import Info
-from util.chnlinfo import ChnlInfo
+from dateutil import parser
 
+from .chnlinfo import ChnlInfo
+from .querier import VidQuerier
 vido_catgy = {"2": "Cars & Vehicles",
               "1": "Film & Animation",
               "10": "Music",
@@ -36,42 +37,49 @@ vido_catgy = {"2": "Cars & Vehicles",
               }
 
 
-class VidInfo(Info):
-  def __init__(self, keyword, maxlen, id, order="relevance", type="video", videoCategoryId=27):
+class VidInfo():
+
+  def __query_youtube(self, name):
+    if hasattr(self, name):
+      return self.result
+    else:
+      obj = VidQuerier(self.keyword, self.maxlen, self.order, self.type)
+      return obj.get_result()
+
+  def __init__(self, keyword, maxlen, id, order, type):
+    self._id = id
     self.keyword = keyword
     self.maxlen = maxlen
     self.order = order
     self.type = type
-    self._id = id
-    super().__init__(keyword, maxlen, id, order="relevance", type="video")
-    req = self.youtube.search().list(
-        q=self.keyword,
-        part="snippet",
-        maxResults=self.maxlen,
-        type=self.type,
-        order=self.order,
-        videoCategoryId=videoCategoryId
-    )
-    self.result = req.execute()
-
-  def open_id(self):
-    return "https://www.youtube.com/watch?v=" + self.result["items"][self._id]["id"]["videoId"]
+    self.result = self.__query_youtube("result")
 
   def get_title(self):
+    """Returns title of the video"""
     return self.result["items"][self._id]["snippet"]["title"]
 
   def get_description(self):
+    """Returns description of the video"""
     return self.result["items"][self._id]["snippet"]["description"]
 
   def get_image_url(self):
+    """Returns url of the image"""
     return self.result["items"][self._id]["snippet"]["thumbnails"]["medium"]["url"]
 
   def get_link(self):
+    """Returns url of the video you can open using webbrower python module"""
     return "https://www.youtube.com/watch?v=" + self.result["items"][self._id]["id"]["videoId"]
 
-  def get_publishedtime(self):
-    pass
+  def get_publisheddate(self):
+    """Returns the date on which the video is published"""
+    upload_date = parser.isoparse(result['items'][0]["snippet"]["publishTime"])
+    return upload_date.date()
+
+  def get_channel_title(self):
+    """Return the channel title"""
+    return self.result['items'][self._id]["snippet"]["channelTitle"]
 
   def channel_info(self):
+    """Return channel object which has function to get stat of the channel"""
     id = self.result["items"][self._id]["snippet"]["channelId"]
     return ChnlInfo(self.youtube, id)

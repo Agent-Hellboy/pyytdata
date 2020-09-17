@@ -8,14 +8,14 @@ def read(fname):
 
 setup(
     name="pyytdata",
-    version="0.1.8",
+    version="0.1.9",
     author="Prince Roshan",
     author_email="princekrroshan01@gmail.com",
     url="https://github.com/princekrroshan01/youtube-api-wrapper",
     description=("this is a simple client for youtube data api v3"),
     long_description=read("README.rst"),
     license="MIT",
-    py_modules=["pyytdata/pyytdata"],
+    packages=['pyytdata'],
     keywords=[
         "youtube-api" "recommend-youtube-videos",
         "youtube-data",
