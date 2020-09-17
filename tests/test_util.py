@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from pyytdata.pyytdata import PyYtData
+from pyytdata import PyYtData
 
 class TestPyYtData(unittest.TestCase):
 
