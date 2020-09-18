@@ -1,5 +1,6 @@
 import os
 import unittest
+import datetime
 
 from pyytdata import PyYtData
 
@@ -28,7 +29,7 @@ class TestPyYtData(unittest.TestCase):
         self.assertTrue(self.rslt[0].get_link() == 'https://www.youtube.com/watch?v=Z1RJmh_OqeA')
 
     def test_get_publishedtime(self):
-        pass
+        self.assertTrue(str(self.rslt[0].get_publisheddate()) == str(datetime.date(2019, 5, 28)))
 
 
 if __name__ == '__main__':

@@ -102,19 +102,23 @@ using
     '1133'
 
     # To get the obejct having stat of the video
-    >>> vidinf=vid[0]..video_stat()
+    >>> vidinf=vid[0].video_stat()
 
     # To get total number of like to the video
     >>> vidinf.total_like()
+    '7203'
 
     # To get total number of dislike to the video
     >>> vidinf.total_dislike()
+    '166'
 
     # To get total number of views
     >>> vidinf.total_view()
+    '436803'
 
     # To get total number of comment on the video
     >>> vidinf.total_comment()
+    '621'
 
 General Info
 ------------
@@ -126,10 +130,7 @@ Under Developement
 - I think the package has implemented the facade pattern as the lower level packages like videoinfo and chnlinfo are independent form pyytdata and is not exposed to client and also the interaction between querier and videoinfo is hidden from client by providing a interface/module pyytdata
 - vidoinfo class and Chnlinfo has composition relationship as video does not exixts without a channel
 
-Package Architecture
---------------------
-.. image:: /images/info.png
-    :alt: Architecture
+
 
 Contributing
 ------------

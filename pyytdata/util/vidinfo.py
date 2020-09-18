@@ -81,7 +81,7 @@ class VidInfo:
   def get_publisheddate(self):
     """Returns the date on which the video is published"""
     upload_date = parser.isoparse(
-        result["items"][self._id]["snippet"]["publishTime"]
+        self.result["items"][self._id]["snippet"]["publishTime"]
     )
     return upload_date.date()
 
