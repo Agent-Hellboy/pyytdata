@@ -120,6 +120,22 @@ using
     >>> vidinf.total_comment()
     '621'
 
+    # To get the object having info about comment on the video
+    >>> cmntinfo=vid[0].comment_info()
+
+    >>> cmntinfo.comment_author(2)
+    'Fourierwave'
+
+    #To get total number of comment on the video
+    >>> cmntinfo.total_comment()
+    20
+
+    # To get the info of channel of the author
+
+    >>> cmntinfo.comment_author_channel_info(2)
+    # working on it  @ToDo
+
+
 General Info
 ------------
 Under Developement

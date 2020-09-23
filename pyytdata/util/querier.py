@@ -1,3 +1,6 @@
+from apiclient.discovery import build
+import os
+
 from .info import Info
 
 
@@ -19,6 +22,25 @@ class VidQuerier(Info):
             videoCategoryId=videoCategoryId,
         )
         self.result = req.execute()
+
+    def get_result(self):
+        return self.result
+
+
+class VidCmntQuerier:
+    def __init__(self, id):
+        try:
+            self.__API_KEY = os.environ.get(
+                "API_KEY"
+            )  # link to get the api key is in readme file
+        except Exception:
+            raise TypeError("You must have API_KEY set as an environment variable")
+        youtube = build("youtube", "v3", developerKey=self.__API_KEY)
+        self.youtube = youtube
+        self.__id = id
+
+        request = youtube.commentThreads().list(part="snippet", videoId=self.__id)
+        self.result = request.execute()
 
     def get_result(self):
         return self.result
