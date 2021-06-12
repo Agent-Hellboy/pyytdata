@@ -51,7 +51,8 @@ Installation
 using
 -----
 
-   First step toward making this package usable from a Toy packages
+   May be first step toward moving the package from a Toy packge to an usable package.
+   
    An API which will take the url of youtube video and provide metadata of the video and the channel which has uploaded that video 
 
 .. code-block:: python
