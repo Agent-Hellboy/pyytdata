@@ -17,9 +17,8 @@ class PyYtData:
     having attributes as the query parameter for API.
     """
 
-    def __init__(self, keyword, maxlen, order="relevance", type="video"):
+    def __init__(self, keyword, maxlen, type="video"):
         self.keyword = keyword
-        self.order = order
         self.maxlen = maxlen
         self.type = type
 
@@ -28,6 +27,6 @@ class PyYtData:
         rslt = []
 
         for i in range(self.maxlen):
-            vid = VidInfo(self.keyword, self.maxlen, i, self.order, self.type)
+            vid = VidInfo(self.type, self.keyword, self.maxlen, i)
             rslt.append(vid)
         return rslt

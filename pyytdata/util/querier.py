@@ -6,22 +6,33 @@ from .info import Info
 
 class VidQuerier(Info):
     def __init__(
-        self, keyword, maxlen, order="relevance", type="video", videoCategoryId=27
+        self,
+        keyword,
+        maxlen,
+        order="relevance",
+        type="video",
+        videoCategoryId=27,
+        id=None,
     ):
         self.keyword = keyword
         self.maxlen = maxlen
         self.order = order
         self.type = type
+        self.id = id
         super().__init__(order="relevance", type="video")
-        req = self.youtube.search().list(
-            q=self.keyword,
-            part="snippet",
-            maxResults=self.maxlen,
-            type=self.type,
-            order=self.order,
-            videoCategoryId=videoCategoryId,
-        )
-        self.result = req.execute()
+        if keyword:
+            req = self.youtube.search().list(
+                q=self.keyword,
+                part="snippet",
+                maxResults=self.maxlen,
+                type=self.type,
+                order=self.order,
+                videoCategoryId=videoCategoryId,
+            )
+            self.result = req.execute()
+        else:
+            req = self.youtube.videos().list(part="snippet", id=self.id)
+            self.result = req.execute()
 
     def get_result(self):
         return self.result
