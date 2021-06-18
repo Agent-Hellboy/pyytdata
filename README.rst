@@ -61,7 +61,7 @@ using
    >>> l=vid_info('https://www.youtube.com/watch?v=0fqHuIqkOak')
    >>> l.get_title()
    'Manoj Bajpayee Vs. Atul Khatri | Epic Middle class Face-off | The Family Man | Amazon Prime Video'
-
+   l is a VidInfo object
 .. code-block:: python
 
 
