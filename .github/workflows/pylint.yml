@@ -19,7 +19,3 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - run: isort --recursive --diff
-      - run: black --check .
-      - run: flake8
-      - run: mypy
