@@ -17,5 +17,6 @@ jobs:
 
       - name: Install dependencies with pip
         run: |
+          pip install --upgrade requests
           pip install -r requirements.txt
 
