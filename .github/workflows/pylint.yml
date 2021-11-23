@@ -1,24 +1,20 @@
-name: Configure pyenv and pick the right version
+name: Continuous Integrationon
 on: [push]
-
 jobs:
- # python installtion
-  install-python:
-  # should run on linux based operating system
-    runs-on: ubuntu-latest
-  
+  build:
+    runs-on: ubuntu-latest   
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]  
+    
     steps:
-      - uses: actions/checkout@v2
-      - name: Install python version
-      
+      - uses: actions/checkout@v2      
+      - name: Set up Python all python version
+        uses: actions/setup-python@v2
         with:
-          default: 3.8.6 # pick 3.8.6 verion 
-          command: pip install -U pip  # upgrade pip after installing python
-      
+          python-version: ${{ matrix.python-version }}
+          architecture: x64     
       - name: Install dependencies
-        run: pip install -r requirements.txt --upgrade pip
-        
-      - name: run test
-        run: python -m unittest discover test
-      
-         
+        run: pip install -r requirements.txt
+      - name: Run Test
+        run: python -m unittest discover tests
