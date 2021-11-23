@@ -17,6 +17,7 @@ jobs:
 
       - name: Install dependencies with pip
         run: |
+          apt install python3-testresources
           pip install -r requirements.txt
 
       - run: isort --recursive --diff
