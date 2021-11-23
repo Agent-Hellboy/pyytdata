@@ -12,7 +12,7 @@ protobuf
 pyasn1
 pyasn1-modules
 pytz
-requests==2.26.0
+requests
 rsa
 six
 uritemplate
