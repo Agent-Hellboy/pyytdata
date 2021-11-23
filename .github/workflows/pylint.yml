@@ -1,5 +1,5 @@
 name: Configure pyenv and pick the right version
-on: [push, pull_request]
+on: [push]
 
 jobs:
  # python installtion
@@ -25,7 +25,9 @@ jobs:
 
       - name: setup pyenv
         id: pyenv_installation
-        uses: "gabrielfalcao/pyenv-action@v7"
+        uses: "gabrielfalcao/pyenv-actiosn@v7"
 
       - name: debug pyenv
         run: echo ${{ steps.pyenv_installation.outputs.pyenv_root }}
+      - name: run test
+        run: python -m unittest discover test
