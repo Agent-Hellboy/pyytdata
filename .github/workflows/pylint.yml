@@ -16,9 +16,10 @@ jobs:
           architecture: x64     
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Run Tox
+        run: run tox
       - name: Run Test
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: python -m unittest discover tests
-      - name: Run Tox
-        run: run tox
+      
