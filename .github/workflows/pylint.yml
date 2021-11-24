@@ -16,6 +16,8 @@ jobs:
           architecture: x64     
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Install tox
+        run: pip install tox
       - name: Run Tox
         run: run tox
       - name: Run Test
