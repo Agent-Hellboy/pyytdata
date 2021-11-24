@@ -1,4 +1,5 @@
 import os
+
 from apiclient.discovery import build
 
 
@@ -8,12 +9,12 @@ class Info:
     having attributes as the query parameter for API.
     """
 
-    def __init__(self, order="relevance", type="video"):
-        try:
-            self.__API_KEY = os.environ.get(
+    def __init__(self, order: str = "relevance", type: str = "video"):
+        
+        self.__API_KEY = os.environ.get(
                 "API_KEY"
             )  # link to get the api key is in readme file
-        except Exception:
+        if not self.__API_KEY:
             raise TypeError("You must have API_KEY set as an environment variable")
         youtube = build("youtube", "v3", developerKey=self.__API_KEY)
         self.youtube = youtube

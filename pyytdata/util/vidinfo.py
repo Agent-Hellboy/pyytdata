@@ -1,11 +1,11 @@
 import os
 
-from dateutil import parser
 from apiclient.discovery import build
+from dateutil import parser
 
 from .chnlinfo import ChnlInfo
-from .querier import VidQuerier, VidCmntQuerier
 from .info import Info
+from .querier import VidCmntQuerier, VidQuerier
 
 vido_catgy = {
     "2": "Cars & Vehicles",
@@ -53,12 +53,12 @@ class VidInfo:
 
     def __init__(
         self,
-        type=None,
-        keyword=None,
-        maxlen=3,
-        indx=0,
-        id=None,
-        order="relevance",
+        type: str = None,
+        keyword: str = None,
+        maxlen: int = 3,
+        indx: int = 0,
+        id: int = None,
+        order: str = "relevance",
     ):
         self._indx = indx
         self.keyword = keyword
@@ -68,21 +68,21 @@ class VidInfo:
         self.id = id
         self.result = self.__query_youtube("result")
 
-    def get_title(self):
+    def get_title(self) -> str:
         """Returns title of the video"""
         return self.result["items"][self._indx]["snippet"]["title"]
 
-    def get_description(self):
+    def get_description(self) -> str:
         """Returns description of the video"""
         return self.result["items"][self._indx]["snippet"]["description"]
 
-    def get_image_url(self):
+    def get_image_url(self) -> str:
         """Returns url of the image"""
         return self.result["items"][self._indx]["snippet"]["thumbnails"]["medium"][
             "url"
         ]
 
-    def get_link(self):
+    def get_link(self) -> str:
         """Returns url of the video you can open using webbrower python module"""
         return (
             "https://www.youtube.com/watch?v="
@@ -96,7 +96,7 @@ class VidInfo:
         )
         return upload_date.date()
 
-    def get_channel_title(self):
+    def get_channel_title(self) -> str:
         """Return the channel title"""
         return self.result["items"][self._indx]["snippet"]["channelTitle"]
 
@@ -115,7 +115,7 @@ class VidInfo:
 
 
 class VidStat:
-    def __init__(self, id):
+    def __init__(self, id: int):
         try:
             self.__API_KEY = os.environ.get(
                 "API_KEY"
@@ -128,16 +128,20 @@ class VidStat:
         request = self.youtube.videos().list(part="statistics", id=self._id)
         self.response = request.execute()
 
-    def total_view(self):
+    def total_view(self) -> int:
+        """Return number of views on the video"""
         return self.response["items"][0]["statistics"]["viewCount"]
 
-    def total_like(self):
+    def total_like(self) -> int:
+        """Return number of liks on the video"""
         return self.response["items"][0]["statistics"]["likeCount"]
 
-    def total_dislike(self):
+    def total_dislike(self) -> int:
+        """Return number of dislike on the video"""
         return self.response["items"][0]["statistics"]["dislikeCount"]
 
-    def total_comment(self):
+    def total_comment(self) -> int:
+        """Return number of comments on the video"""
         return self.response["items"][0]["statistics"]["commentCount"]
 
 
@@ -149,19 +153,21 @@ class VidCmnt:
             obj = VidCmntQuerier(self.id)
             return obj.get_result()
 
-    def __init__(self, id):
+    def __init__(self, id: int):
         self.id = id
         self.result = self.__query_youtube("result")
 
-    def total_comment(self):
+    def total_comment(self) -> int:
+        """Return total number of comments"""
         return self.result["pageInfo"]["totalResults"]
 
-    def comment(self, vid_no):
+    def comment(self, vid_no: int) -> str:
+        """Return the comment of that video number"""
         return self.result["items"][vid_no]["snippet"]["topLevelComment"]["snippet"][
             "textOriginal"
         ]
 
-    def comment_author(self, vid_no):
+    def comment_author(self, vid_no: int) -> str:
         return self.result["items"][vid_no]["snippet"]["topLevelComment"]["snippet"][
             "authorDisplayName"
         ]

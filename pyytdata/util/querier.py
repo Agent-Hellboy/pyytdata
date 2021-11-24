@@ -1,5 +1,6 @@
-from apiclient.discovery import build
 import os
+
+from apiclient.discovery import build
 
 from .info import Info
 
@@ -7,12 +8,12 @@ from .info import Info
 class VidQuerier(Info):
     def __init__(
         self,
-        keyword,
-        maxlen,
-        order="relevance",
-        type="video",
-        videoCategoryId=27,
-        id=None,
+        keyword: str,
+        maxlen: int,
+        order: str = "relevance",
+        type: str = "video",
+        videoCategoryId: int = 27,
+        id: int = None,
     ):
         self.keyword = keyword
         self.maxlen = maxlen
