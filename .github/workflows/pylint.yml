@@ -8,7 +8,10 @@ jobs:
         python-version: [3.6, 3.7, 3.8]  
     
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v2  
+      - name: Add env
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
       - name: Set up Python all python version
         uses: actions/setup-python@v2
         with:
