@@ -6,8 +6,8 @@ This is a youtube data api v3 wrapper which can be integrated into any python ap
 .. image:: https://img.shields.io/pypi/v/pyytdata
    :target: https://pypi.python.org/pypi/pyytdata/
 
-.. image:: https://travis-ci.org/Agent-Hellboy/YouTubeDataApi_Wrapper.svg?branch=master
-    :target: https://travis-ci.org/Agent-Hellboy/YouTubeDataApi_Wrapper
+.. image:: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/
 
 .. image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
