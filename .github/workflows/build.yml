@@ -98,5 +98,5 @@ jobs:
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYPI_TOKEN: ${{ secrets.YOUTUBE_API }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: npx semantic-release
