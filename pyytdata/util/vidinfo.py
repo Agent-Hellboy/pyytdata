@@ -3,8 +3,8 @@ import os
 from apiclient.discovery import build
 from dateutil import parser
 
-from .chnlinfo import ChnlInfo
 from .info import Info
+from .chnlinfo import ChnlInfo
 from .querier import VidCmntQuerier, VidQuerier
 
 vido_catgy = {

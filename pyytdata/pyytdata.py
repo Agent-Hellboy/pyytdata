@@ -1,4 +1,4 @@
-"""Contains a class PyYtData having implementation of youtube data v3 client."""
+"""Contains a class PyYtData having implementation of youtube data v3 client"""
 from typing import List
 
 from .util import VidInfo
