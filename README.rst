@@ -43,8 +43,8 @@ Installation
     for developement
        - git clone https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/
        - cd YouTubeDataApi_Wrapper
-       - virtualenv venv
-       - source venv/bin/activate
+       - python -m venv .venv
+       - source .venv/bin/activate
        - pip install -r requirements.txt
 
 
@@ -165,4 +165,3 @@ Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
-
