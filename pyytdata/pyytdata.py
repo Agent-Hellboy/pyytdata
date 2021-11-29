@@ -10,7 +10,7 @@ class PyYtData:
     having attributes as the query parameter for API.
     """
 
-    def __init__(self, keyword: str, maxlen: str, type: str = "video") -> None:
+    def __init__(self, keyword: str, maxlen: int, type: str = "video") -> None:
         self.keyword = keyword
         self.maxlen = maxlen
         self.type = type

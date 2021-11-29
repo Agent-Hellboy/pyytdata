@@ -10,10 +10,10 @@ class ChnlInfo:
     """
 
     def __init__(self, id: int):
-        self.id = id  
+        self.id = id
         self.__API_KEY = os.environ.get(
-                "API_KEY"
-            )  # link to get the api key is in readme file
+            "API_KEY"
+        )  # link to get the api key is in readme file
         if not self.__API_KEY:
             print(self.__API_KEY)
             raise TypeError("You must have API_KEY set as an environment variable")
