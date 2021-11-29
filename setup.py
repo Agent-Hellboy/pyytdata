@@ -15,7 +15,7 @@ setup(
     description=("this is a simple client for youtube data api v3"),
     long_description=read("README.rst"),
     license="MIT",
-    packages=['pyytdata', 'pyytdata.util'],
+    packages=["pyytdata", "pyytdata.util"],
     keywords=[
         "youtube-api" "recommend-youtube-videos",
         "youtube-data",
