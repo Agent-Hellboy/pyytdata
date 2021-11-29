@@ -28,8 +28,8 @@ jobs:
         pip install -r requirements.txt
         pip install black
         pip install coveralls
-        pip install simpleeval >= 0.9.11
-        pip install wcmatch >= 8.1.2
+        pip install simpleeval 
+        pip install wcmatch 
     - name: Run tests
       run: coverage run -m unittest discover -s tests -t tests
 
