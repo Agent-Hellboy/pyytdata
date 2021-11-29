@@ -32,6 +32,8 @@ jobs:
         pip install wcmatch 
     - name: Run tests
       run: coverage run -m unittest discover -s tests -t tests
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
 
     - name: Upload coverage data to coveralls.io
       run: coveralls --service=github
