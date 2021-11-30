@@ -1,5 +1,4 @@
 from .pyytdata import PyYtData
-
 from .util import VidInfo
 
 

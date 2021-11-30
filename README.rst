@@ -25,8 +25,6 @@ This is a youtube data api v3 wrapper which can be integrated into any python ap
    :target: https://coveralls.io/github/Agent-Hellboy/YouTubeDataApi_Wrapper?branch=master
 
 
-
-
 Prerequisites
 -------------
 
