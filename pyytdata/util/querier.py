@@ -30,10 +30,10 @@ class VidQuerier(Info):
                 order=self.order,
                 videoCategoryId=videoCategoryId,
             )
-            self.result = req.execute()
         else:
             req = self.youtube.videos().list(part="snippet", id=self.id)
-            self.result = req.execute()
+
+        self.result = req.execute()
 
     def get_result(self):
         return self.result
