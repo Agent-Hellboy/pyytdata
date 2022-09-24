@@ -7,9 +7,9 @@ from .info import Info
 from .chnlinfo import ChnlInfo
 from .querier import VidCmntQuerier, VidQuerier
 
-vido_catgy = {
-    "2": "Cars & Vehicles",
+VIDEO_CATEGORY = {
     "1": "Film & Animation",
+    "2": "Cars & Vehicles",
     "10": "Music",
     "15": "Pets & Animals",
     "17": "Sports",
