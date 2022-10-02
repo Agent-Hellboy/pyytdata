@@ -3,7 +3,7 @@ import os
 from apiclient.discovery import build
 
 
-class ChnlInfo:
+class ChannelInfo:
     """
     Params:
         id: id of the channel

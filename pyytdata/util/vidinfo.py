@@ -4,8 +4,8 @@ from apiclient.discovery import build
 from dateutil import parser
 
 from .info import Info
-from .chnlinfo import ChnlInfo
-from .querier import VidCmntQuerier, VidQuerier
+from .channelinfo import ChannelInfo
+from .querier import VideoCommentQuerier, VideoQuerier
 
 VIDEO_CATEGORY = {
     "1": "Film & Animation",
@@ -47,7 +47,7 @@ class VidInfo:
     def __query_youtube(self, name):
         if hasattr(self, name):
             return self.result
-        obj = VidQuerier(self.keyword, self.maxlen, self.order, self.type, id = self.id)
+        obj = VideoQuerier(self.keyword, self.maxlen, self.order, self.type, videoid = self.id)
         return obj.get_result()
 
     def __init__(
@@ -56,7 +56,7 @@ class VidInfo:
         keyword: str = None,
         maxlen: int = 3,
         indx: int = 0,
-        id: str = None,
+        videoid: str = None,
         order: str = "relevance",
     ):
         self._indx = indx
@@ -64,7 +64,7 @@ class VidInfo:
         self.maxlen = maxlen
         self.order = order
         self.type = type
-        self.id = id
+        self.id = videoid
         self.result = self.__query_youtube("result")
 
     def get_title(self) -> str:
@@ -102,7 +102,7 @@ class VidInfo:
     def channel_stat(self):
         """Return channel object which has function to get stat of the channel"""
         id = self.result["items"][self._indx]["snippet"]["channelId"]
-        return ChnlInfo(id)
+        return ChannelInfo(id)
 
     def video_stat(self):
         id = self.result["items"][self._indx]["id"]["videoId"]
@@ -148,7 +148,7 @@ class VidCmnt:
     def __query_youtube(self, name):
         if hasattr(self, name):
             return self.result
-        obj = VidCmntQuerier(self.id)
+        obj = VideoCommentQuerier(self.id)
         return obj.get_result()
 
     def __init__(self, id: int):

@@ -3,6 +3,7 @@ import os
 from apiclient.discovery import build
 
 
+
 class Info:
     """
     Class which acts as a client to the youtube data v3 API,
@@ -18,3 +19,5 @@ class Info:
             raise TypeError("You must have API_KEY set as an environment variable")
         youtube = build("youtube", "v3", developerKey=self.__API_KEY)
         self.youtube = youtube
+
+
