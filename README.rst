@@ -1,7 +1,7 @@
 pyytdata
 ========
 
-This is a youtube data api v3 wrapper which can be integrated into any python app basically in the  web app which recommends  youtube videos.
+A python library which provides metadata of YouTube videos.
 
 .. image:: https://img.shields.io/pypi/v/pyytdata
    :target: https://pypi.python.org/pypi/pyytdata/
