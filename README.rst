@@ -21,8 +21,9 @@ A python library which provides metadata of YouTube videos.
 .. image:: https://img.shields.io/pypi/format/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
 
-.. image:: https://coveralls.io/repos/github/Agent-Hellboy/YouTubeDataApi_Wrapper/badge.svg?branch=master
-   :target: https://coveralls.io/github/Agent-Hellboy/YouTubeDataApi_Wrapper?branch=master
+.. image:: https://coveralls.io/repos/github/Agent-Hellboy/pyytdata/badge.svg
+   :target: https://coveralls.io/github/Agent-Hellboy/pyytdata
+
 
 
 Prerequisites
