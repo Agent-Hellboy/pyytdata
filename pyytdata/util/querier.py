@@ -23,8 +23,11 @@ class VideoQuerier(Info):
         self.type = videotype
         self.id = videoid
         self.videoCategoryId = videoCategoryId
+        self.result = self.fetch()
+
+    def fetch(self):
         req = self.query_youtube()
-        self.result = req.execute()
+        return req.execute()
 
     def get_result(self):
         return self.result
@@ -41,7 +44,7 @@ class VideoQuerier(Info):
             )
         else:
             req = self.youtube.videos().list(part="snippet", id=self.id)
-        return  req
+        return req
 
 class VideoCommentQuerier:
     def __init__(self, idVideoComment):
