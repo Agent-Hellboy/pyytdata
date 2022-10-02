@@ -13,7 +13,7 @@ class VidQuerier(Info):
         order: str = "relevance",
         type: str = "video",
         videoCategoryId: int = 27,
-        id: int = None,
+        id: str = None,
     ):
         self.keyword = keyword
         self.maxlen = maxlen

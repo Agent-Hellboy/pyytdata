@@ -47,7 +47,7 @@ class VidInfo:
     def __query_youtube(self, name):
         if hasattr(self, name):
             return self.result
-        obj = VidQuerier(self.keyword, self.maxlen, self.order, self.type, self.id)
+        obj = VidQuerier(self.keyword, self.maxlen, self.order, self.type, id = self.id)
         return obj.get_result()
 
     def __init__(
@@ -56,7 +56,7 @@ class VidInfo:
         keyword: str = None,
         maxlen: int = 3,
         indx: int = 0,
-        id: int = None,
+        id: str = None,
         order: str = "relevance",
     ):
         self._indx = indx
