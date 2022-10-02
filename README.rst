@@ -49,7 +49,7 @@ Installation
 using
 -----
 
-   Maybe the first step toward moving the package from a Toy package to a usable package.
+   Maybe the first step towards moving the package from a Toy package to a usable package.
 
    An API which will take the URL of youtube video and provide metadata of the video and the channel which has uploaded that video .
 
