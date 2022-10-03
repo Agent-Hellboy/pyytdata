@@ -12,7 +12,7 @@ setup(
     author="Prince Roshan",
     author_email="princekrroshan01@gmail.com",
     url="https://github.com/princekrroshan01/youtube-api-wrapper",
-    description=("this is a simple client for youtube data api v3"),
+    description=("A python library which provides all possible metadata of YouTube videos."),
     long_description=read("README.rst"),
     license="MIT",
     packages=["pyytdata", "pyytdata.util"],
