@@ -33,8 +33,8 @@ class VideoQuerier(Info):
         return self.result
 
     def query_youtube(self):
-        if self.keyword:
-            req = self.youtube.search().list(
+        return (
+            self.youtube.search().list(
                 q=self.keyword,
                 part="snippet",
                 maxResults=self.maxLen,
@@ -42,9 +42,9 @@ class VideoQuerier(Info):
                 order=self.order,
                 videoCategoryId=self.video_category_id,
             )
-        else:
-            req = self.youtube.videos().list(part="snippet", id=self.video_id)
-        return req
+            if self.keyword
+            else self.youtube.videos().list(part="snippet", id=self.video_id)
+        )
 
 
 class VideoCommentQuerier:
