@@ -9,8 +9,8 @@ class ChannelInfo:
         id: id of the channel
     """
 
-    def __init__(self, id: int):
-        self.id = id
+    def __init__(self, channel_id: int):
+        self.channel_id = channel_id
         self.__API_KEY = os.environ.get(
             "API_KEY"
         )  # link to get the api key is in readme file
@@ -19,10 +19,10 @@ class ChannelInfo:
             raise TypeError("You must have API_KEY set as an environment variable")
         youtube = build("youtube", "v3", developerKey=self.__API_KEY)
         self.youtube = youtube
-        req = self.youtube.channels().list(part="statistics", id=self.id)
+        req = self.youtube.channels().list(part="statistics", id=self.channel_id)
         self.result = req.execute()
 
-    def total_viewcnt(self) -> int:
+    def total_viewcount(self) -> int:
         """Return total views for the channel"""
         return self.result["items"][0]["statistics"]["viewCount"]
 

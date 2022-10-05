@@ -8,21 +8,21 @@ from .info import Info
 class VideoQuerier(Info):
 
     def __init__(
-        self,
-        keyword: str,
-        maxlen: int,
-        order: str = "relevance",
-        videotype: str = "video",
-        videoCategoryId: int = 27,
-        videoid: str = None,
+            self,
+            keyword: str,
+            maxLen: int,
+            order: str = "relevance",
+            video_type: str = "video",
+            video_category_id: int = 27,
+            video_id: str = None,
     ):
         super().__init__(order="relevance", type="video")
         self.keyword = keyword
-        self.maxlen = maxlen
+        self.maxLen = maxLen
         self.order = order
-        self.type = videotype
-        self.id = videoid
-        self.videoCategoryId = videoCategoryId
+        self.type = video_type
+        self.video_id = video_id
+        self.video_category_id = video_category_id
         self.result = self.fetch()
 
     def fetch(self):
@@ -37,14 +37,15 @@ class VideoQuerier(Info):
             req = self.youtube.search().list(
                 q=self.keyword,
                 part="snippet",
-                maxResults=self.maxlen,
+                maxResults=self.maxLen,
                 type=self.type,
                 order=self.order,
-                videoCategoryId=self.videoCategoryId,
+                videoCategoryId=self.video_category_id,
             )
         else:
-            req = self.youtube.videos().list(part="snippet", id=self.id)
+            req = self.youtube.videos().list(part="snippet", id=self.video_id)
         return req
+
 
 class VideoCommentQuerier:
     def __init__(self, idVideoComment):

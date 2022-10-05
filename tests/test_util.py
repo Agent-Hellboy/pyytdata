@@ -7,7 +7,7 @@ from pyytdata import PyYtData
 
 class TestPyYtData(unittest.TestCase):
     def test_check_env(self):
-        self.assertTrue(os.environ.get("API_KEY") != None)
+        self.assertTrue(os.environ.get("API_KEY") is not None)
 
     def setUp(self):
         self.data = PyYtData("flask", 1)

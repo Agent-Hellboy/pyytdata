@@ -47,7 +47,7 @@ class VidInfo:
     def __query_youtube(self, name):
         if hasattr(self, name):
             return self.result
-        obj = VideoQuerier(self.keyword, self.maxlen, self.order, self.type, videoid = self.id)
+        obj = VideoQuerier(self.keyword, self.maxlen, self.order, self.type, video_id= self.id)
         return obj.get_result()
 
     def __init__(
@@ -56,28 +56,28 @@ class VidInfo:
         keyword: str = None,
         maxlen: int = 3,
         indx: int = 0,
-        videoid: str = None,
+        video_id: str = None,
         order: str = "relevance",
     ):
-        self._indx = indx
+        self._index = indx
         self.keyword = keyword
         self.maxlen = maxlen
         self.order = order
         self.type = type
-        self.id = videoid
+        self.id = video_id
         self.result = self.__query_youtube("result")
 
     def get_title(self) -> str:
         """Returns title of the video"""
-        return self.result["items"][self._indx]["snippet"]["title"]
+        return self.result["items"][self._index]["snippet"]["title"]
 
     def get_description(self) -> str:
         """Returns description of the video"""
-        return self.result["items"][self._indx]["snippet"]["description"]
+        return self.result["items"][self._index]["snippet"]["description"]
 
     def get_image_url(self) -> str:
         """Returns url of the image"""
-        return self.result["items"][self._indx]["snippet"]["thumbnails"]["medium"][
+        return self.result["items"][self._index]["snippet"]["thumbnails"]["medium"][
             "url"
         ]
 
@@ -85,32 +85,32 @@ class VidInfo:
         """Returns url of the video you can open using webbrower python module"""
         return (
             "https://www.youtube.com/watch?v="
-            + self.result["items"][self._indx]["id"]["videoId"]
+            + self.result["items"][self._index]["id"]["videoId"]
         )
 
     def get_publisheddate(self):
         """Returns the date on which the video is published"""
         upload_date = parser.isoparse(
-            self.result["items"][self._indx]["snippet"]["publishTime"]
+            self.result["items"][self._index]["snippet"]["publishTime"]
         )
         return upload_date.date()
 
     def get_channel_title(self) -> str:
         """Return the channel title"""
-        return self.result["items"][self._indx]["snippet"]["channelTitle"]
+        return self.result["items"][self._index]["snippet"]["channelTitle"]
 
     def channel_stat(self):
         """Return channel object which has function to get stat of the channel"""
-        id = self.result["items"][self._indx]["snippet"]["channelId"]
-        return ChannelInfo(id)
+        channelStatId = self.result["items"][self._index]["snippet"]["channelId"]
+        return ChannelInfo(channelStatId)
 
     def video_stat(self):
-        id = self.result["items"][self._indx]["id"]["videoId"]
-        return VidStat(id)
+        statId = self.result["items"][self._index]["id"]["videoId"]
+        return VidStat(statId)
 
     def comment_info(self):
-        id = self.result["items"][self._indx]["id"]["videoId"]
-        return VidCmnt(id)
+        commentId = self.result["items"][self._index]["id"]["videoId"]
+        return VidCmnt(commentId)
 
 
 class VidStat:
