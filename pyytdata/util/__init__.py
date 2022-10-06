@@ -1,3 +1,3 @@
-from .chnlinfo import ChnlInfo
+from .channelinfo import ChannelInfo
 from .info import Info
 from .vidinfo import VidInfo

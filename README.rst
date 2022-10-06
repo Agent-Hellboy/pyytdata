@@ -83,6 +83,132 @@ using
     >>> vid[0].get_title()
    'Learn Flask for Python - Full Tutorial'
 
+       # To get the link for the video which can we used in web app to open the link for the video.
+       >>> vid[0].get_link()
+      'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
+
+       # To get the title img of the video which can be rendered through HTML tag.
+       >>> vid[0].get_image_url()
+      'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
+
+       # To get the date at which the video is published
+       >>> vid[0].get_publisheddate()
+
+       # To get the chnlInfo object having methods which describes a channel.
+       >>> chnl=vid[0].channel_info()
+
+       >>> dir(chnl)
+       ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
+
+       # To get the total view count of the channel.
+       >>> chnl.total_viewcount()
+       '95246354'
+
+       # To get the number of subscribers of the channel.
+       >>> chnl.total_subscriber()
+       '2170000'
+
+       # To get number of video uploaded by this particular channel.
+       >>> chnl.total_video()
+       '1133'
+
+       # To get the obejct having stat of the video
+       >>> vidinf=vid[0].video_stat()
+
+       # To get total number of like to the video
+       >>> vidinf.total_like()
+       '7203'
+
+       # To get total number of dislike to the video
+       >>> vidinf.total_dislike()
+       '166'
+
+       # To get total number of views
+       >>> vidinf.total_view()
+       '436803'
+
+       # To get total number of comment on the video
+       >>> vidinf.total_comment()
+       '621'
+
+       # To get the object having info about comment on the video
+       >>> cmntinfo=vid[0].comment_info()
+
+       >>> cmntinfo.comment_author(2)
+       'Fourierwave'
+
+       #To get total number of comment on the video
+       >>> cmntinfo.total_comment()
+       20
+
+       # To get the info of channel of the author
+
+       >>> cmntinfo.comment_author_channel_info(2)
+       # working on it  @ToDo
+
+       # To get the link for the video which can we used in web app to open the link for the video.
+       >>> vid[0].get_link()
+      'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
+
+       # To get the title img of the video which can be rendered through HTML tag.
+       >>> vid[0].get_image_url()
+      'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
+
+       # To get the date at which the video is published
+       >>> vid[0].get_publisheddate()
+
+       # To get the chnlInfo object having methods which describes a channel.
+       >>> chnl=vid[0].channel_info()
+
+       >>> dir(chnl)
+       ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
+
+       # To get the total view count of the channel.
+       >>> chnl.total_viewcount()
+       '95246354'
+
+       # To get the number of subscribers of the channel.
+       >>> chnl.total_subscriber()
+       '2170000'
+
+       # To get number of video uploaded by this particular channel.
+       >>> chnl.total_video()
+       '1133'
+
+       # To get the obejct having stat of the video
+       >>> vidinf=vid[0].video_stat()
+
+       # To get total number of like to the video
+       >>> vidinf.total_like()
+       '7203'
+
+       # To get total number of dislike to the video
+       >>> vidinf.total_dislike()
+       '166'
+
+       # To get total number of views
+       >>> vidinf.total_view()
+       '436803'
+
+       # To get total number of comment on the video
+       >>> vidinf.total_comment()
+       '621'
+
+       # To get the object having info about comment on the video
+       >>> cmntinfo=vid[0].comment_info()
+
+       >>> cmntinfo.comment_author(2)
+       'Fourierwave'
+
+       #To get total number of comment on the video
+       >>> cmntinfo.total_comment()
+       20
+
+       # To get the info of channel of the author
+
+       >>> cmntinfo.comment_author_channel_info(2)
+       # working on it  @ToDo
+
     # To get the link for the video which can we used in web app to open the link for the video.
     >>> vid[0].get_link()
    'https://www.youtube.com/watch?v=Z1RJmh_OqeA'

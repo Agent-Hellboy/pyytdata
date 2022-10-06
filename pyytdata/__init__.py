@@ -4,5 +4,5 @@ from .util import VidInfo
 
 def vid_info(url: str) -> VidInfo:
     """Takes URL of the video and return the VidInfo object"""
-    id = url.split("=")
-    return VidInfo(id=id[-1])
+    video_id = url.split("=")
+    return VidInfo(video_id=video_id[-1])
