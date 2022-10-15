@@ -33,34 +33,34 @@ An API which will take the URL of youtube video and provide metadata of the vide
     >>> obj=PyYtData('flask',1)
     >>> vid=obj.get_videoinfo()
     >>> vid
-    [<util.vidinfo.VidInfo object at 0x7ff971539e10>]
-
+    <generator object PyYtData.get_videoinfo at 0x7fb0f69f8040>
+    #Since get_videoinfo returns a generator, you can either iterate or get the next() item.
 
     #You can fire dir on this object to get the attribute and method of the object.
-    >>> dir(vid[0])
+    >>> dir(next(vid))
     ['_Info__API_KEY', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_id', 'channel_info', 'get_description', 'get_image_url', 'get_link', 'get_publishedtime', 'get_title', 'keyword', 'maxlen', 'open_id', 'order', 'result', 'type', 'youtube']
 
     # To get the description of the video
-    >>> vid[0].get_description()
+    >>> next(vid).get_description()
     'Flask is a micro web framework written in Python. It is classified as a microframework because it does not require particular tools or libraries. Learn how to use it ...'
 
     # To get the title of the video.
-    >>> vid[0].get_title()
+    >>> next(vid).get_title()
    'Learn Flask for Python - Full Tutorial'
 
        # To get the link for the video which can we used in web app to open the link for the video.
-       >>> vid[0].get_link()
+       >>> next(vid).get_link()
       'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
 
        # To get the title img of the video which can be rendered through HTML tag.
-       >>> vid[0].get_image_url()
+       >>> next(vid).get_image_url()
       'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
 
        # To get the date at which the video is published
-       >>> vid[0].get_publisheddate()
+       >>> next(vid).get_publisheddate()
 
        # To get the chnlInfo object having methods which describes a channel.
-       >>> chnl=vid[0].channel_info()
+       >>> chnl=next(vid).channel_info()
 
        >>> dir(chnl)
        ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
@@ -78,7 +78,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
        '1133'
 
        # To get the obejct having stat of the video
-       >>> vidinf=vid[0].video_stat()
+       >>> vidinf=next(vid).video_stat()
 
        # To get total number of like to the video
        >>> vidinf.total_like()
@@ -97,7 +97,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
        '621'
 
        # To get the object having info about comment on the video
-       >>> cmntinfo=vid[0].comment_info()
+       >>> cmntinfo=next(vid).comment_info()
 
        >>> cmntinfo.comment_author(2)
        'Fourierwave'
@@ -112,18 +112,18 @@ An API which will take the URL of youtube video and provide metadata of the vide
        # working on it  @ToDo
 
        # To get the link for the video which can we used in web app to open the link for the video.
-       >>> vid[0].get_link()
+       >>> next(vid).get_link()
       'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
 
        # To get the title img of the video which can be rendered through HTML tag.
-       >>> vid[0].get_image_url()
+       >>> next(vid).get_image_url()
       'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
 
        # To get the date at which the video is published
-       >>> vid[0].get_publisheddate()
+       >>> next(vid).get_publisheddate()
 
        # To get the chnlInfo object having methods which describes a channel.
-       >>> chnl=vid[0].channel_info()
+       >>> chnl=next(vid).channel_info()
 
        >>> dir(chnl)
        ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
@@ -141,7 +141,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
        '1133'
 
        # To get the obejct having stat of the video
-       >>> vidinf=vid[0].video_stat()
+       >>> vidinf=next(vid).video_stat()
 
        # To get total number of like to the video
        >>> vidinf.total_like()
@@ -160,7 +160,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
        '621'
 
        # To get the object having info about comment on the video
-       >>> cmntinfo=vid[0].comment_info()
+       >>> cmntinfo=next(vid).comment_info()
 
        >>> cmntinfo.comment_author(2)
        'Fourierwave'
@@ -175,18 +175,18 @@ An API which will take the URL of youtube video and provide metadata of the vide
        # working on it  @ToDo
 
     # To get the link for the video which can we used in web app to open the link for the video.
-    >>> vid[0].get_link()
+    >>> next(vid).get_link()
    'https://www.youtube.com/watch?v=Z1RJmh_OqeA'
 
     # To get the title img of the video which can be rendered through HTML tag.
-    >>> vid[0].get_image_url()
+    >>> next(vid).get_image_url()
    'https://i.ytimg.com/vi/Z1RJmh_OqeA/mqdefault.jpg'
 
     # To get the date at which the video is published
-    >>> vid[0].get_publisheddate()
+    >>> next(vid).get_publisheddate()
 
     # To get the chnlInfo object having methods which describes a channel.
-    >>> chnl=vid[0].channel_info()
+    >>> chnl=next(vid).channel_info()
 
     >>> dir(chnl)
     ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',          '__ge__', '__getattribute__', '__gt__', '__hash__',  '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'id', 'result', 'total_subscriber', 'total_video', 'total_viewcnt', 'youtube']
@@ -204,7 +204,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
     '1133'
 
     # To get the obejct having stat of the video
-    >>> vidinf=vid[0].video_stat()
+    >>> vidinf=next(vid).video_stat()
 
     # To get total number of like to the video
     >>> vidinf.total_like()
@@ -223,7 +223,7 @@ An API which will take the URL of youtube video and provide metadata of the vide
     '621'
 
     # To get the object having info about comment on the video
-    >>> cmntinfo=vid[0].comment_info()
+    >>> cmntinfo=next(vid).comment_info()
 
     >>> cmntinfo.comment_author(2)
     'Fourierwave'
