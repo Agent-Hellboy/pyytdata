@@ -1,7 +1,7 @@
 import datetime
 import os
 import unittest
-
+import  types
 from pyytdata import PyYtData
 
 
@@ -14,7 +14,8 @@ class TestPyYtData(unittest.TestCase):
         self.rslt = self.data.get_videoinfo()
 
     def test_get_videoinfo(self):
-        self.assertTrue(len(self.rslt) == 1)
+        self.assertIsInstance(self.rslt, types.GeneratorType)
+        self.assertTrue(len(list(self.rslt)) == 1)
 
 
 if __name__ == "__main__":
