@@ -17,9 +17,5 @@ class PyYtData:
 
     def get_videoinfo(self) -> List:
         """Returns a list with has objects of VidInfo class"""
-        rslt = []
-
         for i in range(self.maxlen):
-            vid = VidInfo(self.type, self.keyword, self.maxlen, i)
-            rslt.append(vid)
-        return rslt
+            yield VidInfo(self.type, self.keyword, self.maxlen, i)
