@@ -1,7 +1,6 @@
-import datetime
 import os
+import types
 import unittest
-import  types
 from pyytdata import PyYtData
 
 
