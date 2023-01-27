@@ -1,26 +1,24 @@
 import os
 from abc import ABC, abstractmethod
 
-from dotenv import load_dotenv
 from googleapiclient.discovery import build
-
-load_dotenv()
 
 
 class DataFetcher(ABC):
+    def __init__(self):
+        __API_KEY = os.environ.get("API_KEY")
+        if not __API_KEY:
+            raise TypeError("You must have API_KEY set as an environment variable")
+        self.youtube = build("youtube", "v3", developerKey=__API_KEY)
+
     @abstractmethod
     def get_result(self):
-        pass
+        """Fetch Result from YouTube Data v3 API using googleapiclinet"""
 
 
 class ChannelDataFetcher(DataFetcher):
     def __init__(self):
-        __API_KEY = os.environ.get(
-            "API_KEY"
-        )  # link to get the api key is in readme file
-        if not __API_KEY:
-            raise TypeError("You must have API_KEY set as an environment variable")
-        self.youtube = build("youtube", "v3", developerKey=__API_KEY)
+        super().__init__()
 
     def get_result(self, part, channel_id, channel_name):
         if channel_id:
@@ -34,12 +32,7 @@ class VideoDataFetcher(DataFetcher):
     qtype = None
 
     def __init__(self):
-        __API_KEY = os.environ.get(
-            "API_KEY"
-        )  # link to get the api key is in readme file
-        if not __API_KEY:
-            raise TypeError("You must have API_KEY set as an environment variable")
-        self.youtube = build("youtube", "v3", developerKey=__API_KEY)
+        super().__init__()
 
     def get_result(
         self,

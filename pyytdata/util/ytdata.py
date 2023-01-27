@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from datetime import datetime
 
 
 @dataclass(frozen=True)
@@ -29,5 +28,5 @@ class YtVideoInfo:
     description: str
     image_url: str
     link: str
-    publisheddate: datetime
+    publisheddate: str
     channel_title: str

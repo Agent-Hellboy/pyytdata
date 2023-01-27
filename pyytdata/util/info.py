@@ -1,20 +1,16 @@
 from abc import ABC, abstractmethod
 
-from dateutil import parser
-
-from pyytdata.util.ytdata import (
-    YtChannelInfo, YtChannelStat, YtVideoInfo, YtVideoStat
-)
+from pyytdata.util.ytdata import YtChannelInfo, YtChannelStat, YtVideoInfo, YtVideoStat
 
 
 class Info(ABC):
     @abstractmethod
     def get_data(self):
-        pass
+        """Prepare data fetched from Datagathers"""
 
     @abstractmethod
     def get_info(self):
-        pass
+        """Return specific Dataclass"""
 
 
 class VideoInfo(Info):
@@ -36,7 +32,6 @@ class VideoInfo(Info):
         )
         self.link = "https://www.youtube.com/watch?v=" + vid_id
         self.publisheddate = video_data["publishedAt"]
-        # self.publisheddate = parser.isoparse(video_data["publishedAt"]).date()
         self.channel_title = video_data["channelTitle"]
 
     def get_info(self, idx):
@@ -56,7 +51,6 @@ class ChannelInfo(Info):
         self, data_v3_api_obj, part, channel_id: int = None, channel_name: str = None
     ):
         self.result = data_v3_api_obj.get_result(part, channel_id, channel_name)
-
 
     def get_data(self):
         self.title = self.result["items"][0]["snippet"]["title"]

@@ -2,9 +2,16 @@ from enum import Enum
 
 from .pyytdata import PyYtData
 from .util import (
-    ChannelDataFetcher, ChannelInfo, ChannelStatInfo, VideoDataFetcher,
-    VideoInfo, VideoStatInfo, YtChannelInfo, YtChannelStat, YtVideoInfo,
-    YtVideoStat
+    ChannelDataFetcher,
+    ChannelInfo,
+    ChannelStatInfo,
+    VideoDataFetcher,
+    VideoInfo,
+    VideoStatInfo,
+    YtChannelInfo,
+    YtChannelStat,
+    YtVideoInfo,
+    YtVideoStat,
 )
 
 
