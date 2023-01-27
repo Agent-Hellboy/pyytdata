@@ -68,7 +68,7 @@ Other APIs
 General Info
 ------------
 python-client for
-https://developers.google.com/youtube/v3/docs/channels
+https://developers.google.com/youtube/v3/docs
 
 
 Contributing
