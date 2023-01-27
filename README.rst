@@ -9,6 +9,9 @@ A python library which provides metadata of YouTube videos.
 .. image:: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/actions/workflows/build.yml/badge.svg
     :target: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/
 
+.. image:: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/actions/workflows/lint.yml/badge.svg
+    :target: https://github.com/Agent-Hellboy/YouTubeDataApi_Wrapper/
+
 .. image:: https://img.shields.io/pypi/pyversions/pyytdata.svg
    :target: https://pypi.python.org/pypi/pyytdata/
 
@@ -54,8 +57,8 @@ Using
     - get_video_stat_by_ID -> Return Video stat from vide_id
 
 Other APIs
-.. code-block:: python
 
+.. code-block:: python
 
     >>> from pyytdata import PyYtData
     >>> obj=PyYtData('flask',1)
