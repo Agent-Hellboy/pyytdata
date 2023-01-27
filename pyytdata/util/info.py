@@ -34,7 +34,7 @@ class VideoInfo(Info):
             if self.data_v3_api_obj.qtype == "list"
             else self.result["items"][indx]["id"]["videoId"]
         )
-        self.link = "https://www.youtube.com/watch?v=" + vid_id
+        self.link = f"https://www.youtube.com/watch?v={vid_id}"
         self.publisheddate = video_data["publishedAt"]
         # self.publisheddate = parser.isoparse(video_data["publishedAt"]).date()
         self.channel_title = video_data["channelTitle"]

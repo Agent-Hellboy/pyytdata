@@ -15,12 +15,10 @@ class DataFetcher(ABC):
 
 class ChannelDataFetcher(DataFetcher):
     def __init__(self):
-        __API_KEY = os.environ.get(
-            "API_KEY"
-        )  # link to get the api key is in readme file
-        if not __API_KEY:
+        if __API_KEY := os.environ.get("API_KEY"):
+            self.youtube = build("youtube", "v3", developerKey=__API_KEY)
+        else:
             raise TypeError("You must have API_KEY set as an environment variable")
-        self.youtube = build("youtube", "v3", developerKey=__API_KEY)
 
     def get_result(self, part, channel_id, channel_name):
         if channel_id:
@@ -34,12 +32,10 @@ class VideoDataFetcher(DataFetcher):
     qtype = None
 
     def __init__(self):
-        __API_KEY = os.environ.get(
-            "API_KEY"
-        )  # link to get the api key is in readme file
-        if not __API_KEY:
+        if __API_KEY := os.environ.get("API_KEY"):
+            self.youtube = build("youtube", "v3", developerKey=__API_KEY)
+        else:
             raise TypeError("You must have API_KEY set as an environment variable")
-        self.youtube = build("youtube", "v3", developerKey=__API_KEY)
 
     def get_result(
         self,
