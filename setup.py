@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name="pyytdata",
-    version="0.3.0",
+    version="0.2.8",
     author="Prince Roshan",
     author_email="princekrroshan01@gmail.com",
     url="https://github.com/princekrroshan01/youtube-api-wrapper",
