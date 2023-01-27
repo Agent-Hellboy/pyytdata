@@ -1,10 +1,7 @@
 # Base tools
-flake8~=3.7
-isort~=5.9
-pre-commit~=2.13.0
+flake8~=6.0.0
+isort~=5.10.1
+pre-commit~=2.17.0
 
-# Flake8 plugins
-flake8-annotations~=2.0
-flake8-bandit~=2.1
-flake8-docstrings~=1.5
-flake8-isort~=4.0
+#plugin
+flake8-docstrings~=1.7.0

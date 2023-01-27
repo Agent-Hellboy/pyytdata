@@ -18,3 +18,4 @@ six
 uritemplate
 urllib3
 python-dateutil 
+python-dotenv

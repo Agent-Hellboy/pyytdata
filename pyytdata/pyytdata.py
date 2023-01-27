@@ -1,7 +1,8 @@
 """Contains a class PyYtData having implementation of youtube data v3 client"""
 from typing import List
 
-from .util import VidInfo
+from .util.fetcher import VideoDataFetcher
+from .util.info import VideoInfo
 
 
 class PyYtData:
@@ -16,6 +17,8 @@ class PyYtData:
         self.type = type
 
     def get_videoinfo(self) -> List:
-        """Returns a list with has objects of VidInfo class"""
-        for i in range(self.maxlen):
-            yield VidInfo(self.type, self.keyword, self.maxlen, i)
+        """Returns generator object of VideoInfo"""
+        v = VideoDataFetcher()
+        vid_info = VideoInfo(v, "snippet", keyword=self.keyword, maxlen=self.maxlen)
+        for indx in range(self.maxlen):
+            yield vid_info.get_info(indx)

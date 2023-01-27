@@ -9,5 +9,7 @@ setup.py
 *.py~
 *~
 new_med.py
-.tox 
+.tox
 .venv
+.vscode/
+.env
