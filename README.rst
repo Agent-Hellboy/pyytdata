@@ -45,11 +45,12 @@ Using
 -----
 
    Public APIs
-   get_vid_info_from_url -> Return Video Info from URL
-   get_video_info -> Return Video Info from video_id
-   get_channel_info -> Return Channel Info from channel name
-   get_channel_stat_by_name -> Return channel stat from channel name
-   get_video_stat_by_ID -> Return Video stat from vide_id
+   
+    - get_vid_info_from_url -> Return Video Info from URL
+    - get_video_info -> Return Video Info from video_id
+    - get_channel_info -> Return Channel Info from channel name
+    - get_channel_stat_by_name -> Return channel stat from channel name
+    - get_video_stat_by_ID -> Return Video stat from vide_id
 
 Other APIs
 .. code-block:: python
